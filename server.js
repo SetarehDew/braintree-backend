@@ -1,3 +1,6 @@
+app.get("/version", (req, res) => {
+  res.send("Latest version deployed!");
+});
 const express = require("express");
 const braintree = require("braintree");
 
