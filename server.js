@@ -43,6 +43,10 @@ app.post("/checkout", async (req, res) => {
     res.status(500).send("Error processing transaction");
   }
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Server running on port " + PORT));
+
 app.get("/", (req, res) => {
   res.send("Server running");
 });
@@ -55,6 +59,3 @@ app.get("/token", async (req, res) => {
   const response = await gateway.clientToken.generate({});
   res.send(response.clientToken);
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running on port " + PORT));
