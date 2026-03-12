@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Braintree Sandbox Test</title>
+  <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
+</head>
+<body>
+  <h2>Test Braintree Payment</h2>
+  <div id="dropin-container"></div>
+  <button id="submit-button">Pay</button>
+
+  <script>
+    // Get a client token from your backend
+    fetch('https://braintree-backend1.onrender.com/token')
+      .then(response => response.text())
+      .then(token => {
+        braintree.dropin.create({
+          authorization: token,
+          container: '#dropin-container'
+        }, function (createErr, instance) {
+          if (createErr) {
+            console.error(createErr);
+            return;
+          }
+
+          document.getElementById('submit-button').addEventListener('click', function () {
+            instance.requestPaymentMethod(function (err, payload) {
+              if (err) {
+                console.error(err);
+                return;
+              }
+
+              // Send the nonce to your backend for payment
+              fetch('https://braintree-backend1.onrender.com/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nonce: payload.nonce })
+              })
+              .then(res => res.json())
+              .then(data => alert('Payment result: ' + JSON.stringify(data)))
+              .catch(err => console.error(err));
+            });
+          });
+        });
+      });
+  </script>
+</body>
+</html>
