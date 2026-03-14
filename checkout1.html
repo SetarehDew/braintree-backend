@@ -11,9 +11,8 @@
 
   <script>
     fetch('https://braintree-backend1.onrender.com/token')
-      .then(response => response.json())
-      .then(data => {
-        const token = data.clientToken;
+      .then(response => response.text())
+      .then(token => {
 
         braintree.dropin.create({
           authorization: token,
