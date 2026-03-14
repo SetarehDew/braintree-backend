@@ -2,50 +2,70 @@
 <html>
 <head>
   <title>Braintree Sandbox Test</title>
+  <!-- Braintree Drop-in JS -->
   <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
 </head>
 <body>
   <h2>Test Braintree Payment</h2>
+
+  <!-- Drop-in UI will appear here -->
   <div id="dropin-container"></div>
+
+  <!-- Pay button -->
   <button id="submit-button">Pay</button>
 
   <script>
-    fetch('https://braintree-backend1.onrender.com/token')
-      .then(response => response.text())
-      .then(token => {
+    // Make sure the page is fully loaded
+    window.addEventListener("load", function() {
 
-        braintree.dropin.create({
-          authorization: token,
-          container: '#dropin-container'
-        }, function (createErr, instance) {
+      // Fetch the client token from your Render backend
+      fetch('https://braintree-backend1.onrender.com/token')
+        .then(response => response.text())  // plain text token
+        .then(token => {
 
-          if (createErr) {
-            console.error(createErr);
-            return;
-          }
+          console.log("TOKEN RECEIVED:", token); // debugging line
 
-          document.getElementById('submit-button').addEventListener('click', function () {
-            instance.requestPaymentMethod(function (err, payload) {
+          // Initialize Braintree Drop-in UI
+          braintree.dropin.create({
+            authorization: token,
+            container: '#dropin-container'
+          }, function (createErr, instance) {
 
-              if (err) {
-                console.error(err);
-                return;
-              }
+            if (createErr) {
+              console.error("Drop-in create error:", createErr);
+              return;
+            }
 
-              fetch('https://braintree-backend1.onrender.com/checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nonce: payload.nonce })
-              })
-              .then(res => res.json())
-              .then(data => alert('Payment result: ' + JSON.stringify(data)))
-              .catch(err => console.error(err));
+            // Handle Pay button click
+            document.getElementById('submit-button').addEventListener('click', function () {
+
+              instance.requestPaymentMethod(function (err, payload) {
+
+                if (err) {
+                  console.error("Payment method error:", err);
+                  return;
+                }
+
+                // Send the payment nonce to your backend
+                fetch('https://braintree-backend1.onrender.com/checkout', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ nonce: payload.nonce })
+                })
+                .then(res => res.json())
+                .then(data => alert('Payment result: ' + JSON.stringify(data)))
+                .catch(err => console.error("Checkout error:", err));
+
+              });
 
             });
+
           });
 
-        });
-      });
+        })
+        .catch(err => console.error("Token fetch error:", err));
+
+    });
   </script>
 </body>
 </html>
