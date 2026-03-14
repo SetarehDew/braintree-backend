@@ -10,22 +10,24 @@
   <button id="submit-button">Pay</button>
 
   <script>
-    // Get a client token from your Render backend
     fetch('https://braintree-backend1.onrender.com/token')
-      .then(response => response.text())
-      .then(token => {
+      .then(response => response.json())
+      .then(data => {
+        const token = data.clientToken;
+
         braintree.dropin.create({
           authorization: token,
           container: '#dropin-container'
         }, function (createErr, instance) {
+
           if (createErr) {
             console.error(createErr);
             return;
           }
 
-          // When the button is clicked, send the payment nonce to the backend
           document.getElementById('submit-button').addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
+
               if (err) {
                 console.error(err);
                 return;
@@ -39,8 +41,10 @@
               .then(res => res.json())
               .then(data => alert('Payment result: ' + JSON.stringify(data)))
               .catch(err => console.error(err));
+
             });
           });
+
         });
       });
   </script>
