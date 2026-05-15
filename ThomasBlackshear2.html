@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Blackshear | VJ Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #2f241d;
+      background:
+        linear-gradient(rgba(47,36,29,0.55), rgba(47,36,29,0.55)),
+        url("tbs.webp") center / cover no-repeat fixed;
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 3px solid #b88b4a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2f241d;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      color: #b88b4a;
+    }
+
+    /* ===== HERO BANNER ===== */
+    .artist-banner {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .artist-banner h1 {
+      font-size: 5rem;
+      color: #f0c080;
+      text-shadow: 2px 4px 12px rgba(0,0,0,0.8);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .banner-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .banner-divider::before,
+    .banner-divider::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #b88b4a, transparent);
+    }
+
+    .banner-divider span {
+      color: #b88b4a;
+      font-size: 1.5rem;
+    }
+
+    /* ===== MAIN CONTENT CARD ===== */
+    .artist-page {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    /* ===== BIO SECTION ===== */
+    .bio-section {
+      background: rgba(255,255,255,0.95);
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .bio-left {
+      text-align: center;
+    }
+
+    .bio-left img {
+      width: 100%;
+      border-radius: 16px;
+      border: 4px solid #b88b4a;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    .painting-preview {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #b88b4a;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .painting-label {
+      font-size: 0.85rem;
+      color: #6d5b4f;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .bio-right h2 {
+      font-size: 1.8rem;
+      color: #b88b4a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e5d5c5;
+    }
+
+    .bio-right p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #2f241d;
+      margin-bottom: 20px;
+    }
+
+    .bio-right p strong {
+      color: #b88b4a;
+    }
+
+    /* ===== SHOP BUTTON ===== */
+    .shop-btn-wrap {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 36px;
+      background: #b88b4a;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      transition: background 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #9d7338;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .bio-section {
+        grid-template-columns: 1fr;
+      }
+
+      .artist-banner h1 {
+        font-size: 3rem;
+      }
+
+      .main-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-header">
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Logo">
+      <span>VJ Gallery</span>
+    </div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+    </nav>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="artist-banner">
+    <h1>Thomas Blackshear II</h1>
+    <div class="banner-divider"><span>✦</span></div>
+  </div>
+
+  <main class="artist-page">
+
+    <!-- Bio Section -->
+    <div class="bio-section">
+
+      <div class="bio-left">
+        <img src="Thomas-Blackshear-headshot.jpg" alt="Thomas Blackshear headshot">
+        <img class="painting-preview" src="tbs.webp" alt="Thomas Blackshear painting">
+        <p class="painting-label">Signature painting by Thomas Blackshear II</p>
+      </div>
+
+      <div class="bio-right">
+        <h2>About the Artist</h2>
+        <p>
+          <strong>Born:</strong> November 14, 1955, in Waco, Texas; raised in Atlanta, Georgia.
+        </p>
+        <p>
+          <strong>Education:</strong> Studied at the Art Institute of Chicago before transferring to the American Academy of Art in Chicago, from which he graduated in 1977.
+        </p>
+        <p>
+          <strong>Artistic Style:</strong> Blackshear is celebrated for his dramatic lighting, emotional depth, and sensitivity to mood. He coined the term "Western Nouveau" for his distinctive style — a blend of art nouveau fluid lines with Western and Native cultural imagery, using plant-inspired forms, muted earthy palettes, and organic shapes.
+        </p>
+        <p>
+          <strong>Notable Works:</strong> Illustrated over 30 U.S. postage stamps, including contributions to the Black Heritage series featuring Jean Baptiste Point du Sable, James W. Johnson, Asa Philip Randolph, and Ida B. Wells. A touring exhibition of his Black Heritage series debuted at the Smithsonian's National Museum of American History in 1992.
+        </p>
+        <p>
+          Thomas Blackshear is known for creating expressive, richly detailed artwork and collectible pieces with emotional depth, elegance, and powerful storytelling. His work brings together beauty, character, and meaning — making each piece a memorable addition for collectors who appreciate fine artistry.
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
