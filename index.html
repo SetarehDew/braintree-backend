@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VJ Gallery Checkout</title>
+  <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+ <style>
+  body {
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 20px;
+  line-height: 1.4;
+  background: #f7f3ee;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.products h2 {
+  grid-column: 1 / -1;
+  margin-top: 40px;
+}
+
+.product {
+  background: white;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.product img {
+  width: 80%;
+  height: 180px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-bottom: 1px solid #160d0d;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+/* CART PANEL */
+.cart {
+  max-width: 900px;
+  margin: 60px auto 30px;
+  padding: 35px 30px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #d8c8b8;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.cart::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 360px;
+  background: url("LOGO.png") no-repeat center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+  opacity: 0.05;
+}
+
+.cart * {
+  position: relative;
+  z-index: 1;
+}
+
+.cart h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+
+.cart-item {
+  background: #fffaf5;
+  border: 1px solid #e1d2c2;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+#cart-total {
+  text-align: right;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid #d8c8b8;
+}
+
+#dropin-container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+}
+
+#submit-button {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 50px;
+  padding: 16px;
+  background: #2f241d;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+#submit-button:hover {
+  background: #b88b4a;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  letter-spacing: 2px;
+}
+
+.payment-title {
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-family: 'playfair display', serif;
+  font-size: 4rem;
+}
+
+h2 {
+  font-family: 'great vibes', cursive;
+  font-size: 3rem;
+}
+ </style> 
+</head>
+<body>
+  <h1>VJ Gallery Checkout</h1>
+
+  <section class="products">
+    <h2>Disney Products</h2>
+
+    <div class="product">
+    <img src="mickey.jpg" alt="Disney Mickey Mouse figurine wearing classic red shorts and yellow shoes, standing in a cheerful pose with arms raised against a neutral gray background">
+     <h3>Lonesome Ghost</h3>
+     <p>$700.00</p>
+     <button onclick="addToCart('item1')">Add to Cart</button>
+    </div>
+
+    
+   <div class="product">
+    <img src="vj12.png" alt="Pinocchio front view">
+     <h3>Pinocchio</h3>
+     <p>$490.00</p>
+     <button onclick="addToCart('item2')">Add to Cart</button>
+  </div>
+
+    <div class="product">
+      <img src="FlightbyDustyHorner-VJ27.jpg" alt="Disney character figurine in yellow and green outfit in mid-flight pose against a dark starry background, conveying a sense of adventure and wonder">
+      <h3>Flight By Dusty Horner Starlight</h3>
+      <p>$1120.00</p>
+      <button onclick="addToCart('item3')">Add to Cart</button>
+    </div>
+   
+    <div class="product">
+      <img src="DonaldDuck-VJ11.png" alt="Disney Donald Duck">
+      <h3>Donald Duck</h3>
+      <p>$400.00</p>
+      <button onclick="addToCart('item4')">Add to Cart</button>
+    </div>
+      <div class="product">
+      <img src="RememberWho-VJ20.png" alt="Disney Lion King">
+      <h3>Lion King</h3>
+      <p>$1300.00</p>
+      <button onclick="addToCart('item5')">Add to Cart</button>
+    </div>
+      
+    <div class="product">
+      <img src="dumbo.jpg" alt="Disney Dumbo">
+      <h3>Dumbo</h3>
+      <p>$750.00</p>
+    <button onclick="addToCart('item6')">Add to Cart</button>
+    </div>
+      
+    <div class="product">
+      <img src="NatureIsAll-VJ25.png" alt="Disney Bambi">
+      <h3>Bambi</h3>
+      <p>$350.00</p>
+      <button onclick="addToCart('item7')">Add to Cart</button>
+  </div>
+
+  <h2>Thomas Blackshear Products</h2>
+      
+    <div class="product">
+      <img src="vj26.png" alt="UNKNOWN">
+      <h3>UNKNOWN</h3>
+      <p>$600.00</p>
+      <button onclick="addToCart('item8')">Add to Cart</button>
+    </div>
+      
+    <div class="product">
+      <img src="Catching the Eye-vj127.png" alt="Catching The Eye">
+      <h3>Catching The Eye</h3>
+      <p>$340.00</p>
+      <button onclick="addToCart('item9')">Add to Cart</button> 
+    </div>  
+
+    <div class="product">
+      <img src="ColorOfLove-VJ131.png" alt="The Color of Love">
+      <h3>The Color of Love</h3>
+      <p>$650.00</p>
+      <button onclick="addToCart('item10')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="OhYesSheDid-VJ149.png" alt="Oh Yes She Did!">
+      <h3>Oh Yes She Did!</h3>
+      <p>$425.00</p>
+      <button onclick="addToCart('item11')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="RidingHigh-VJ145.png" alt="Riding High">
+      <h3>Riding High</h3>
+      <p>$185.00</p>
+      <button onclick="addToCart('item12')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Boss-VJ157.png" alt="The Boss">
+      <h3>The Boss</h3>
+      <p>$300.00</p>
+      <button onclick="addToCart('item13')">Add to Cart</button>
+    </div> 
+
+    <div class="product">
+      <img src="UnderTheShelter-VJ167.png" alt="Under the Shelter of his Wings">
+      <h3>Under the Shelter of his Wings</h3>
+      <p>$1160.00</p>
+      <button onclick="addToCart('item14')">Add to Cart</button>
+    </div>
+  
+    <div class="product">
+      <img src="ProtectorsOfFreedom-vj169.png" alt="The Protectors of Freedom">
+      <h3>The Protectors of Freedom</h3>
+      <p>$950.00</p>
+      <button onclick="addToCart('item15')">Add to Cart</button>  
+    </div>  
+
+    <div class="product">
+      <img src="SistersForever-VJ177.png" alt="Sisters Forever">
+      <h3>Sisters Forever</h3>
+      <p>$225.00</p>
+      <button onclick="addToCart('item16')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Praise-VJ185.jpeg" alt="Praise">
+      <h3>Praise</h3>
+      <p>$550.00</p>
+      <button onclick="addToCart('item17')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="PeaceOnEarth-VJ189.jpeg" alt="Peace on Earth">
+      <h3>Peace on Earth</h3>
+      <p>$225.00</p>
+      <button onclick="addToCart('item18')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="TheJoysOfSpring-VJ195.png" alt="The Joys of Spring">
+      <h3>The Joys of Spring</h3>
+      <p>$220.00</p>
+      <button onclick="addToCart('item19')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Tootie-VJ201.png" alt="Tootie">
+      <h3>Tootie</h3>
+      <p>$220.00</p>
+      <button onclick="addToCart('item20')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Forever Friends-VJ308.png" alt="Forever Friends">
+      <h3>Forever Friends</h3>
+      <p>$190.00</p>
+      <button onclick="addToCart('item21')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Gypsy-VJ214.png" alt="Gypsy">
+      <h3>Gypsy</h3>
+      <p>$275.00</p>
+      <button onclick="addToCart('item22')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Flower Girl-VJ224.png" alt="The Flower Girl">
+      <h3>The Flower Girl</h3>
+      <p>$95.00</p>
+      <button onclick="addToCart('item23')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Birdy-VJ232.png" alt="Birdy">
+      <h3>Birdy</h3>
+      <p>$120.00</p>
+      <button onclick="addToCart('item24')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Skeeter-VJ238.png" alt="Skeeter">
+      <h3>Skeeter</h3>
+      <p>$175.00</p>
+      <button onclick="addToCart('item25')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Grandmama-VJ245.png" alt="Grandma">
+      <h3>Grandma</h3>
+      <p>$430.00</p>
+      <button onclick="addToCart('item26')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="JJ CLUCK-VJ251.png" alt="Jay Jay & Cluck">
+      <h3>Jay Jay & Cluck</h3>
+      <p>$190.00</p>
+      <button onclick="addToCart('item27')">Add to Cart</button>
+    </div>
+
+     <div class="product">
+      <img src="Heir-VJ266.png" alt="The Heirs">
+      <h3>The Heirs</h3>
+      <p>$100.00</p>
+      <button onclick="addToCart('item28')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="vj300.jpeg" alt="The Little Shepherd">
+      <h3>The Little Shepherd</h3>
+      <p>$65.00</p>
+      <button onclick="addToCart('item29')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="UNKNOWN-VJ221.png" alt="UNKNOWN">
+      <h3>UNKNOWN</h3>
+      <p>$0.00</p>
+      <button onclick="addToCart('item30')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Harmony-VJ291.png" alt="Harmony">
+      <h3>Harmony</h3>
+      <p>$50.00</p>
+      <button onclick="addToCart('item31')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Evening Rose-VJ306.png" alt="Evening Rose">
+      <h3>Evening Rose</h3>
+      <p>$0.00</p>
+      <button onclick="addToCart('item32')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Midnight-VJ316.png" alt="Midnight">
+      <h3>Midnight</h3>
+      <p>$750.00</p>
+      <button onclick="addToCart('item33')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="DoubleHug-VJ270.png" alt="Double Hug">
+      <h3>Double Hug</h3>
+      <p>$300.00</p>
+      <button onclick="addToCart('item34')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="FruitsOfFriendship-VJ279.png" alt="The Fruits of Friendship">
+      <h3>The Fruits of Friendship</h3>
+      <p>$240.00</p>
+      <button onclick="addToCart('item35')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Leap-VJ330.png" alt="Leap of Faith">
+      <h3>Leap of Faith</h3>
+      <p>$600.00</p>
+      <button onclick="addToCart('item36')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="BrightMorningStar-VJ285.png" alt="A Bright and Morning Star">
+      <h3>A Bright and Morning Star</h3>
+      <p>$100.00</p>
+      <button onclick="addToCart('item37')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="K9Mnshine2.jpeg" alt="K9 and Moonshine">
+      <h3>K9 and Moonshine</h3>
+      <p>$225.00</p>
+      <button onclick="addToCart('item38')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="Family-VJ328.png" alt="The Family">
+      <h3>The Family</h3>
+      <p>$475.00</p>
+      <button onclick="addToCart('item39')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="HeavenlyPeace1.jpeg" alt="Heavenly Peace">
+      <h3>Heavenly Peace</h3>
+      <p>$70.00</p>
+      <button onclick="addToCart('item40')">Add to Cart</button>
+    </div>
+
+  
+  </section>
+
+  <section class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div id="cart-total">Total: $0.00</div>
+  </section>
+
+  <h2 class="payment-title">Payment</h2>
+  <div id="dropin-container"></div>
+  <button id="submit-button">Purchase</button>
+
+  <script>
+    const products = [
+  { id: "item1", name: "Disney Mickey Figurine", price: 700.00 },
+  { id: "item2", name: "Pinocchio", price: 490.00 },
+  { id: "item3", name: "Flight By Dusty Horner Starlight", price: 1120.00 },
+  { id: "item4", name: "Disney Donald Duck", price: 400.00 },
+  { id: "item5", name: "Disney Lion King", price: 1300.00 },
+  { id: "item6", name: "Disney Dumbo", price: 750.00 },
+  { id: "item7", name: "Disney Bambi", price: 350.00 },
+  { id: "item8", name: "UNKNOWN", price: 600.00 },
+  { id: "item9", name: "Catching The Eye", price: 340.00 },
+  { id: "item10", name: "The Color of Love", price: 650.00 },
+  { id: "item11", name: "Oh Yes She Did!", price: 425.00 },
+  { id: "item12", name: "Riding High", price: 185.00 },
+  { id: "item13", name: "The Boss", price: 300.00 },
+  { id: "item14", name: "Under the Shelter of his Wings", price: 1160.00 },
+  { id: "item15", name: "The Protectors of Freedom", price: 950.00 },
+  { id: "item16", name: "Sisters Forever", price: 225.00 },
+  { id: "item17", name: "Praise", price: 550.00 },
+  { id: "item18", name: "Peace on Earth", price: 225.00 },
+  { id: "item19", name: "The Joys of Spring", price: 220.00 },
+  { id: "item20", name: "Tootie", price: 220.00 },
+  { id: "item21", name: "Forever Friends", price: 190.00 },
+  { id: "item22", name: "Gypsy", price: 275.00 },
+  { id: "item23", name: "The Flower Girl", price: 95.00 },
+  { id: "item24", name: "Birdy", price: 120.00 },
+  { id: "item25", name: "Skeeter", price: 175.00 },
+  { id: "item26", name: "Grandmama", price: 430.00 },
+  { id: "item27", name: "Jay Jay & Cluck", price: 190.00 },
+  { id: "item28", name: "The Heirs", price: 100.00 },
+  { id: "item29", name: "The Little Shepherd", price: 65.00 },
+  { id: "item30", name: "UNKNOWN", price: 0.00 },
+  { id: "item31", name: "Harmony", price: 50.00 },
+  { id: "item32", name: "Evening Rose", price: 0.00 },
+  { id: "item33", name: "Midnight", price: 750.00 },
+  { id: "item34", name: "Double Hug", price: 300.00 },
+  { id: "item35", name: "The Fruits of Friendship", price: 240.00 },
+  { id: "item36", name: "Leap of Faith", price: 600.00 },
+  { id: "item37", name: "A Bright and Morning Star", price: 100.00 },
+  { id: "item38", name: "K9 and Moonshine", price: 225.00 },
+  { id: "item39", name: "The Family", price: 475.00 },
+  { id: "item40", name: "Heavenly Peace", price: 70.00 }
+];
+
+    const cart = [];
+
+    function addToCart(productId) {
+      const existingItem = cart.find(item => item.id === productId);
+
+      if (existingItem) {
+        existingItem.qty += 1;
+      } else {
+        cart.push({ id: productId, qty: 1 });
+      }
+
+      renderCart();
+    }
+
+    function increaseQty(productId) {
+      const item = cart.find(item => item.id === productId);
+      if (item) {
+        item.qty += 1;
+        renderCart();
+      }
+    }
+
+    function decreaseQty(productId) {
+      const item = cart.find(item => item.id === productId);
+      if (!item) return;
+
+      item.qty -= 1;
+
+      if (item.qty <= 0) {
+        const index = cart.findIndex(cartItem => cartItem.id === productId);
+        cart.splice(index, 1);
+      }
+
+      renderCart();
+    }
+
+    function removeFromCart(productId) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      const cartItemsDiv = document.getElementById("cart-items");
+      const cartTotalDiv = document.getElementById("cart-total");
+
+      cartItemsDiv.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotalDiv.textContent = "Total: $0.00";
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (!product) return;
+
+        const itemTotal = product.price * item.qty;
+        total += itemTotal;
+
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.className = "cart-item";
+
+        cartItemDiv.innerHTML = `
+          <strong>${product.name}</strong><br>
+          Price: $${product.price.toFixed(2)}<br>
+          Quantity: ${item.qty}
+          <span class="qty-controls">
+            <button onclick="decreaseQty('${item.id}')">-</button>
+            <button onclick="increaseQty('${item.id}')">+</button>
+            <button onclick="removeFromCart('${item.id}')">Remove</button>
+          </span>
+          <br>
+          Item Total: $${itemTotal.toFixed(2)}
+        `;
+
+        cartItemsDiv.appendChild(cartItemDiv);
+      });
+
+      cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    window.addEventListener("load", function () {
+      fetch("https://checkout-backend-c5gi.onrender.com/token")
+        .then(response => response.text())
+        .then(token => {
+          token = token.trim();
+
+          console.log("TOKEN RECEIVED:", token);
+
+          braintree.dropin.create({
+            authorization: token,
+            container: "#dropin-container"
+          }, function (createErr, instance) {
+            if (createErr) {
+              console.error("DROP-IN ERROR:", createErr);
+              alert("Drop-in failed: " + JSON.stringify(createErr));
+              return;
+            }
+
+            console.log("Drop-in loaded successfully!");
+
+            document.getElementById("submit-button").addEventListener("click", function () {
+              if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+              }
+
+              instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                  console.error("Payment method error:", err);
+                  return;
+                }
+
+                fetch("https://checkout-backend-c5gi.onrender.com/checkout", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    nonce: payload.nonce,
+                    cart: cart
+                  })
+                })
+                  .then(res => res.json())
+                  .then(data => {
+                    alert("Payment result: " + JSON.stringify(data));
+                  })
+                  .catch(err => console.error("Checkout error:", err));
+              });
+            });
+          });
+        })
+        .catch(err => {
+          console.error("Token fetch error:", err);
+          alert("Token failed to load");
+        });
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

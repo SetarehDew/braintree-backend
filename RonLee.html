@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ron Lee | VJ Gallery</title>
+  <style>
+  body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: 
+        linear-gradient(rgba(247,243,238,0.7), rgba(247,243,238,0.7)),  /* 👈 soft overlay */
+        url("rlbg2.jpg") center / cover no-repeat;
+      color: #2f241d;
+      margin: 0;
+      line-height: 1.6;
+      min-height: 100vh;
+   }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: white;
+      border-bottom: 1px solid #e5d5c5;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2f241d;
+    }
+
+    .artist-page {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .artist-hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+    .artist-hero img {
+      width: 300px;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 20px;
+      background: #2f241d;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #b88b4a;
+    }
+
+    @media (max-width: 700px) {
+      .artist-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .main-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    .artist-image {
+  width: 200%;
+  max-width: 250px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 16px;
+}
+  </style>
+</head>
+<body>
+  <div class="main-header" style="font-size: 1.5rem;">
+    <div class="logo">VJ Gallery</div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+    </nav>
+  </div>
+
+  <main class="artist-page">
+    <div class="artist-hero">
+      <img src="ronaldlee.jpg" alt="Ron Lee headshot">
+    </div>
+    <h1>Ron Lee</h1>
+    <img class="artist-image" src="rlbg2.jpg" alt="Ron Lee clown logo">
+
+      <div style="font-size: 1.5rem;">
+        <p>Ron Lee (1947–2017) was a beloved American artist and sculptor whose colorful, clown-inspired creations have brought smiles to collectors around the world. Known for his signature character “Hobo Joe,” Ron captured the humor, heart, and humanity of circus life in each hand-crafted piece. Starting his career as a young metalworker in California, he mastered the art of bronze and pewter casting, creating thousands of limited-edition sculptures over four decades. His work—often finished with hand-painted details and mounted on marble or onyx—blends craftsmanship, storytelling, and timeless charm. Even after his passing, Ron Lee’s joyful spirit continues to live on through every sculpture that finds a new home.
+</p>
+        <p>
+          Ron Lee is a renowned artist whose work has captivated audiences with its unique blend of realism and fantasy. His art often features intricate details and vibrant colors, creating a sense of wonder and imagination. Lee's pieces are known for their emotional depth and storytelling, drawing viewers into the worlds he creates on canvas. With a career spanning several decades, Ron Lee has established himself as a significant figure in the art world, with his works being exhibited in galleries and collections worldwide.
+        </p>
+        <a class="btn" href="index.html">Shop Collection</a>
+      </div>

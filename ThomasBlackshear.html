@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Blackshear | VJ Gallery</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+          linear-gradient(rgba(47,36,29,0.2), rgba(47,36,29,0.2)),
+          url("tbs.webp") center no-repeat;
+      background-size: cover;   /* 👈 THIS is where cover goes */
+}
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgb(116, 125, 62);
+      border-bottom: 1px solid #e5d5c5;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #040705;
+    }
+
+    .artist-page {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .artist-hero {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .artist-hero img {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      border-bottom: 3px solid #15562c;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .btn {
+      display: block;
+      margin: 25px auto 0;
+      padding: 12px 20px;
+      width: fit-content;
+      background: #104e15;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #277748;
+    }
+
+    @media (max-width: 700px) {
+      .artist-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .main-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+     .artist-logo {
+       display: block;
+       width: 100%;
+       height: 400px;
+       object-fit: contain;
+       border-radius: 12px;
+       margin: 20px 0;
+       padding-bottom: 50px;
+ }
+    .artist-page p {
+       font-size: 1.4rem;
+       line-height: 1;
+    }
+
+    .artist-page .btn {
+       display: block;
+       margin: 30px auto 0;
+       width: fit-content;
+    }
+
+    .logo {
+       display: flex;
+       align-items: center;
+       gap: 10px;   /* space between logo + text */
+       font-size: 2rem;
+       font-weight: bold;
+    }
+
+    .logo img {
+       width: 40px;     /* 👈 controls logo size */
+       height: 40px;
+       object-fit: contain;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="main-header">
+  <div class="logo">
+  <img src="LOGO.png" alt="VJ Logo">
+  <span>VJ Gallery</span>
+</div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+    </nav>
+  </div>
+
+  <main class="artist-page">
+    <div class="artist-hero">
+      <img src="Thomas-Blackshear-headshot.jpg" alt="Thomas Blackshear logo">
+
+      <div>
+        <h1>Thomas Blackshear II</h1>
+        <img class="artist-logo" src="tbs.webp" alt="Thomas Blackshear logo" style="margin-bottom: 20px;">
+        <p>
+<strong>Born:</strong> November 14, 1955, in Waco, Texas; raised in Atlanta, Georgia.<br><br>
+<strong>Education:</strong> Studied at the Art Institute of Chicago before transferring to the American Academy of Art in Chicago, from which he graduated in 1977.<br><br>
+
+<strong>Artistic Contributions & Style:</strong>
+Blackshear is celebrated for his dramatic lighting, emotional depth, and sensitivity to mood. He works across mediums—painting, sculpture, stamp and ornament design—with recurring themes centered on African-American legacy and Western American life.<br><br>
+He coined the term “Western Nouveau” for his distinctive style—a blend of art nouveau fluid lines with Western and Native cultural imagery, using plant-inspired forms, muted earthy palettes, and organic shapes.<br><br>
+
+<strong>Notable Works & Achievements:</strong> Postage Stamps & Illustration
+Illustrated over 30 U.S. postage stamps, including contributions to the Black Heritage series (e.g., Jean Baptiste Point du Sable, James W. Johnson, Asa Philip Randolph, Ida B. Wells) and others like Joe Louis, James Baldwin, Mother Teresa, and notable figures from jazz, film, and literature.
+Created the USPS commemorative book I Have a Dream: A Collection of Black Americans on U.S. Postage Stamps (1991).
+A touring exhibition of his Black Heritage series debuted at the Smithsonian’s National Museum of American History in 1992.
+Thomas Blackshear II is a celebrated artist whose portfolio spans landmark stamp designs, illustration, collectible art, museum pieces, and fine art exhibitions. His signature style—“Western Nouveau”—fuses Western heritage with Art Nouveau sensibilities, creating a distinctive visual voice honored in halls, museums, and beyond.
+</p>
+        
+        
+        <p>
+          Thomas Blackshear is known for creating expressive, richly detailed artwork and collectible pieces with emotional depth, elegance, and powerful storytelling.
+        </p>
+
+        <p>
+          His work brings together beauty, character, and meaning, making each piece a memorable addition for collectors who appreciate fine artistry.
+        </p>
+
+        <a class="btn" href="ThomasBlackshearCollection.html">Browse and Shop Collection</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

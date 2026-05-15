@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah Schultz | VJ Gallery</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f7f3ee;
+      color: #2f241d;
+      margin: 0;
+      line-height: 1.6;
+      font-size: 1.5rem;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: white;
+      border-bottom: 1px solid #e5d5c5;
+    }
+
+    .logo {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2f241d;
+    }
+
+    .artist-page {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .artist-hero {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .artist-hero img {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 20px;
+      background: #2f241d;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #b88b4a;
+    }
+
+    @media (max-width: 700px) {
+      .artist-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .main-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-header">
+    <div class="logo">VJ Gallery</div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+    </nav>
+  </div>
+
+  <main class="artist-page">
+    <div class="artist-hero">
+      <img src="sa1.png" alt="Sarah Schultz logo">
+        <div>
+        <h1>Sarah Schultz</h1>
+        <p>In 1983, Sarah Schultz was managing the gift department in her husband’s pharmacy. During that time, she was already making and selling her own handmade creations. Over time, her craft-based designs evolved into the figurine/decorative business known as Sarah’s Attic. The figurines often feature children or animals and are hand-painted; for example, there is a figurine called “Percy Boy” that has a small painted heart on the pant leg, which is cited as a trademark of Sarah Schultz’s style. Sarah’s Attic figurines also appear in collectible/resale markets, suggesting they still have collector interest decades later. 
+        </p>
+        <p>
+          Sarah Schultz is known for creating expressive, richly detailed artwork and collectible pieces with emotional depth, elegance, and powerful storytelling.
+        </p>
+
+        <p>
+          Her work brings together beauty, character, and meaning, making each piece a memorable addition for collectors who appreciate fine artistry.
+        </p>
+
+        <a class="btn" href="index.html">Shop Collection</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

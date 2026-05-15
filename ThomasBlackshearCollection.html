@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Blackshear Collection | VJ Gallery</title>
+
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 0;
+      color: #2f241d;
+      background:
+        linear-gradient(rgba(47,36,29,0.2), rgba(47,36,29,0.2)),
+        url("tbs.webp") center / cover no-repeat fixed;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid #e5d5c5;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2f241d;
+    }
+
+    .page-title {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .page-title h1 {
+      font-size: 6rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .page-title p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: white;  
+    }
+
+    .collection-grid {
+      max-width: 1200px;
+      margin: 30px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: rgba(116, 125, 62, 0.94);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #b88b4a;
+    }
+
+
+.fade-carousel {
+  position: relative;
+  height: 420px;
+  max-width: 420px;
+  margin: 0 auto 35px;
+}
+
+.fade-carousel img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.fade-carousel img.active {
+  opacity: 1;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 3;
+  border: none;
+  background: rgba(47, 36, 29, 0.75);
+  color: white;
+  font-size: 2rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-btn.prev {
+  left: 0;
+}
+
+.carousel-btn.next {
+  right: 0;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background: #c9b8a8;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #2f241d;
+}
+  </style>
+</head>
+
+<body>
+  <div class="main-header">
+    <div class="logo">VJ Gallery</div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="ThomasBlackshear.html">Artist Bio</a>
+      <a href="index.html">Full Shop</a>
+    </nav>
+  </div>
+
+  <section class="page-title">
+    <h1>Thomas Blackshear Collection</h1>
+    <p>
+      Explore collectible figurines and artwork inspired by Thomas Blackshear’s expressive style, rich detail, and powerful storytelling.
+    </p>
+  </section>
+<section class="collection-grid">
+  <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Birdy-VJ232.png" class="active" alt="Front view">
+        <img src="Birdy-VJ233.png" alt="Side view">
+        <img src="Birdy-VJ235.png" alt="Back view">
+        <img src="Birdy-VJ234.png" alt="In-hand view">
+        <img src="Birdy-VJ236.png" alt="Display view">
+        <img src="Birdy-VJ231.png" alt="Alternate angle">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Birdy</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Boss-VJ157.png" class="active" alt="Front view">
+        <img src="Boss-VJ158.png" alt=" Close up view">
+        <img src="Boss-VJ159.png" alt="Full view">
+        <img src="Boss-VJ155.png" alt="Arial view">
+        <img src="Boss-VJ156.png" alt="Back view">
+        <img src="Boss-VJ154.png" alt="full view with ">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Boss</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="BrightMorningStar-VJ285.png" class="active" alt="Front view">
+        <img src="BrightMorningStar-VJ286.png" alt=" side view">
+        <img src="BrightMorningStar-VJ283.png" alt="side view">
+        <img src="BrightMorningStar-VJ284.png" alt="back view">
+        <img src="BrightMorningStar-VJ282.png" alt="Full view with authentication letter view">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+        </div>
+        </div>
+    
+      <h3>Bright and Morning Star</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+  
+  <div class="product-card">
+  <div class="fade-carousel">
+    <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+    <img src="ColorOfLove-VJ130.png" class="active" alt="Front view">
+    <img src="ColorOfLove-VJ131.png" alt="Side view">
+    <img src="ColorOfLove-VJ132.png" alt="Back view">
+    <img src="ColorOfLove-VJ134.png" alt="In-hand view">
+    <img src="ColorOfLove-VJ135.png" alt="Display view">
+    <img src="ColorOfLove-VJ136.png" alt="Alternate angle">
+    <img src="ColorOfLove-VJ138.png" alt="Collector's display">
+
+    <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+    <div class="carousel-dots">
+  <span class="dot active" onclick="goToSlide(this, 0)"></span>
+  <span class="dot" onclick="goToSlide(this, 1)"></span>
+  <span class="dot" onclick="goToSlide(this, 2)"></span>
+  <span class="dot" onclick="goToSlide(this, 3)"></span>
+  <span class="dot" onclick="goToSlide(this, 4)"></span>
+  <span class="dot" onclick="goToSlide(this, 5)"></span>
+  <span class="dot" onclick="goToSlide(this, 6)"></span>
+</div>
+
+</div>
+
+
+  <h3>The Color of Love</h3>
+  <span class="price">$650.00</span>
+  <a class="btn" href="index.html">Shop This Piece</a>
+</div>
+    
+<div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="OhYesSheDid-VJ149.png" class="active" alt="Front view">
+        <img src="OhYesSheDid-VJ153.png" alt="Side view">
+        <img src="OhYesSheDid-VJ150.png" alt="Back view">
+        <img src="OhYesSheDid-VJ151.png" alt="In-hand view">
+        <img src="OhYesSheDid-VJ152.png" alt="Display view">
+        <img src="OhYesSheDid-VJ148.png" alt="Alternate angle">
+        <img src="OhYesSheDid-VJ147.png" alt="Collector's display">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+          <span class="dot" onclick="goToSlide(this, 6)"></span>
+        </div>
+        </div>
+    
+      <h3>Oh Yes She Did!</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+  <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+      <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+    <img src="ProtectorsofFreedom-vj169.png" class="active" alt="Front view">
+    <img src="ProtectorsofFreedom-VJ170.png" alt="Side view">
+    <img src="ProtectorsofFreedom-VJ171.png" alt="Back view">
+    <img src="ProtectorsofFreedom-VJ172.png" alt="In-hand view">
+    <img src="ProtectorsofFreedom-VJ173.png" alt="Display view">
+    <img src="ProtectorsofFreedom-VJ174.png" alt="Alternate angle">
+    <img src="ProtectorsofFreedom-VJ168.png" alt="Collector's display">
+
+    <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+  <div class="carousel-dots">
+         <span class="dot active" onclick="goToSlide(this, 0)"></span>
+         <span class="dot" onclick="goToSlide(this, 1)"></span>
+         <span class="dot" onclick="goToSlide(this, 2)"></span>
+         <span class="dot" onclick="goToSlide(this, 3)"></span>
+         <span class="dot" onclick="goToSlide(this, 4)"></span>
+         <span class="dot" onclick="goToSlide(this, 5)"></span>
+         <span class="dot" onclick="goToSlide(this, 6)"></span>
+    </div>
+    </div>
+    
+      <h3>The Protectors of Freedom</h3>
+      <span class="price">$950.00</span>
+      <a class="btn" href="index.html">Shop This Piece</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+      <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+    <img src="SistersForever-VJ177.png" class="active" alt="Front view">
+    <img src="SistersForever-VJ178.png" alt="Side view">
+    <img src="SistersForever-VJ179.png" alt="Back view">
+    <img src="SistersForever-VJ180.png" alt= "In-hand view">
+    <img src="SistersForever-VJ181.png" alt="Display view">
+    <img src="SistersForever-VJ175.png" alt="Alternate angle">
+
+    <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+  <div class="carousel-dots">
+         <span class="dot active" onclick="goToSlide(this, 0)"></span>
+         <span class="dot" onclick="goToSlide(this, 1)"></span>
+         <span class="dot" onclick="goToSlide(this, 2)"></span>
+         <span class="dot" onclick="goToSlide(this, 3)"></span>
+         <span class="dot" onclick="goToSlide(this, 4)"></span>
+         <span class="dot" onclick="goToSlide(this, 5)"></span>
+         <span class="dot" onclick="goToSlide(this, 6)"></span>
+    </div>
+    </div>
+    
+      <h3>Sisters Forever</h3>
+      <span class="price">$225.00</span>
+      <a class="btn" href="index.html">Shop This Piece</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="DoubleHug-VJ270.png" class="active" alt="Front view">
+        <img src="DoubleHug-VJ271.png" alt="Side view">
+        <img src="DoubleHug-VJ272.png" alt="Back view">
+        <img src="DoubleHug-VJ273.png" alt="In-hand view">
+        <img src="DoubleHug-VJ269.png" alt="Display view">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+        </div>
+        </div>
+    
+      <h3>Double Hug</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Evening Rose-VJ306.png" class="active" alt="Front view">
+        <img src="Evening Rose-VJ305.png" alt="Side view">
+        <img src="Evening Rose-VJ304.png" alt="Back view">
+        <img src="Evening Rose-VJ303.png" alt="In-hand view">
+        <img src="Evening Rose-VJ302.png" alt="Display view">
+        <img src="Evening Rose-VJ301.png" alt="Alternate angle">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Evening Rose</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Family-VJ328.png" class="active" alt="Front view">
+        <img src="Family-VJ327.png" alt="Side view">
+        <img src="Family-VJ326.png" alt="Back view">
+        <img src="Family-VJ325.png" alt="In-hand view">
+        <img src="Family-VJ324.png" alt="Display view">
+        <img src="Family-VJ323.png" alt="Alternate angle">
+        <img src="Family-VJ322.png" alt="Collector's display">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+          <span class="dot" onclick="goToSlide(this, 6)"></span>
+        </div>
+        </div>
+    
+      <h3>Family</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Flower Girl-VJ224.png" class="active" alt="Front view">
+        <img src="Flower Girl-VJ229.png" alt="Side view">
+        <img src="Flower Girl-VJ225.png" alt="Back view">
+        <img src="Flower Girl-VJ226.png" alt="In-hand view">
+        <img src="Flower Girl-VJ228.png" alt="Display view">
+        <img src="Flower Girl-VJ227.png" alt="Alternate angle">
+        <img src="Flower Girl-VJ230.png" alt="Collector's display">
+        <img src="Flower Girl-VJ223.png" alt="Close-up view">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+          <span class="dot" onclick="goToSlide(this, 6)"></span>
+          <span class="dot" onclick="goToSlide(this, 7)"></span>
+        </div>
+        </div>
+    
+      <h3>Flower Girl</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Forever Friends-VJ308.png" class="active" alt="Front view">
+        <img src="Forever Friends-VJ309.png" alt="Side view">
+        <img src="Forever Friends-VJ310.png" alt="Back view">
+        <img src="Forever Friends-VJ311.png" alt="In-hand view">
+        <img src="ForeverFriends-VJ222.png" alt="Display view">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+        </div>
+        </div>
+    
+      <h3>Forever Friends</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="FruitsofFriendship-VJ275.png" class="active" alt="Front view">
+        <img src="FruitsofFriendship-VJ276.png" alt="Side view">
+        <img src="FruitsofFriendship-VJ278.png" alt="Back view">
+        <img src="FruitsofFriendship-VJ277.png" alt="In-hand view">
+        <img src="FruitsofFriendship-VJ280.png" alt="Display view">
+        <img src="FruitsofFriendship-VJ279.png" alt="Alternate angle">
+        <img src="FruitsofFriendship-VJ281.png" alt="full display with certification letter">
+        <img src="FruitsofFriendship-VJ274.png" alt="Close-up view of authentication">
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+          <span class="dot" onclick="goToSlide(this, 6)"></span>
+          <span class="dot" onclick="goToSlide(this, 7)"></span>
+        </div>
+        </div>
+    
+      <h3>Fruits of Friendship</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Grandmama-VJ245.png" class="active" alt="Front view">
+        <img src="Grandmama-VJ246.png" alt="Side view">
+        <img src="Grandmama-VJ247.png" alt="back view">
+        <img src="Grandmama-VJ248.png" alt="side view">
+        <img src="Grandmama-VJ249.png" alt="Display view">
+        <img src="Grandmama-VJ244.png" alt="close up of authentication">
+        
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Grandmama</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Gypsy-VJ214.png" class="active" alt="Front view">
+        <img src="Gypsy-VJ212.png" alt="Side view">
+        <img src="Gypsy-VJ210.png" alt="back view">
+        <img src="Gypsy-VJ211.png" alt="side view">
+        <img src="Gypsy-VJ215.png" alt="Display view">
+        <img src="Gypsy-VJ208.png" alt="close up of authentication">
+        
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Gypsy</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Harmony-VJ292.png" class="active" alt="Front view">
+        <img src="Harmony-VJ294.png" alt="Side view">
+        <img src="Harmony-VJ293.png" alt="back view">
+        <img src="Harmony-VJ291.png" alt="side view">        
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+        </div>
+        </div>
+    
+      <h3>Harmony</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="HeavenlyPeace1.jpeg" class="active" alt="Front view">
+        <img src="HeavenlyPeace4.jpeg" alt="Side view">
+        <img src="HeavenlyPeace2.jpeg" alt="side view">
+        <img src="HeavenlyPeace3.jpeg" alt="back view">
+        <img src="HeavenlyPeace5.jpeg" alt="display with authentication letter view">    
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+        </div>
+        </div>
+    
+      <h3>Heavenly Peace</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Heir-VJ266.png" class="active" alt="Front view">
+        <img src="Heir-VJ267.png" alt="Side view">
+        <img src="Heir-VJ263.png" alt="back view">
+        <img src="Heir-VJ265.png" alt="side view">
+        <img src="Heir-VJ264.png" alt="Display view">
+        <img src="Heir-VJ268.png" alt="full display with letter of authentication">   
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Heir</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="JJ CLUCK-VJ251.png" class="active" alt="Front view">
+        <img src="JJ CLUCK-VJ252.png" alt="Side view">
+        <img src="JJ CLUCK-VJ253.png" alt="back view">
+        <img src="JJ CLUCK-VJ254.png" alt="side view">
+        <img src="JJ CLUCK-VJ255.png" alt="Display view">
+        <img src="JJ CLUCK-VJ250.png" alt="full display with letter of authentication">   
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Jay Jay & Cluck Cluck</h3>
+      <span class="price">$425.00</span>
+      <a class="btn" href="index.html">Place in cart</a>
+    </div>
+
+
+
+
+  </section>
+
+  
+
+<script>
+function updateCarousel(carousel, newIndex) {
+  const images = carousel.querySelectorAll("img");
+  const dots = carousel.querySelectorAll(".dot");
+
+  images.forEach(img => img.classList.remove("active"));
+  dots.forEach(dot => dot.classList.remove("active"));
+
+  images[newIndex].classList.add("active");
+  dots[newIndex].classList.add("active");
+
+  carousel.dataset.index = newIndex;
+}
+
+function changeSlide(button, direction) {
+  const carousel = button.closest(".fade-carousel");
+  const images = carousel.querySelectorAll("img");
+  let index = Number(carousel.dataset.index || 0);
+
+  index = index + direction;
+
+  if (index < 0) index = images.length - 1;
+  if (index >= images.length) index = 0;
+
+  updateCarousel(carousel, index);
+}
+
+function goToSlide(dot, index) {
+  const carousel = dot.closest(".fade-carousel");
+  updateCarousel(carousel, index);
+}
+</script>
+</body>
+</html>
