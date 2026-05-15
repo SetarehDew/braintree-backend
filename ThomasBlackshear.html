@@ -111,7 +111,7 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.2);
       margin-bottom: 40px;
       display: grid;
-      grid-template-columns: 250px 1fr;
+      grid-template-columns: 350px 1fr;
       gap: 40px;
       align-items: start;
     }
@@ -153,8 +153,8 @@
     }
 
     .bio-right p {
-      font-size: 1.15rem;
-      line-height: 1.9;
+      font-size: 1.3rem;
+      line-height: 1.5;
       color: #2f241d;
       margin-bottom: 20px;
     }
@@ -201,6 +201,81 @@
         gap: 12px;
       }
     }
+
+    .figurines-section {
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  margin-bottom: 40px;
+}
+
+.figurines-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #2f241d;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.figurines-section h2::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #b88b4a, transparent);
+  margin: 10px auto 0;
+}
+
+.figurines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.figurine-card {
+  background: #f7f3ee;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.figurine-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.14);
+}
+
+.figurine-card img {
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  background: white;
+  padding: 10px;
+}
+
+.collection-btn {
+  display: inline-block;
+  padding: 18px 50px;
+  background: #4a7c59;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0% 50%);
+  transition: background 0.3s ease;
+  box-shadow: 0 6px 20px rgba(74,124,89,0.4);
+}
+
+.collection-btn:hover {
+  background: #2f5c3a;
+  box-shadow: 0 8px 24px rgba(74,124,89,0.6);
+}
   </style>
 </head>
 <body>
@@ -254,7 +329,25 @@
       </div>
 
     </div>
-
+    <!-- Figurines Grid -->
+<div class="figurines-section">
+  <div class="figurines-grid">
+    <div class="figurine-card">
+      <img src="couple.jpg" alt="Thomas Blackshear figurine">
+    </div>
+    <div class="figurine-card">
+      <img src="tbIIbackground.jpeg" alt="Thomas Blackshear figurine">
+    </div>
+    <div class="figurine-card">
+      <img src="strole.jpg" alt="Thomas Blackshear figurine">
+    </div>
+  </div>
+</div>
+<div style="text-align: center; margin: 40px 0 60px;">
+  <a class="collection-btn" href="ThomasBlackshearCollection.html">
+    ✦ Browse & Shop Thomas Blackshear ✦
+  </a>
+</div>
   </main>
 
 </body>

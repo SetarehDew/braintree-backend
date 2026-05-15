@@ -63,12 +63,66 @@
     }
 
     .product-card {
-      background: rgba(116, 125, 62, 0.94);
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-    }
+  background: rgba(235, 228, 210, 0.95);
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  border: 2px solid rgba(74, 124, 89, 0.5);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(74,124,89,0.3);
+  border-color: #4a7c59;
+}
+
+.product-card h3 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #2f4a1d;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  display: block;
+  color: #6b4c2a;
+}
+
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(184,139,74,0.2);
+  border-color: #b88b4a;
+}
+
+.product-card h3 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  display: block;
+  color: #b88b4a;
+}
 
     .product-card img {
       width: 100%;
@@ -85,23 +139,27 @@
 
     .price {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 2rem;
       margin-bottom: 14px;
       display: block;
     }
-
     .btn {
-      display: inline-block;
-      padding: 12px 18px;
-      background: #2f241d;
-      color: white;
-      border-radius: 999px;
-      text-decoration: none;
-    }
+  display: inline-block;
+  padding: 12px 18px;
+  background: #4a7c59;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
 
-    .btn:hover {
-      background: #b88b4a;
-    }
+.btn:hover {
+  background: #2f5c3a;
+}
+    
+
+   
 
 
 .fade-carousel {
@@ -171,6 +229,34 @@
 .dot.active {
   background: #2f241d;
 }
+.collection-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  gap: 16px;
+  padding: 10px 20px;
+}
+
+.collection-divider::before,
+.collection-divider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #b88b4a, transparent);
+}
+
+.collection-divider span {
+  color: #2f241d;
+  font-size: 5rem;
+  font-style: italic;
+  white-space: nowrap;
+  background: rgba(235, 228, 210, 0.9);
+  padding: 6px 20px;
+  border-radius: 999px;
+  border: 2px solid #4a7c59;
+}
   </style>
 </head>
 
@@ -185,10 +271,12 @@
   </div>
 
   <section class="page-title">
-    <h1>Thomas Blackshear Collection</h1>
-    <p>
-      Explore collectible figurines and artwork inspired by Thomas Blackshear’s expressive style, rich detail, and powerful storytelling.
-    </p>
+    </section>
+
+<div class="collection-divider">
+  <span>✦ Thomas Blackshear II ✦</span>
+</div>
+    
   </section>
 <section class="collection-grid">
   <div class="product-card">
@@ -770,6 +858,17 @@ function goToSlide(dot, index) {
   const carousel = dot.closest(".fade-carousel");
   updateCarousel(carousel, index);
 }
+
+// Fade in cards on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 </script>
 </body>
 </html>
