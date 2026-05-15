@@ -186,12 +186,61 @@
   display: block;
   margin: 0 auto;
   width: fit-content;
+  padding: 10px 16px;
+  background: #ff2020;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #ffd700;
+  color: #2f241d;
 }
 
 .product-card {
+  background: rgba(60, 20, 20, 0.85);
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  border: 2px solid rgba(255, 32, 32, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.2s ease;
+}
+
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(255,32,32,0.3);
+  border-color: #ff2020;
+}
+
+.product-card h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #ffd700;
+}
+
+.price {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  color: #f0c080;
 }
 
 .product-card h3 {
@@ -272,10 +321,82 @@
   font-style: italic;
 }
 
+.collection-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  gap: 16px;
+  padding: 10px 20px;
+}
+
+.collection-divider::before,
+.collection-divider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, black, transparent);
+}
+
+.collection-divider span {
+  color: black;
+  font-size: 3rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ===== FLOATING CART BUTTON ===== */
+.floating-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.floating-cart img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  padding: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  border: 2px solid #b88b4a;
+}
+
+.floating-cart:hover img {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff2020;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
 
 </style>
 </head>
 <body>
+  <a class="floating-cart" href="index.html">
+  <img src="LOGO.png" alt="Cart">
+  <span class="cart-badge" id="cart-count">0</span>
+</a>
   <div class="sparkles" id="sparkles"></div>
   <div class="main-header">
   <div class="logo">
@@ -295,6 +416,7 @@
   <section class="page-title">
     <h1>Disney Collection</h1>
   </section>
+
 <section class="collection-grid">
   
     <div class="product-card">
@@ -316,8 +438,9 @@
     
       <h3>Donald Duck</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item4', 'Donald Duck', 425.00)">Add to Cart</button>
     </div>
+  </div>
 
   <div class="product-card">
     <div class="fade-carousel" data-index="0">
@@ -338,7 +461,7 @@
     
       <h3>Dumbo</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item6', 'Dumbo', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -360,7 +483,7 @@
     
       <h3>Pinocchio</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item2', 'Pinocchio', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -378,9 +501,9 @@
         </div>
     </div>
     
-      <h3></h3>
+      <h3>Flight by Dusty Horner</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item3', 'Flight by Dusty Horner', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -390,7 +513,7 @@
   </div>
   <h3>Nature Is All Around You</h3>
   <span class="price">$000.00</span>
-  <a class="btn" href="index.html">Place in cart</a>
+  <button class="btn" onclick="addToCart('item7', 'Nature Is All Around You', 0.00)">Place in cart</button>
 </div>
     </section>
  <script>
@@ -424,7 +547,20 @@ function goToSlide(dot, index) {
   const carousel = dot.closest(".fade-carousel");
   updateCarousel(carousel, index);
 }
-</script><script>
+
+// Fade in cards on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+</script>
+
+<script>
   // Generate sparkles
   const container = document.getElementById('sparkles');
   const colors = ['#ffd700', '#ffffff', '#ffec8b', '#ffe4e1', '#ff9999'];
@@ -445,6 +581,32 @@ function goToSlide(dot, index) {
   }
 </script>
 
+</body>
+<script>
+  // Update cart count from localStorage
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+    const total = cart.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById('cart-count').textContent = total;
+  }
+
+  function addToCart(productId, productName, productPrice) {
+    let cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ id: productId, name: productName, price: productPrice, qty: 1 });
+    }
+    localStorage.setItem('vjcart', JSON.stringify(cart));
+    updateCartCount();
+    alert(productName + ' added to cart!');
+  }
+
+  updateCartCount();
+</script>
+</body>
+</html>
 
 
 </body>

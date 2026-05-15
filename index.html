@@ -521,13 +521,11 @@ h2 {
 
     function addToCart(productId) {
       const existingItem = cart.find(item => item.id === productId);
-
       if (existingItem) {
         existingItem.qty += 1;
       } else {
         cart.push({ id: productId, qty: 1 });
       }
-
       renderCart();
     }
 
@@ -542,14 +540,11 @@ h2 {
     function decreaseQty(productId) {
       const item = cart.find(item => item.id === productId);
       if (!item) return;
-
       item.qty -= 1;
-
       if (item.qty <= 0) {
         const index = cart.findIndex(cartItem => cartItem.id === productId);
         cart.splice(index, 1);
       }
-
       renderCart();
     }
 
@@ -564,7 +559,6 @@ h2 {
     function renderCart() {
       const cartItemsDiv = document.getElementById("cart-items");
       const cartTotalDiv = document.getElementById("cart-total");
-
       cartItemsDiv.innerHTML = "";
 
       if (cart.length === 0) {
@@ -584,7 +578,6 @@ h2 {
 
         const cartItemDiv = document.createElement("div");
         cartItemDiv.className = "cart-item";
-
         cartItemDiv.innerHTML = `
           <strong>${product.name}</strong><br>
           Price: $${product.price.toFixed(2)}<br>
@@ -593,11 +586,9 @@ h2 {
             <button onclick="decreaseQty('${item.id}')">-</button>
             <button onclick="increaseQty('${item.id}')">+</button>
             <button onclick="removeFromCart('${item.id}')">Remove</button>
-          </span>
-          <br>
+          </span><br>
           Item Total: $${itemTotal.toFixed(2)}
         `;
-
         cartItemsDiv.appendChild(cartItemDiv);
       });
 
@@ -605,11 +596,23 @@ h2 {
     }
 
     window.addEventListener("load", function () {
+      // Load cart from localStorage
+      const savedCart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+      savedCart.forEach(item => {
+        const existing = cart.find(c => c.id === item.id);
+        if (existing) {
+          existing.qty = item.qty;
+        } else {
+          cart.push(item);
+        }
+      });
+      renderCart();
+
+      // Load Braintree
       fetch("https://checkout-backend-c5gi.onrender.com/token")
         .then(response => response.text())
         .then(token => {
           token = token.trim();
-
           console.log("TOKEN RECEIVED:", token);
 
           braintree.dropin.create({
@@ -638,13 +641,8 @@ h2 {
 
                 fetch("https://checkout-backend-c5gi.onrender.com/checkout", {
                   method: "POST",
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({
-                    nonce: payload.nonce,
-                    cart: cart
-                  })
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ nonce: payload.nonce, cart: cart })
                 })
                   .then(res => res.json())
                   .then(data => {
@@ -660,8 +658,6 @@ h2 {
           alert("Token failed to load");
         });
     });
-
-    renderCart();
-  </script>
+</script>
 </body>
 </html>
