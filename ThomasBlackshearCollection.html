@@ -25,14 +25,25 @@
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 2rem;
       font-weight: bold;
+      color: #2f241d;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
     }
 
     .nav a {
       margin-left: 20px;
       text-decoration: none;
       color: #2f241d;
+      font-size: 2rem;
     }
 
     .page-title {
@@ -328,7 +339,10 @@
   <span class="cart-badge" id="cart-count">0</span>
 </a>
   <div class="main-header">
-    <div class="logo">VJ Gallery</div>
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Logo">
+      <span>VJ Gallery</span>
+    </div>
     <nav class="nav">
       <a href="store.html">Home</a>
       <a href="ThomasBlackshear.html">Artist Bio</a>
@@ -895,6 +909,10 @@
 
   </section>
 
+  <footer style="background: #1a0a00; color: #f0c080; text-align: center; padding: 30px 20px; margin-top: 0; font-style: italic; font-size: 1rem; border-top: 4px solid var(--orange);">
+  <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+</footer>
+
   
 
 <script>
@@ -1028,6 +1046,7 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
 
   updateCartCount();
 </script>
+
 </body>
 </html>
 </body>
