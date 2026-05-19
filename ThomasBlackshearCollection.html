@@ -257,21 +257,91 @@
   border-radius: 999px;
   border: 2px solid #4a7c59;
 }
+
+/* ===== FLOATING CART BUTTON ===== */
+.floating-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.floating-cart img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  padding: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  border: 2px solid #b88b4a;
+}
+
+.floating-cart:hover img {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff2020;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2f241d;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  margin: 10px 0 0 20px;
+}
+
+.back-btn:hover {
+  background: #b88b4a;
+}
   </style>
 </head>
 
 <body>
+  
+  <a class="floating-cart" href="index.html">
+  <img src="LOGO.png" alt="Cart">
+  <span class="cart-badge" id="cart-count">0</span>
+</a>
   <div class="main-header">
     <div class="logo">VJ Gallery</div>
     <nav class="nav">
       <a href="store.html">Home</a>
       <a href="ThomasBlackshear.html">Artist Bio</a>
-      <a href="index.html">Full Shop</a>
+      <a href="index.html">Full Shop</a>   
+      
     </nav>
   </div>
+  <button class="back-btn" onclick="history.back()">← Back</button>
+ 
 
   <section class="page-title">
     </section>
+    
 
 <div class="collection-divider">
   <span>✦ Thomas Blackshear II ✦</span>
@@ -304,7 +374,7 @@
     
       <h3>Birdy</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item24', 'Birdy', 120.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -332,7 +402,7 @@
     
       <h3>Boss</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item13', 'Boss', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -358,7 +428,7 @@
     
       <h3>Bright and Morning Star</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item37', 'Bright and Morning Star', 425.00)">Add to Cart</button>
     </div>
   
   <div class="product-card">
@@ -390,7 +460,7 @@
 
   <h3>The Color of Love</h3>
   <span class="price">$650.00</span>
-  <a class="btn" href="index.html">Shop This Piece</a>
+  <button class="btn" onclick="addToCart('item10', 'The Color of Love', 650.00)">Add to Cart</button>
 </div>
     
 <div class="product-card">
@@ -420,7 +490,7 @@
     
       <h3>Oh Yes She Did!</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item11', 'Oh Yes She Did!', 425.00)">Add to Cart</button>
     </div>
 
   <div class="product-card">
@@ -450,7 +520,7 @@
     
       <h3>The Protectors of Freedom</h3>
       <span class="price">$950.00</span>
-      <a class="btn" href="index.html">Shop This Piece</a>
+      <button class="btn" onclick="addToCart('item15', 'The Protectors of Freedom', 950.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -479,7 +549,7 @@
     
       <h3>Sisters Forever</h3>
       <span class="price">$225.00</span>
-      <a class="btn" href="index.html">Shop This Piece</a>
+      <button class="btn" onclick="addToCart('item16', 'Sisters Forever', 225.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -505,7 +575,7 @@
     
       <h3>Double Hug</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item34', 'Double Hug', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -533,7 +603,7 @@
     
       <h3>Evening Rose</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item32', 'Evening Rose', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -563,7 +633,7 @@
     
       <h3>Family</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item39', 'Family', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -595,7 +665,7 @@
     
       <h3>Flower Girl</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item23', 'Flower Girl', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -621,7 +691,7 @@
     
       <h3>Forever Friends</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item21', 'Forever Friends', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -653,7 +723,7 @@
     
       <h3>Fruits of Friendship</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item35', 'Fruits of Friendship', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -682,7 +752,7 @@
     
       <h3>Grandmama</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item26', 'Grandmama', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -711,7 +781,7 @@
     
       <h3>Gypsy</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item22', 'Gypsy', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -735,7 +805,7 @@
     
       <h3>Harmony</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item31', 'Harmony', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -761,7 +831,7 @@
     
       <h3>Heavenly Peace</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item40', 'Heavenly Peace', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -789,7 +859,7 @@
     
       <h3>Heir</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item28', 'Heir', 425.00)">Add to Cart</button>
     </div>
 
     <div class="product-card">
@@ -817,7 +887,7 @@
     
       <h3>Jay Jay & Cluck Cluck</h3>
       <span class="price">$425.00</span>
-      <a class="btn" href="index.html">Place in cart</a>
+      <button class="btn" onclick="addToCart('item27', 'Jay Jay & Cluck Cluck', 425.00)">Add to Cart</button>
     </div>
 
 
@@ -870,5 +940,95 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 </script>
+
+<script>
+  // ===== DRAGGABLE CART =====
+  const cartEl = document.querySelector('.floating-cart');
+  let isDragging = false;
+  let startX, startY, startLeft, startTop;
+  let dragMoved = false;
+
+  cartEl.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragMoved = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = cartEl.offsetLeft;
+    startTop = cartEl.offsetTop;
+    cartEl.style.cursor = 'grabbing';
+    cartEl.style.right = 'auto';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+    cartEl.style.left = (startLeft + dx) + 'px';
+    cartEl.style.top = (startTop + dy) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    cartEl.style.cursor = 'grab';
+    if (!dragMoved) {
+      window.location.href = 'index.html';
+    }
+  });
+
+  // ===== TOUCH SUPPORT FOR MOBILE =====
+  cartEl.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    isDragging = true;
+    dragMoved = false;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    startLeft = cartEl.offsetLeft;
+    startTop = cartEl.offsetTop;
+    cartEl.style.right = 'auto';
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+    cartEl.style.left = (startLeft + dx) + 'px';
+    cartEl.style.top = (startTop + dy) + 'px';
+  });
+
+  document.addEventListener('touchend', () => {
+    isDragging = false;
+    if (!dragMoved) {
+      window.location.href = 'index.html';
+    }
+  });
+
+  // ===== CART COUNT & ADD TO CART =====
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+    const total = cart.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById('cart-count').textContent = total;
+  }
+
+  function addToCart(productId, productName, productPrice) {
+    let cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ id: productId, name: productName, price: productPrice, qty: 1 });
+    }
+    localStorage.setItem('vjcart', JSON.stringify(cart));
+    updateCartCount();
+    alert(productName + ' added to cart!');
+  }
+
+  updateCartCount();
+</script>
+</body>
+</html>
 </body>
 </html>

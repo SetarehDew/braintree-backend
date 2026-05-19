@@ -276,9 +276,27 @@
   background: #2f5c3a;
   box-shadow: 0 8px 24px rgba(74,124,89,0.6);
 }
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2f241d;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 10px 20px;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #b88b4a;
+}
   </style>
 </head>
 <body>
+  
 
   <div class="main-header">
     <div class="logo">
@@ -291,6 +309,7 @@
       <a href="store.html#artists">Artists</a>
     </nav>
   </div>
+  <button class="back-btn" onclick="history.back()">← Back</button>
 
   <!-- Hero Banner -->
   <div class="artist-banner">
