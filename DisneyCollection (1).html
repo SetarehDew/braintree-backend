@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disney Collection | VJ Gallery</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #2f241d;
+      background:
+        linear-gradient(rgba(47,36,29,0.1), rgba(47,36,29,0.1)),
+        url("waltbg.png") center / cover no-repeat fixed;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid #cd1818;
+      font-size: 1.5rem;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #2f241d;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .page-title {
+      text-align: center;
+      padding: 80px 20px 60px;
+    }
+
+    .collection-grid {
+      max-width: 1200px;
+      margin: 60px auto 100px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .fade-carousel {
+      position: relative;
+      height: 420px;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 20px;
+    }
+
+    .fade-carousel img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      opacity: 0 !important;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .fade-carousel img.active {
+      opacity: 1 !important;
+      z-index: 2;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      z-index: 5;
+      border: none;
+      background: rgba(47, 36, 29, 0.75);
+      color: white;
+      font-size: 2rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 5;
+    }
+
+    .carousel-btn.prev { left: 0; }
+    .carousel-btn.next { right: 0; }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background: #c9b8a8;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .dot.active { background: #2f241d; }
+
+    .price {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 10px 0;
+      text-align: center;
+      color: #f0c080;
+    }
+
+    .btn {
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
+      padding: 10px 16px;
+      background: #ff2020;
+      color: white;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.5rem;
+      transition: background 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #ffd700;
+      color: #2f241d;
+    }
+
+    .product-card {
+      background: rgba(60, 20, 20, 0.85);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255, 32, 32, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(255,32,32,0.3);
+      border-color: #ff2020;
+    }
+
+    .product-card h3 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #ffd700;
+    }
+
+    /* ===== SPARKLE ANIMATION ===== */
+    .sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+      animation: sparkle-float linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes sparkle-float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    /* ===== GOLD SHIMMER TITLE ===== */
+    .page-title h1 {
+      font-size: 7rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ff2020, #ffd700, #ff2020, #ffd700);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+      text-shadow: none;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 300% center; }
+    }
+
+    .collection-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      gap: 16px;
+      padding: 10px 20px;
+    }
+
+    .collection-divider::before,
+    .collection-divider::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, black, transparent);
+    }
+
+    .collection-divider span {
+      color: black;
+      font-size: 3rem;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    /* ===== FLOATING CART BUTTON ===== */
+    .floating-cart {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      cursor: grab;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .floating-cart img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      padding: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      border: 2px solid #b88b4a;
+    }
+
+    .floating-cart:hover img { transform: scale(1.1); }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ff2020;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #2f241d;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      margin: 10px 0 0 20px;
+    }
+
+    .back-btn:hover { background: #b88b4a; }
+  </style>
+</head>
+<body>
+
+  <a class="floating-cart" href="index.html">
+    <img src="LOGO.png" alt="Cart">
+    <span class="cart-badge" id="cart-count">0</span>
+  </a>
+
+  <div class="sparkles" id="sparkles"></div>
+
+  <div class="main-header">
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Logo">
+      <span>VJ Gallery</span>
+    </div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="Disney.html">Artist Bio</a>
+    </nav>
+  </div>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <section class="page-title">
+    <h1>Disney Collection</h1>
+  </section>
+
+  <section class="collection-grid">
+
+    <div class="product-card">
+      <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+        <img src="DonaldDuck-VJ11.png" class="active slide" alt="Front view">
+        <img src="DonaldDuck-VJ9.png" class="slide" alt="Side view">
+        <img src="DonaldDuck-VJ10.png" class="slide" alt="Back view">
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+        </div>
+      </div>
+      <h3>Donald Duck</h3>
+      <span class="price">$425.00</span>
+      <button class="btn" onclick="addToCart('item4', 'Donald Duck', 425.00)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+        <img src="dumbo.jpg" class="active slide" alt="Front view">
+        <img src="IMG_1247.jpg" class="slide" alt="Side view">
+        <img src="IMG_1246.jpg" class="slide" alt="Back view">
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+        </div>
+      </div>
+      <h3>Dumbo</h3>
+      <span class="price">$425.00</span>
+      <button class="btn" onclick="addToCart('item6', 'Dumbo', 425.00)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+        <img src="vj12.png" class="active slide" alt="Front view">
+        <img src="vj15.png" class="slide" alt="Side view">
+        <img src="vj14.png" class="slide" alt="Back view">
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+        </div>
+      </div>
+      <h3>Pinocchio</h3>
+      <span class="price">$425.00</span>
+      <button class="btn" onclick="addToCart('item2', 'Pinocchio', 425.00)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+        <img src="FlightbyDustyHorner-VJ27.jpg" class="active slide" alt="Front view">
+        <img src="FlightbyDustyHorner-VJ27+.png" class="slide" alt="Side view">
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+        </div>
+      </div>
+      <h3>Flight by Dusty Horner</h3>
+      <span class="price">$425.00</span>
+      <button class="btn" onclick="addToCart('item3', 'Flight by Dusty Horner', 425.00)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <div class="fade-carousel">
+        <img src="NatureIsAll-VJ25.png" class="active slide" alt="Front view"
+          style="position: absolute; left: 50%; transform: translateX(-50%); opacity: 1 !important;">
+      </div>
+      <h3>Nature Is All Around You</h3>
+      <span class="price">$000.00</span>
+      <button class="btn" onclick="addToCart('item7', 'Nature Is All Around You', 0.00)">Place in cart</button>
+    </div>
+
+  </section>
+
+  <footer style="background: #1a0a00; color: #f0c080; text-align: center; padding: 30px 20px; margin-top: 0; font-style: italic; font-size: 1rem; border-top: 4px solid #ff7a00;">
+    <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+  </footer>
+
+  <script>
+    function updateCarousel(carousel, newIndex) {
+      const images = carousel.querySelectorAll(".slide");
+      const dots = carousel.querySelectorAll(".dot");
+      images.forEach(img => img.classList.remove("active"));
+      dots.forEach(dot => dot.classList.remove("active"));
+      images[newIndex].classList.add("active");
+      dots[newIndex].classList.add("active");
+      carousel.dataset.index = newIndex;
+    }
+
+    function changeSlide(button, direction) {
+      const carousel = button.closest(".fade-carousel");
+      const images = carousel.querySelectorAll(".slide");
+      let index = Number(carousel.dataset.index || 0);
+      index = index + direction;
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      updateCarousel(carousel, index);
+    }
+
+    function goToSlide(dot, index) {
+      const carousel = dot.closest(".fade-carousel");
+      updateCarousel(carousel, index);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+
+    const container = document.getElementById('sparkles');
+    const colors = ['#ffd700', '#ffffff', '#ffec8b', '#ffe4e1', '#ff9999'];
+    for (let i = 0; i < 60; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      const size = Math.random() * 8 + 3;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.animationDuration = (Math.random() * 6 + 4) + 's';
+      sparkle.style.animationDelay = (Math.random() * 8) + 's';
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      container.appendChild(sparkle);
+    }
+  </script>
+
+  <script>
+    // ===== DRAGGABLE CART WITH POSITION MEMORY =====
+    const cartEl = document.querySelector('.floating-cart');
+    let isDragging = false;
+    let startX, startY, startLeft, startTop;
+    let hasDragged = false;
+
+    const savedLeft = localStorage.getItem('cartLeft');
+    const savedTop = localStorage.getItem('cartTop');
+    if (savedLeft && savedTop) {
+      cartEl.style.right = 'auto';
+      cartEl.style.left = savedLeft;
+      cartEl.style.top = savedTop;
+    }
+
+    cartEl.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      startLeft = cartEl.offsetLeft;
+      startTop = cartEl.offsetTop;
+      cartEl.style.cursor = 'grabbing';
+      cartEl.style.right = 'auto';
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasDragged = true;
+      cartEl.style.left = (startLeft + dx) + 'px';
+      cartEl.style.top = (startTop + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      cartEl.style.cursor = 'grab';
+      localStorage.setItem('cartLeft', cartEl.style.left);
+      localStorage.setItem('cartTop', cartEl.style.top);
+      if (hasDragged) {
+        e.stopPropagation();
+        hasDragged = false;
+        return;
+      }
+      hasDragged = false;
+    });
+
+    cartEl.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+        return;
+      }
+      window.location.href = 'index.html';
+    });
+
+    cartEl.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      isDragging = true;
+      hasDragged = false;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      startLeft = cartEl.offsetLeft;
+      startTop = cartEl.offsetTop;
+      cartEl.style.right = 'auto';
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasDragged = true;
+      cartEl.style.left = (startLeft + dx) + 'px';
+      cartEl.style.top = (startTop + dy) + 'px';
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+      localStorage.setItem('cartLeft', cartEl.style.left);
+      localStorage.setItem('cartTop', cartEl.style.top);
+      if (!hasDragged) window.location.href = 'index.html';
+      hasDragged = false;
+    });
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+      const total = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cart-count').textContent = total;
+    }
+
+    function addToCart(productId, productName, productPrice) {
+      let cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: productId, name: productName, price: productPrice, qty: 1 });
+      }
+      localStorage.setItem('vjcart', JSON.stringify(cart));
+      updateCartCount();
+      alert(productName + ' added to cart!');
+    }
+
+    updateCartCount();
+  </script>
+
+</body>
+</html>
