@@ -960,15 +960,24 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
 </script>
 
 <script>
-  // ===== DRAGGABLE CART =====
+  // ===== DRAGGABLE CART WITH POSITION MEMORY =====
   const cartEl = document.querySelector('.floating-cart');
   let isDragging = false;
   let startX, startY, startLeft, startTop;
-  let dragMoved = false;
+  let dragDistance = 0;
+
+  // Restore saved position
+  const savedLeft = localStorage.getItem('cartLeft');
+  const savedTop = localStorage.getItem('cartTop');
+  if (savedLeft && savedTop) {
+    cartEl.style.right = 'auto';
+    cartEl.style.left = savedLeft;
+    cartEl.style.top = savedTop;
+  }
 
   cartEl.addEventListener('mousedown', (e) => {
     isDragging = true;
-    dragMoved = false;
+    dragDistance = 0;
     startX = e.clientX;
     startY = e.clientY;
     startLeft = cartEl.offsetLeft;
@@ -982,24 +991,32 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
     if (!isDragging) return;
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+    dragDistance = Math.sqrt(dx * dx + dy * dy);
     cartEl.style.left = (startLeft + dx) + 'px';
     cartEl.style.top = (startTop + dy) + 'px';
   });
 
   document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
     isDragging = false;
     cartEl.style.cursor = 'grab';
-    if (!dragMoved) {
+
+    // Save position to localStorage
+    localStorage.setItem('cartLeft', cartEl.style.left);
+    localStorage.setItem('cartTop', cartEl.style.top);
+
+    // Only navigate if it was a click not a drag (less than 8px movement)
+    if (dragDistance < 8) {
       window.location.href = 'index.html';
     }
+    dragDistance = 0;
   });
 
-  // ===== TOUCH SUPPORT FOR MOBILE =====
+  // ===== TOUCH SUPPORT =====
   cartEl.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
     isDragging = true;
-    dragMoved = false;
+    dragDistance = 0;
     startX = touch.clientX;
     startY = touch.clientY;
     startLeft = cartEl.offsetLeft;
@@ -1012,16 +1029,19 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
     const touch = e.touches[0];
     const dx = touch.clientX - startX;
     const dy = touch.clientY - startY;
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+    dragDistance = Math.sqrt(dx * dx + dy * dy);
     cartEl.style.left = (startLeft + dx) + 'px';
     cartEl.style.top = (startTop + dy) + 'px';
   });
 
   document.addEventListener('touchend', () => {
     isDragging = false;
-    if (!dragMoved) {
+    localStorage.setItem('cartLeft', cartEl.style.left);
+    localStorage.setItem('cartTop', cartEl.style.top);
+    if (dragDistance < 8) {
       window.location.href = 'index.html';
     }
+    dragDistance = 0;
   });
 
   // ===== CART COUNT & ADD TO CART =====
@@ -1047,7 +1067,5 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
   updateCartCount();
 </script>
 
-</body>
-</html>
 </body>
 </html>

@@ -866,17 +866,16 @@
 
     const cart = [];
 
-    function addToCart(productId) {
-      const existingItem = cart.find(item => item.id === productId);
-      if (existingItem) {
-        existingItem.qty += 1;
-      } else {
-        cart.push({ id: productId, qty: 1 });
-      }
-      localStorage.setItem('vjcart', JSON.stringify(cart));
-      renderCart();
-    }
-
+   function addToCart(productId) {
+  const existingItem = cart.find(item => item.id === productId);
+  if (existingItem) {
+    existingItem.qty += 1;
+  } else {
+    cart.push({ id: productId, qty: 1 });
+  }
+  localStorage.setItem('vjcart', JSON.stringify(cart)); // ✅ make sure this line exists
+  renderCart();
+}
     function increaseQty(productId) {
       const item = cart.find(item => item.id === productId);
       if (item) {
