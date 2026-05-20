@@ -43,7 +43,7 @@
       margin-left: 20px;
       text-decoration: none;
       color: #2f241d;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     .page-title {
@@ -275,8 +275,9 @@
   top: 20px;
   right: 20px;
   z-index: 9999;
-  cursor: pointer;
+  cursor: grab;
   text-decoration: none;
+  user-select: none;
 }
 
 .floating-cart img {
@@ -346,6 +347,7 @@
     <nav class="nav">
       <a href="store.html">Home</a>
       <a href="ThomasBlackshear.html">Artist Bio</a>
+      <a href="DisneyCollection.html">Disney Collection</a>
       <a href="index.html">Full Shop</a>   
       
     </nav>
@@ -964,7 +966,7 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
   const cartEl = document.querySelector('.floating-cart');
   let isDragging = false;
   let startX, startY, startLeft, startTop;
-  let dragDistance = 0;
+  let hasDragged = false;
 
   // Restore saved position
   const savedLeft = localStorage.getItem('cartLeft');
@@ -977,7 +979,7 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
 
   cartEl.addEventListener('mousedown', (e) => {
     isDragging = true;
-    dragDistance = 0;
+    hasDragged = false;
     startX = e.clientX;
     startY = e.clientY;
     startLeft = cartEl.offsetLeft;
@@ -985,66 +987,71 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
     cartEl.style.cursor = 'grabbing';
     cartEl.style.right = 'auto';
     e.preventDefault();
+    e.stopPropagation();
   });
 
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
-    dragDistance = Math.sqrt(dx * dx + dy * dy);
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasDragged = true;
     cartEl.style.left = (startLeft + dx) + 'px';
     cartEl.style.top = (startTop + dy) + 'px';
   });
 
-  document.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', (e) => {
     if (!isDragging) return;
     isDragging = false;
     cartEl.style.cursor = 'grab';
-
-    // Save position to localStorage
     localStorage.setItem('cartLeft', cartEl.style.left);
     localStorage.setItem('cartTop', cartEl.style.top);
-
-    // Only navigate if it was a click not a drag (less than 8px movement)
-    if (dragDistance < 8) {
-      window.location.href = 'index.html';
+    if (hasDragged) {
+      e.stopPropagation();
+      hasDragged = false;
+      return;
     }
-    dragDistance = 0;
+    hasDragged = false;
   });
 
-  // ===== TOUCH SUPPORT =====
+  cartEl.addEventListener('click', (e) => {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasDragged = false;
+      return;
+    }
+    window.location.href = 'index.html';
+  });
+
   cartEl.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
     isDragging = true;
-    dragDistance = 0;
+    hasDragged = false;
     startX = touch.clientX;
     startY = touch.clientY;
     startLeft = cartEl.offsetLeft;
     startTop = cartEl.offsetTop;
     cartEl.style.right = 'auto';
-  });
+  }, { passive: true });
 
   document.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     const touch = e.touches[0];
     const dx = touch.clientX - startX;
     const dy = touch.clientY - startY;
-    dragDistance = Math.sqrt(dx * dx + dy * dy);
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) hasDragged = true;
     cartEl.style.left = (startLeft + dx) + 'px';
     cartEl.style.top = (startTop + dy) + 'px';
-  });
+  }, { passive: true });
 
   document.addEventListener('touchend', () => {
     isDragging = false;
     localStorage.setItem('cartLeft', cartEl.style.left);
     localStorage.setItem('cartTop', cartEl.style.top);
-    if (dragDistance < 8) {
-      window.location.href = 'index.html';
-    }
-    dragDistance = 0;
+    if (!hasDragged) window.location.href = 'index.html';
+    hasDragged = false;
   });
 
-  // ===== CART COUNT & ADD TO CART =====
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('vjcart') || '[]');
     const total = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -1066,6 +1073,5 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
 
   updateCartCount();
 </script>
-
 </body>
 </html>
