@@ -25,19 +25,21 @@
 
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      background: #2a1800;
+      background: #515151;
       color: #f0ebe3;
       line-height: 1.6;
-    }
+}
 
     /* ===== PAGE HEADER ===== */
     .page-header {
-      text-align: center;
-      padding: 60px 20px 40px;
-      background: linear-gradient(180deg, #5c3310 0%, #3d2200 100%);
-      border-bottom: 2px solid rgba(184,139,74,0.4);
-      position: relative;
-    }
+  text-align: center;
+  padding: 60px 20px 40px;
+  background:
+    linear-gradient(rgba(47,36,29,0.2), rgba(47,36,29,0.2)),
+    url("homebackground.png") center / cover no-repeat;
+  border-bottom: 2px solid rgba(184,139,74,0.4);
+  position: relative;
+}
 
     .page-header::before {
       content: "";
@@ -49,8 +51,8 @@
 
     .page-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      color: var(--disney-gold);
+      font-size: clamp(6rem, 10vw, 4.5rem);
+      color: black;
       letter-spacing: 0.08em;
       text-shadow: 0 2px 20px rgba(255,215,0,0.3);
       position: relative;
@@ -94,7 +96,7 @@
       color: white;
       border: 1px solid var(--tb-gold);
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 1.2rem;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -114,13 +116,13 @@
     }
 
     .section-banner.disney {
-      background: linear-gradient(135deg, var(--disney-dark) 0%, #2a0808 100%);
+      background: linear-gradient(135deg, var(--disney-dark) 0%, white);
       border-top: 3px solid var(--disney-red);
       border-bottom: 3px solid var(--disney-red);
     }
 
     .section-banner.thomas {
-      background: linear-gradient(135deg, var(--tb-dark) 0%, #0a2010 100%);
+      background: linear-gradient(135deg, var(--tb-dark) 0%, white);
       border-top: 3px solid var(--tb-green);
       border-bottom: 3px solid var(--tb-green);
     }
@@ -158,33 +160,34 @@
     }
 
     .section-banner.disney h2 {
-      color: var(--disney-gold);
+      color: black;
       text-shadow: 0 2px 15px rgba(255,215,0,0.2);
     }
 
     .section-banner.thomas h2 {
-      color: #a8d4a8;
+      color: black;
       text-shadow: 0 2px 15px rgba(168,212,168,0.2);
     }
 
     .section-banner p {
-      font-style: italic;
+      font-style: italic bold;
       opacity: 0.7;
       margin-top: 8px;
       position: relative;
       z-index: 1;
       font-size: 2rem;
       text-align: right;
+      color: black;
     }
 
     /* ===== PRODUCT GRIDS ===== */
     .products-disney {
-      background: linear-gradient(180deg, #4a1010 0%, #3d0f0f 100%);
+      background: whitesmoke;
       padding: 30px 30px 50px;
     }
 
     .products-thomas {
-      background: linear-gradient(180deg, #1a4a1a 0%, #1a3a1a 100%);
+      background: whitesmoke;
       padding: 30px 30px 50px;
     }
 
@@ -474,7 +477,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 40px;
-  background: rgba(47, 36, 29, 0.97);
+  background: rgba(87, 87, 87, 0.9);
   border-bottom: 2px solid var(--tb-gold);
   position: static;
   top: 0;
@@ -486,6 +489,9 @@
   color: var(--disney-gold);
   font-weight: bold;
   letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .main-nav a {
@@ -504,7 +510,10 @@
 </head>
 <body>
   <div class="main-header">
-  <div class="nav-logo">VJ Gallery</div>
+  <div class="nav-logo">
+  <img src="logo.png" alt="VJ Gallery Logo" style="width: 60px; height: 60px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
+  VJ Gallery
+</div>
   <nav class="main-nav">
     <a href="store.html">Home</a>
     <a href="store.html#artists">Artists</a>
@@ -520,8 +529,7 @@
     <div style="width: 180px; height: 180px; background: rgba(255,215,0,0.15); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,215,0,0.3);">
       <img src="lg.png" alt="VJ Gallery Logo" style="width: 130px; height: 130px; object-fit: contain;">
     </div>
-    <h1>VJ Gallery</h1>
-    <p>Collectible Figurines & Fine Art</p>
+    <h1>VJ Full Gallery</h1>
     <div class="header-divider"><span>✦</span></div>
   </div>
 
@@ -815,7 +823,20 @@
     <div class="payment-section">
       <h2 class="payment-title">Secure Payment</h2>
       <div id="dropin-container"></div>
-      <button id="submit-button">Complete Purchase</button>
+      <div style="max-width: 900px; margin: 0 auto 16px; padding: 20px 30px; background: white; border-radius: 14px; border: 1px solid #e5d5c5; font-family: 'Cormorant Garamond', serif;">
+  <p style="font-size: 1.1rem; color: #2f241d; text-align: center; margin-bottom: 10px;">
+    By completing your purchase you agree to our
+    <a href="policies.html" target="_blank" style="color: #b88b4a; font-weight: bold; text-decoration: underline;">Shipping & Return Policy</a>
+    and
+    <a href="policies.html" target="_blank" style="color: #b88b4a; font-weight: bold; text-decoration: underline;">Privacy Policy</a>.
+  </p>
+  <p style="font-size: 1rem; color: #6d5b4f; text-align: center; font-style: italic;">
+    Returns are handled on a case-by-case basis. Please contact us before returning any item.
+    <a href="mailto:victor.dewberry@vjgallery.com" style="color: #b88b4a;">victor.dewberry@vjgallery.com</a>
+  </p>
+</div>
+
+<button id="submit-button">Complete Purchase</button>
     </div>
 
   </div>
