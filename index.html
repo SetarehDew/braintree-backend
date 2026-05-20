@@ -867,13 +867,24 @@
     const cart = [];
 
    function addToCart(productId) {
+  // ✅ Always sync with localStorage first
+  const saved = JSON.parse(localStorage.getItem('vjcart') || '[]');
+  saved.forEach(item => {
+    const existing = cart.find(c => c.id === item.id);
+    if (existing) {
+      existing.qty = item.qty;
+    } else {
+      cart.push(item);
+    }
+  });
+
   const existingItem = cart.find(item => item.id === productId);
   if (existingItem) {
     existingItem.qty += 1;
   } else {
     cart.push({ id: productId, qty: 1 });
   }
-  localStorage.setItem('vjcart', JSON.stringify(cart)); // ✅ make sure this line exists
+  localStorage.setItem('vjcart', JSON.stringify(cart));
   renderCart();
 }
     function increaseQty(productId) {
@@ -931,18 +942,21 @@
         const cartItemDiv = document.createElement("div");
         cartItemDiv.className = "cart-item";
         cartItemDiv.innerHTML = `
-          <div class="cart-item-info">
-            <strong>${name}</strong>
-            <div class="item-price" style="font-family: Arial, sans-serif;">$${Number(price).toFixed(2)} each</div>
-          </div>
-          <div class="qty-controls">
-            <button onclick="decreaseQty('${item.id}')">−</button>
-            <span>${item.qty}</span>
-            <button onclick="increaseQty('${item.id}')">+</button>
-            <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-          </div>
-          <div class="item-total">$${itemTotal.toFixed(2)}</div>
-        `;
+  <div class="cart-item-info">
+    <strong>${name}</strong>
+    <div class="item-price" style="font-family: Arial, sans-serif;">$${Number(price).toFixed(2)} each</div>
+  </div>
+  <div class="qty-controls">
+    <button onclick="decreaseQty('${item.id}')">−</button>
+    <div style="text-align: center;">
+      <div style="font-family: Arial, sans-serif; font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em;">Qty</div>
+      <div style="font-family: Arial, sans-serif; font-size: 1.6rem; font-weight: bold; color: #2f241d; min-width: 30px;">${item.qty}</div>
+    </div>
+    <button onclick="increaseQty('${item.id}')">+</button>
+    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+  </div>
+  <div class="item-total">$${itemTotal.toFixed(2)}</div>
+`;
         cartItemsDiv.appendChild(cartItemDiv);
       });
 

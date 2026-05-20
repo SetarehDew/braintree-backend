@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Policies | VJ Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: #faf6f0;
+      color: #2f241d;
+      line-height: 1.8;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== HEADER ===== */
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: white;
+      border-bottom: 2px solid #e5d5c5;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .logo img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      font-size: 1rem;
+      color: #2f241d;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: #b88b4a; }
+
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #2f241d;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 24px 0 0 40px;
+    }
+
+    .back-btn:hover { background: #b88b4a; }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 50px;
+      background: white;
+      border-bottom: 1px solid #e5d5c5;
+      margin-bottom: 50px;
+    }
+
+    .hero-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin: 0 auto 20px;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: #2f241d;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #b88b4a;
+      margin: 12px auto 0;
+    }
+
+    .hero p {
+      color: #6d5b4f;
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-top: 12px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 30px;
+    }
+
+    /* ===== POLICY SECTION ===== */
+    .policy-section {
+      background: white;
+      border-radius: 16px;
+      padding: 45px 50px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      border: 1px solid #e5d5c5;
+      border-left: 5px solid #b88b4a;
+    }
+
+    .policy-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #2f241d;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #e5d5c5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .policy-section h2 .icon {
+      font-size: 1.6rem;
+    }
+
+    .policy-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #b88b4a;
+      margin: 24px 0 10px;
+    }
+
+    .policy-section p {
+      font-size: 1.1rem;
+      color: #3a2e28;
+      margin-bottom: 14px;
+      line-height: 1.9;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .policy-section ul li {
+      font-size: 1.1rem;
+      color: #3a2e28;
+      padding: 6px 0 6px 24px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .policy-section ul li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #b88b4a;
+      font-size: 0.7rem;
+      top: 10px;
+    }
+
+    .highlight-box {
+      background: #faf6f0;
+      border: 1px solid #e5d5c5;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 1.05rem;
+      color: #2f241d;
+    }
+
+    .highlight-box strong {
+      color: #b88b4a;
+    }
+
+    /* ===== CONTACT BANNER ===== */
+    .contact-banner {
+      background: #2f241d;
+      color: #f0e8d8;
+      border-radius: 16px;
+      padding: 40px 50px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffd700;
+      margin-bottom: 12px;
+    }
+
+    .contact-banner p {
+      font-size: 1.1rem;
+      color: #c9b8a8;
+      margin-bottom: 8px;
+    }
+
+    .contact-banner a {
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    .contact-banner a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #2f241d;
+      color: #c9b8a8;
+      text-align: center;
+      padding: 30px 20px;
+      font-style: italic;
+      font-size: 1rem;
+      border-top: 4px solid #b88b4a;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .main-header { flex-direction: column; gap: 12px; padding: 18px 20px; }
+      .content-wrapper { padding: 0 16px; }
+      .policy-section { padding: 30px 24px; }
+      .back-btn { margin: 20px 0 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="main-header">
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Gallery Logo">
+      <span>VJ Gallery</span>
+    </div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+    </nav>
+  </div>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <!-- Hero -->
+  <div class="hero">
+    <img class="hero-logo" src="lg.png" alt="VJ Gallery Logo">
+    <h1>Our Policies</h1>
+    <p>Transparency and trust are the foundation of every purchase at VJ Gallery</p>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- Shipping Policy -->
+    <div class="policy-section">
+      <h2><span class="icon">📦</span> Shipping Policy</h2>
+
+      <h3>Processing Time</h3>
+      <p>All orders are carefully packaged and processed within 1–3 business days of purchase. Each figurine is individually inspected and wrapped to ensure it arrives in perfect condition.</p>
+
+      <h3>Delivery Time</h3>
+      <p>Standard shipping typically takes <strong>5–10 business days</strong> after your order has been processed. Please note that delivery times may vary depending on your location and carrier availability.</p>
+
+      <h3>Free Shipping</h3>
+      <div class="highlight-box">
+        <strong>✦ Free shipping on all orders of $500 or more!</strong> Orders below $500 will be charged a shipping fee calculated at checkout based on your location and order size.
+      </div>
+
+      <h3>Packaging</h3>
+      <p>Every piece in the VJ Gallery collection is a one-of-a-kind collectible. We take great care in packaging each figurine with protective materials to ensure safe transit. If your item arrives damaged due to shipping, please contact us immediately with photos so we can resolve the issue promptly.</p>
+
+      <h3>Shipping Destinations</h3>
+      <ul>
+        <li>We currently ship within the United States</li>
+        <li>For international shipping inquiries please contact us directly</li>
+        <li>P.O. Box deliveries may require additional processing time</li>
+      </ul>
+    </div>
+
+    <!-- Return Policy -->
+    <div class="policy-section">
+      <h2><span class="icon">🔄</span> Return Policy</h2>
+
+      <p>At VJ Gallery, we take great pride in the quality and authenticity of every piece we sell. Because our figurines are collectible items — many of which are limited edition or one-of-a-kind — we handle all return requests on a <strong>case-by-case basis</strong>.</p>
+
+      <h3>How to Request a Return</h3>
+      <p>If you are not fully satisfied with your purchase, please contact us <strong>before</strong> returning any item. We will review your situation and work with you to find the best resolution.</p>
+
+      <div class="highlight-box">
+        <strong>Important:</strong> Do not ship any item back without first contacting us. Unauthorized returns may not be accepted.
+      </div>
+
+      <h3>Conditions We Consider</h3>
+      <ul>
+        <li>Item arrived damaged or defective</li>
+        <li>Item significantly different from its description</li>
+        <li>Order error on our part</li>
+        <li>Other extenuating circumstances reviewed individually</li>
+      </ul>
+
+      <h3>General Guidelines</h3>
+      <ul>
+        <li>Items must be in their original condition and packaging</li>
+        <li>Return requests should be made within 7 days of receiving your order</li>
+        <li>Buyer is responsible for return shipping costs unless the error was ours</li>
+        <li>Refunds are issued once the returned item is received and inspected</li>
+      </ul>
+    </div>
+
+    <!-- Privacy Policy -->
+    <div class="policy-section">
+      <h2><span class="icon">🔒</span> Privacy Policy</h2>
+
+      <p>VJ Gallery is committed to protecting your personal information. This policy explains what information we collect, how we use it, and how we keep it safe.</p>
+
+      <h3>Information We Collect</h3>
+      <ul>
+        <li>Name and contact information provided during checkout</li>
+        <li>Shipping address for order fulfillment</li>
+        <li>Payment information — processed securely through Braintree and never stored on our servers</li>
+        <li>Email address for order confirmation and communication</li>
+      </ul>
+
+      <h3>How We Use Your Information</h3>
+      <ul>
+        <li>To process and fulfill your order</li>
+        <li>To communicate with you about your purchase</li>
+        <li>To resolve any issues or disputes related to your order</li>
+        <li>To improve our products and services</li>
+      </ul>
+
+      <h3>Payment Security</h3>
+      <p>All payment transactions are processed through <strong>Braintree</strong>, a trusted and PCI-compliant payment gateway. Your credit card and payment details are never stored on our servers. We use industry-standard encryption to protect your information during transmission.</p>
+
+      <h3>We Will Never</h3>
+      <ul>
+        <li>Sell or share your personal information with third parties</li>
+        <li>Send unsolicited marketing emails without your consent</li>
+        <li>Store your payment details on our systems</li>
+      </ul>
+
+      <h3>Your Rights</h3>
+      <p>You have the right to request access to the personal information we hold about you, or to request its deletion. To do so please contact us at the information below.</p>
+
+      <h3>Updates to This Policy</h3>
+      <p>VJ Gallery reserves the right to update this privacy policy at any time. Any changes will be reflected on this page. We encourage you to review this policy periodically.</p>
+    </div>
+
+    <!-- Contact Banner -->
+    <div class="contact-banner">
+      <h2>Questions? We're Here to Help</h2>
+      <p>For any questions about our policies, orders, or returns please reach out to us directly.</p>
+      <p style="margin-top: 16px;">📧 <a href="mailto:victor.dewberry@vjgallery.com">victor.dewberry@vjgallery.com</a></p>
+      <p>📞 <a href="tel:4059239565">(405) 923-9565</a></p>
+      <p style="margin-top: 8px; color: #a89880; font-size: 0.95rem;">Oklahoma City, Oklahoma</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+  </footer>
+
+</body>
+</html>
