@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | VJ Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #b8912a;
+      --gold-light: #d4ab4a;
+      --gold-pale: #f0e0b0;
+      --silver: #c8cdd4;
+      --silver-light: #e8ecf0;
+      --silver-dark: #9aa0a8;
+      --white: #ffffff;
+      --off-white: #f7f5f2;
+      --light-gray: #eeebea;
+      --mid-gray: #d4d0cc;
+      --text-dark: #2a2520;
+      --text-mid: #5a5048;
+      --text-light: #8a8078;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--off-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 15%, rgba(184,145,42,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 70% at 85% 85%, rgba(200,205,212,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #f0ece8 0%, #e8e4de 100%);
+    }
+
+    /* Shimmer particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.5; }
+      90%  { opacity: 0.2; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Geometric SVG lines */
+    .geo-lines {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: relative;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 50px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(184,145,42,0.2);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .nav-links a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: var(--text-mid);
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .back-btn {
+      margin-left: 20px;
+      background: transparent;
+      border: 1px solid rgba(184,145,42,0.4);
+      color: var(--gold);
+      padding: 7px 18px;
+      border-radius: 999px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--gold);
+      color: white;
+    }
+
+    /* ===== PAGE WRAPPER ===== */
+    .page-wrapper {
+      position: relative;
+      z-index: 10;
+      min-height: calc(100vh - 77px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 80px;
+    }
+
+    /* ===== HEADER ===== */
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,145,42,0.3);
+      background: linear-gradient(135deg, rgba(184,145,42,0.08), rgba(200,205,212,0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(184,145,42,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .logo-circle::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,145,42,0.12);
+    }
+
+    .logo-circle::after {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,205,212,0.2);
+    }
+
+    .logo-circle img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+      opacity: 0.6;
+    }
+
+    .eyebrow::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .page-title span { color: var(--gold); }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== CONTACT CARD ===== */
+    .contact-card {
+      width: 100%;
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      border-radius: 4px;
+      overflow: hidden;
+      animation: fadeUp 0.7s ease 0.15s both;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.04),
+        0 20px 60px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(184,145,42,0.12);
+    }
+
+    /* ===== INFO PANEL ===== */
+    .info-panel {
+      padding: 48px 40px;
+      background: linear-gradient(160deg, #2a2420 0%, #1a1510 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-panel::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,145,42,0.15);
+    }
+
+    .info-panel::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,205,212,0.08);
+    }
+
+    .info-panel-top { position: relative; z-index: 1; }
+
+    .info-panel h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--gold-pale);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(184,145,42,0.2);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(184,145,42,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      background: rgba(184,145,42,0.08);
+    }
+
+    .contact-detail h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .contact-detail p {
+      font-size: 1rem;
+      color: rgba(240,224,176,0.85);
+      line-height: 1.5;
+    }
+
+    .contact-detail a {
+      color: rgba(240,224,176,0.85);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-detail a:hover { color: var(--gold-pale); }
+
+    .info-divider {
+      height: 1px;
+      background: linear-gradient(to right, rgba(184,145,42,0.3), transparent);
+      margin: 24px 0;
+    }
+
+    .hours-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: rgba(200,205,212,0.6);
+      margin-bottom: 8px;
+    }
+
+    .hours-row span:last-child {
+      color: var(--gold-pale);
+      font-style: italic;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-btn {
+      display: inline-block;
+      padding: 7px 16px;
+      border: 1px solid rgba(184,145,42,0.3);
+      border-radius: 999px;
+      text-decoration: none;
+      color: rgba(240,224,176,0.7);
+      font-size: 0.82rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.06em;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-pale);
+      background: rgba(184,145,42,0.08);
+    }
+
+    /* ===== FORM PANEL ===== */
+    .form-panel {
+      padding: 48px 48px;
+      background: var(--white);
+    }
+
+    .form-panel h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--silver-dark);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--off-white);
+      border: 1px solid var(--mid-gray);
+      border-radius: 2px;
+      padding: 12px 14px;
+      color: var(--text-dark);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--silver-dark);
+      font-style: italic;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(184,145,42,0.08);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8912a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-color: var(--off-white);
+      padding-right: 36px;
+    }
+
+    .form-group select option {
+      background: white;
+      color: var(--text-dark);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(184,145,42,0.25);
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover {
+      box-shadow: 0 8px 30px rgba(184,145,42,0.4);
+      transform: translateY(-1px);
+      background: linear-gradient(135deg, var(--gold-light) 0%, #e0c060 100%);
+    }
+
+    .submit-btn:active { transform: translateY(0); }
+
+    /* Success message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .success-message .check {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .success-message h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .success-message p {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 10;
+      background: rgba(255,255,255,0.7);
+      border-top: 1px solid var(--mid-gray);
+      padding: 22px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    footer p {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 18px;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover { color: var(--gold-light); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .contact-card { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .form-panel { padding: 32px 24px; }
+      .info-panel { padding: 32px 24px; }
+      footer { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-canvas">
+    <div class="particles" id="particles"></div>
+    <svg class="geo-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <line x1="0" y1="450" x2="1440" y2="450" stroke="#b8912a" stroke-width="0.8"/>
+      <line x1="720" y1="0" x2="720" y2="900" stroke="#b8912a" stroke-width="0.8"/>
+      <circle cx="720" cy="450" r="200" fill="none" stroke="#b8912a" stroke-width="0.6"/>
+      <circle cx="720" cy="450" r="380" fill="none" stroke="#c8cdd4" stroke-width="0.4"/>
+      <circle cx="720" cy="450" r="500" fill="none" stroke="#c8cdd4" stroke-width="0.3"/>
+      <polygon points="720,80 1160,720 280,720" fill="none" stroke="#b8912a" stroke-width="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a class="nav-brand" href="store.html">
+      <img src="LOGO.png" alt="VJ Gallery">
+      VJ Gallery
+    </a>
+    <div class="nav-links">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+      <a href="policies.html">Policies</a>
+      <button class="back-btn" onclick="history.back()">← Back</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-wrapper">
+
+    <div class="page-header">
+      <div class="logo-circle">
+        <img src="lg.png" alt="VJ Gallery Logo">
+      </div>
+      <div class="eyebrow">Get In Touch</div>
+      <h1 class="page-title">Contact <span>VJ Gallery</span></h1>
+      <p class="page-subtitle">We'd love to hear from you — reach out about any piece in our collection</p>
+    </div>
+
+    <div class="contact-card">
+
+      <!-- Info Panel -->
+      <div class="info-panel">
+        <div class="info-panel-top">
+          <h2>Our Information</h2>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-detail">
+              <h3>Location</h3>
+              <p>Oklahoma City, Oklahoma</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-detail">
+              <h3>Phone</h3>
+              <p><a href="tel:4059239565">(405) 923-9565</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-detail">
+              <h3>Email</h3>
+              <p><a href="mailto:victor.dewberry@vjgallery.com">victor.dewberry@vjgallery.com</a></p>
+            </div>
+          </div>
+
+          <div class="info-divider"></div>
+
+          <p class="hours-title">Response Times</p>
+          <div class="hours-row">
+            <span>Monday – Friday</span>
+            <span>Within 24 hours</span>
+          </div>
+          <div class="hours-row">
+            <span>Saturday</span>
+            <span>Within 48 hours</span>
+          </div>
+          <div class="hours-row">
+            <span>Sunday</span>
+            <span>Next business day</span>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/vjgallery" target="_blank">f Facebook</a>
+          <a class="social-btn" href="https://www.instagram.com/vjgallery" target="_blank">◎ Instagram</a>
+        </div>
+      </div>
+
+      <!-- Form Panel -->
+      <div class="form-panel">
+        <h2>Send A Message</h2>
+
+        <form id="contact-form" action="https://formspree.io/f/xdajevby" method="POST">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number (optional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="(xxx) xxx-xxxx">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="" disabled selected>Select a topic...</option>
+              <option value="Product Inquiry">Product Inquiry</option>
+              <option value="Order Question">Order Question</option>
+              <option value="Return Request">Return Request</option>
+              <option value="Shipping Question">Shipping Question</option>
+              <option value="General Question">General Question</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">✦ Send Message</button>
+
+        </form>
+
+        <div class="success-message" id="success-msg">
+          <span class="check">✦</span>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+    <div>
+      <a href="policies.html">Shipping Policy</a>
+      <a href="policies.html">Returns</a>
+      <a href="policies.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    // Generate silver and gold floating particles
+    const container = document.getElementById('particles');
+    const colors = ['#b8912a', '#c8cdd4', '#d4ab4a', '#e0e4e8', '#c9a84c'];
+    for (let i = 0; i < 35; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 4 + 1;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (Math.random() * 14 + 8) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      container.appendChild(p);
+    }
+
+    // Show success message if redirected back with ?success
+    if (window.location.search.includes('success')) {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

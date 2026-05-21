@@ -3,810 +3,1148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VJ Gallery Checkout</title>
+  <title>VJ Gallery | Full Collection</title>
   <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --disney-dark: #3d0f0f;
-      --disney-red: #cc1a1a;
-      --disney-gold: #ffd700;
-      --disney-card: rgba(90, 30, 30, 0.85);
-      --disney-border: rgba(204, 26, 26, 0.5);
-      --tb-dark: #1a3a1a;
-      --tb-green: #3a6b3a;
-      --tb-gold: #b88b4a;
-      --tb-card: rgba(40, 75, 40, 0.85);
-      --tb-border: rgba(58, 107, 58, 0.6);
-      --cart-bg: #faf6f0;
+      --black: #080808;
+      --deep: #0f0f0f;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --white: #f5f0e8;
+      --cream: #ede8dc;
+      --gray: #2a2a2a;
+      --disney-red: #8b1a1a;
+      --tb-green: #1a3a1a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      background: #515151;
-      color: #f0ebe3;
-      line-height: 1.6;
-}
+      background: #3a3530;
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-    /* ===== PAGE HEADER ===== */
-    .page-header {
-      background: linear-gradient(rgba(47, 36, 29, 0.2), rgba(47, 36, 29, 0.2)),
-          url("homebackground.png") center / cover no-repeat fixed;
-      color: white;
-      min-height: 70vh;
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 50px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .nav-links a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      font-family: 'Cinzel', serif;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .back-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-left: 20px;
+    }
+
+    .back-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 20px 80px;
     }
-    .page-header::before {
+
+    .hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(8,8,8,0.35), rgba(8,8,8,0.50)),
+    url("homebackground.png") center / cover no-repeat fixed;
+  z-index: 0;
+}
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  letter-spacing: 1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-weight: bold;
+  text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
+}
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
       content: "";
-      position: absolute;
-      inset: 0;
-      background: url("logo.png") center/120px no-repeat;
-      opacity: 0.04;
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
     }
 
-    .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(6rem, 10vw, 4.5rem);
-      color: black;
-      letter-spacing: 0.08em;
-      text-shadow: 0 2px 20px rgba(255,215,0,0.3);
-      position: relative;
+    .hero-logo {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin: 0 auto 24px;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
     }
 
-    .page-header p {
-      color: #c9a070;
-      font-size: 2rem;
-      margin-top: 10px;
+    .hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.8);
+}
+
+    .hero h1 span {
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
+}
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: rgba(245,240,232,0.7);
       font-style: italic;
-      position: relative;
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
     }
 
-    .header-divider {
+    .hero-divider {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
-      max-width: 400px;
-      margin: 16px auto 0;
-      position: relative;
+      margin-bottom: 40px;
     }
 
-    .header-divider::before,
-    .header-divider::after {
+    .hero-divider::before,
+    .hero-divider::after {
       content: "";
-      flex: 1;
+      width: 100px;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--disney-gold), transparent);
+      background: linear-gradient(to right, transparent, var(--gold));
     }
 
-    .header-divider span {
-      color: var(--disney-gold);
-      font-size: 1rem;
+    .hero-divider::after {
+      background: linear-gradient(to left, transparent, var(--gold));
     }
 
-    /* ===== BACK BUTTON ===== */
-    .back-btn {
-      padding: 10px 20px;
-      background: rgba(47,36,29,0.9);
-      color: white;
-      border: 1px solid var(--tb-gold);
-      border-radius: 999px;
+    .hero-divider span {
+      color: var(--gold);
       font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      font-family: 'Cormorant Garamond', serif;
     }
 
-    .back-btn:hover {
-      background: var(--tb-gold);
-      color: #1a0a00;
-    }
-
-    /* ===== SECTION BANNERS ===== */
-    .section-banner {
-      padding: 50px 40px 30px;
+    /* ===== COLLECTION BANNERS ===== */
+    .collection-banner {
+      padding: 60px 50px 40px;
       position: relative;
       overflow: hidden;
     }
 
-    .section-banner.disney {
-      background: linear-gradient(135deg, var(--disney-dark) 0%, white);
-      border-top: 3px solid var(--disney-red);
-      border-bottom: 3px solid var(--disney-red);
+    .collection-banner.disney {
+      background: linear-gradient(135deg, #1a0505 0%, #0f0a0a 100%);
+      border-top: 1px solid rgba(139,26,26,0.5);
+      border-bottom: 1px solid rgba(139,26,26,0.3);
     }
 
-    .section-banner.thomas {
-      background: linear-gradient(135deg, var(--tb-dark) 0%, white);
-      border-top: 3px solid var(--tb-green);
-      border-bottom: 3px solid var(--tb-green);
+    .collection-banner.thomas {
+      background: linear-gradient(135deg, #051a05 0%, #0a0f0a 100%);
+      border-top: 1px solid rgba(26,58,26,0.5);
+      border-bottom: 1px solid rgba(26,58,26,0.3);
     }
 
-    .section-banner::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      opacity: 0.04;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    .banner-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
     }
 
-    .section-banner.disney::before {
-      background-image: url("disneythumb.png");
+    .banner-text h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
     }
 
-    .section-banner.thomas::before {
-      background-image: url("tbs.webp");
+    .collection-banner.disney .banner-text h2 { color: red; }
+    .collection-banner.thomas .banner-text h2 { color: #a8d4a8; }
+
+    .banner-text p {
+      font-style: italic;
+      color: rgba(245,240,232,0.5);
+      font-size: 1.1rem;
     }
 
-    .section-banner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 4vw, 3.5rem);
-      position: relative;
-      z-index: 1;
-      letter-spacing: 0.05em;
-      text-align: center;
+    .banner-line {
+      flex: 1;
+      height: 1px;
+      max-width: 300px;
     }
 
-    .section-banner.disney h2 {
-      color: black;
-      text-shadow: 0 2px 15px rgba(255,215,0,0.2);
+    .collection-banner.disney .banner-line {
+      background: linear-gradient(to right, rgba(139,26,26,0.6), transparent);
     }
 
-    .section-banner.thomas h2 {
-      color: black;
-      text-shadow: 0 2px 15px rgba(168,212,168,0.2);
-    }
-
-    .section-banner p {
-      font-style: italic bold;
-      opacity: 0.7;
-      margin-top: 8px;
-      position: relative;
-      z-index: 1;
-      font-size: 2rem;
-      text-align: right;
-      color: black;
+    .collection-banner.thomas .banner-line {
+      background: linear-gradient(to right, rgba(26,58,26,0.6), transparent);
     }
 
     /* ===== PRODUCT GRIDS ===== */
-    .products-disney {
-      background: whitesmoke;
-      padding: 30px 30px 50px;
+    .products-section {
+      padding: 40px 40px 70px;
     }
 
-    .products-thomas {
-      background: whitesmoke;
-      padding: 30px 30px 50px;
+    .products-section.disney-section {
+      background: #665d54;
+    }
+
+    .products-section.thomas-section {
+      background: #665d54;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
       max-width: 1400px;
       margin: 0 auto;
     }
 
-    .product {
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* NEW CARD STYLE — Borderless with reveal effect */
+    .product-card {
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      background: var(--gray);
+      aspect-ratio: 3/4;
     }
 
-    .product.disney-product {
-      background: var(--disney-card);
-      border: 1px solid var(--disney-border);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .product.disney-product:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(204,26,26,0.2);
-      border-color: var(--disney-red);
-    }
-
-    .product.thomas-product {
-      background: var(--tb-card);
-      border: 1px solid var(--tb-border);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .product.thomas-product:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(58,107,58,0.25);
-      border-color: var(--tb-green);
-    }
-
-    .product img {
+    .product-card img {
       width: 100%;
-      height: 320px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      background: rgba(255,255,255,0.03);
-      padding: 6px;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
     }
 
-    .product h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 6px;
+    .product-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%);
+    }
+
+    .card-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 20px;
+      transform: translateY(0);
+      transition: transform 0.4s ease;
+    }
+
+    .card-info h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 4px;
       line-height: 1.3;
     }
 
-    .disney-product h3 { color: #f0c080; }
-    .thomas-product h3 { color: #a8d4a8; }
-
-    .product p {
+    .card-price {
       font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 12px;
+      color: var(--gold);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
     }
 
-    .disney-product p { color: var(--disney-gold); }
-    .thomas-product p { color: var(--tb-gold); }
-
-    .add-btn {
+    .card-add-btn {
       display: block;
       width: 100%;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 999px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      font-weight: 600;
+      padding: 10px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s ease;
-      letter-spacing: 0.04em;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
     }
 
-    .disney-product .add-btn {
-      background: var(--disney-red);
-      color: white;
+    .product-card:hover .card-add-btn {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .disney-product .add-btn:hover {
-      background: var(--disney-gold);
-      color: #1a0505;
-    }
-
-    .thomas-product .add-btn {
-      background: var(--tb-green);
-      color: white;
-    }
-
-    .thomas-product .add-btn:hover {
-      background: var(--tb-gold);
-      color: #0d1a0d;
+    .card-add-btn:hover {
+      background: var(--gold);
+      color: var(--black);
     }
 
     /* ===== CART SECTION ===== */
     .cart-section {
-      background: var(--cart-bg);
-      padding: 60px 20px;
+      background: #3a3530;
+      padding: 80px 40px;
+      border-top: 1px solid rgba(201,168,76,0.15);
     }
 
-    .cart {
+    .cart-wrapper {
       max-width: 900px;
-      margin: 0 auto 40px;
-      padding: 40px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #e5d5c5;
+      margin: 0 auto;
     }
 
-    .cart::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      background: url("LOGO.png") no-repeat center;
-      background-size: contain;
-      transform: translate(-50%, -50%);
-      opacity: 0.04;
-    }
-
-    .cart * { position: relative; z-index: 1; }
-
-    .cart-title {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 3rem;
+    .cart-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 4rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
       text-align: center;
-      color: #2f241d;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #e5d5c5;
+      margin-bottom: 8px;
+    }
+
+    .cart-heading-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .cart-heading-line::before,
+    .cart-heading-line::after {
+      content: "";
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .cart-heading-line::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .cart-heading-line span {
+      color: var(--gold);
+      font-size: 0.9rem;
     }
 
     .cart-item {
-      background: #fffaf5;
-      border: 1px solid #e1d2c2;
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
+      padding: 20px 24px;
+      margin-bottom: 2px;
+      background: rgba(255,255,255,0.03);
+      border-left: 2px solid rgba(201,168,76,0.3);
+      transition: background 0.2s ease;
     }
 
-    .cart-item-info strong { font-size: 2rem; color: #2f241d; }
-    .cart-item-info .item-price { color: #6d5b4f; font-size: 1.75rem; margin-top: 4px; }
+    .cart-item:hover { background: rgba(255,255,255,0.05); }
+
+    .cart-item-info strong {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-info .item-price {
+      font-size: 1.25rem;
+      color: rgba(245,240,232,0.5);
+      font-family: Arial, sans-serif;
+    }
 
     .qty-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
 
     .qty-controls button {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 1px solid #d8c8b8;
-      background: white;
-      color: #2f241d;
+      border: 1px solid rgba(201,168,76,0.4);
+      background: transparent;
+      color: var(--gold);
       font-size: 2rem;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
     }
 
-    .qty-controls button:hover { background: #2f241d; color: white; }
+    .qty-controls button:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .qty-display {
+      text-align: center;
+    }
+
+    .qty-label {
+      font-size: 1.25rem;
+      color: rgba(245,240,232,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .qty-number {
+      font-family: Arial, sans-serif;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--white);
+      min-width: 28px;
+      display: block;
+    }
 
     .remove-btn {
-      padding: 6px 14px !important;
+      background: transparent !important;
+      border: 1px solid rgba(180,50,50,0.4) !important;
+      color: rgba(220,100,100,0.8) !important;
+      padding: 5px 14px !important;
       border-radius: 999px !important;
-      background: #fff0f0 !important;
-      border: 1px solid #ffcccc !important;
-      color: #cc3333 !important;
-      font-size: 0.85rem !important;
+      font-size: 0.8rem !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
       width: auto !important;
       height: auto !important;
     }
 
     .remove-btn:hover {
-      background: #cc3333 !important;
-      color: white !important;
+      background: rgba(180,50,50,0.2) !important;
+      border-color: rgba(220,100,100,0.8) !important;
     }
 
     .item-total {
+      font-family: Arial, sans-serif;
+      font-size: 1.25rem;
       font-weight: bold;
-      color: #2f241d;
-      font-size: 1.6rem;
+      color: var(--gold);
       min-width: 80px;
       text-align: right;
-      font-family: 'Arial', sans-serif;
     }
 
     #cart-total {
       text-align: right;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #2f241d;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: var(--white);
       margin-top: 24px;
       padding-top: 20px;
-      border-top: 2px solid #d8c8b8;
-      font-family: 'Arial', sans-serif;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      letter-spacing: 0.05em;
+      font-weight: 600;
     }
 
-    /* ===== PAYMENT SECTION ===== */
-    .payment-section {
-      max-width: 900px;
-      margin: 0 auto;
+    #cart-total span {
+      color: var(--gold);
     }
 
-    .payment-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+    .empty-cart {
       text-align: center;
-      color: #2f241d;
-      margin-bottom: 24px;
+      padding: 60px 20px;
+      color: rgba(245,240,232,0.3);
+      font-style: italic;
+      font-size: 1.2rem;
       letter-spacing: 0.05em;
     }
 
+    /* ===== PAYMENT SECTION ===== */
+    .payment-wrapper {
+      max-width: 900px;
+      margin: 60px auto 0;
+    }
+
+    .payment-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
     #dropin-container {
-      background: white;
+      background: rgba(255,255,255,0.03);
       padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      border: 1px solid #e5d5c5;
+      border-radius: 4px;
+      border: 1px solid rgba(201,168,76,0.15);
       margin-bottom: 20px;
     }
+
+    /* Policy notice */
+    .policy-notice {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      padding: 18px 24px;
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .policy-notice p {
+      font-size: 1.25rem;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 6px;
+    }
+
+    .policy-notice a {
+      color: var(--gold);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .policy-notice a:hover { color: var(--gold-light); }
 
     #submit-button {
       display: block;
       width: 100%;
-      padding: 18px;
-      background: #2f241d;
-      color: white;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: var(--gold);
+      color: var(--black);
       border: none;
-      border-radius: 999px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
+      border-radius: 2px;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 24px rgba(47,36,29,0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(201,168,76,0.2);
     }
 
     #submit-button:hover {
-      background: var(--tb-gold);
-      box-shadow: 0 12px 30px rgba(184,139,74,0.4);
+      background: var(--gold-light);
+      box-shadow: 0 0 50px rgba(201,168,76,0.4);
       transform: translateY(-2px);
     }
 
-    /* ===== EMPTY CART MESSAGE ===== */
-    .empty-cart {
-      text-align: center;
-      padding: 40px;
-      color: #6d5b4f;
-      font-style: italic;
-      font-size: 1.2rem;
+    /* ===== FOOTER ===== */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 60px 50px 40px;
     }
 
-    /* ===== NAV HEADER ===== */
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 40px;
-  background: rgba(87, 87, 87, 0.9);
-  border-bottom: 2px solid var(--tb-gold);
-  position: static;
-  top: 0;
-  z-index: 1000;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: var(--disney-gold);
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
 
-.main-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #f0ebe3;
-  font-size: 1.5rem;
-  font-family: 'Cormorant Garamond', serif;
-  transition: color 0.2s ease;
-}
+    .footer-brand .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
 
-.main-nav a:hover {
-  color: var(--disney-gold);
-}
+    .footer-brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .footer-brand .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-brand p {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.4);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .footer-col h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .footer-col a {
+      display: block;
+      text-decoration: none;
+      color: rgba(245,240,232,0.5);
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover { color: var(--gold); }
+
+    .footer-col p {
+      color: rgba(245,240,232,0.5);
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      color: rgba(245,240,232,0.3);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-bottom a {
+      color: rgba(201,168,76,0.5);
+      text-decoration: none;
+      font-size: 1.25rem;
+      margin-left: 20px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+      .products-section { padding: 20px 10px 50px; }
+      .collection-banner { padding: 40px 20px 30px; }
+    }
   </style>
 </head>
 <body>
-  <div class="main-header">
-  <div class="nav-logo">
-  <img src="logo.png" alt="VJ Gallery Logo" style="width: 60px; height: 60px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
-  VJ Gallery
-</div>
-  <nav class="main-nav">
-    <a href="store.html">Home</a>
-    <a href="store.html#artists">Artists</a>
-    <a href="DisneyCollection.html">Disney</a>
-    <a href="ThomasBlackshearCollection.html">Thomas Blackshear</a>
-  </nav>
-</div>
-<div style="height: 20px;"></div>
-  <button class="back-btn" onclick="history.back()">← Back</button>
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <div style="width: 180px; height: 180px; background: rgba(255,215,0,0.15); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,215,0,0.3);">
-      <img src="lg.png" alt="VJ Gallery Logo" style="width: 130px; height: 130px; object-fit: contain;">
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <img src="logo.png" alt="VJ Gallery">
+      VJ Gallery
     </div>
-    <h1>VJ Full Gallery</h1>
-    <div class="header-divider"><span>✦</span></div>
-  </div>
+    <div class="nav-links">
+      <a href="store.html">Home</a>
+      <a href="store.html#artists">Artists</a>
+      <a href="DisneyCollection.html">Disney</a>
+      <a href="ThomasBlackshearCollection.html">Thomas Blackshear</a>
+      <button class="back-btn" onclick="history.back()">← Back</button>
+    </div>
+  </nav>
 
-  <!-- Disney Section Banner -->
-  <div class="section-banner disney">
-    <h2>✦ Disney Collection</h2>
-    <p>Magical figurines inspired by timeless Disney stories</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">The Full Collection</div>
+      <img class="hero-logo" src="lg.png" alt="VJ Gallery Logo">
+      <h1>VJ <span>Gallery</span></h1>
+      <p class="hero-subtitle">Collectible Figurines & Fine Art · Oklahoma City</p>
+      <div class="hero-divider"><span>✦</span></div>
+    </div>
+  </section>
+
+  <!-- Disney Collection Banner -->
+  <div class="collection-banner disney">
+    <div class="banner-inner">
+      <div class="banner-text">
+        <h2>✦ Disney Collection</h2>
+        <p>Magical figurines inspired by timeless Disney stories</p>
+      </div>
+      <div class="banner-line"></div>
+    </div>
   </div>
 
   <!-- Disney Products -->
-  <div class="products-disney">
+  <div class="products-section disney-section">
     <div class="product-grid">
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="mickey.jpg" alt="Lonesome Ghost">
-        <h3>Lonesome Ghost</h3>
-        <p>$700.00</p>
-        <button class="add-btn" onclick="addToCart('item1')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Lonesome Ghost</h3>
+          <div class="card-price">$700.00</div>
+          <button class="card-add-btn" onclick="addToCart('item1')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="vj12.png" alt="Pinocchio">
-        <h3>Pinocchio</h3>
-        <p>$490.00</p>
-        <button class="add-btn" onclick="addToCart('item2')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Pinocchio</h3>
+          <div class="card-price">$490.00</div>
+          <button class="card-add-btn" onclick="addToCart('item2')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="FlightbyDustyHorner-VJ27.jpg" alt="Flight By Dusty Horner">
-        <h3>Flight By Dusty Horner</h3>
-        <p>$1,120.00</p>
-        <button class="add-btn" onclick="addToCart('item3')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Flight By Dusty Horner</h3>
+          <div class="card-price">$1,120.00</div>
+          <button class="card-add-btn" onclick="addToCart('item3')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="DonaldDuck-VJ11.png" alt="Donald Duck">
-        <h3>Donald Duck</h3>
-        <p>$400.00</p>
-        <button class="add-btn" onclick="addToCart('item4')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Donald Duck</h3>
+          <div class="card-price">$400.00</div>
+          <button class="card-add-btn" onclick="addToCart('item4')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="RememberWho-VJ20.png" alt="Lion King">
-        <h3>Lion King</h3>
-        <p>$1,300.00</p>
-        <button class="add-btn" onclick="addToCart('item5')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Lion King</h3>
+          <div class="card-price">$1,300.00</div>
+          <button class="card-add-btn" onclick="addToCart('item5')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="dumbo.jpg" alt="Dumbo">
-        <h3>Dumbo</h3>
-        <p>$750.00</p>
-        <button class="add-btn" onclick="addToCart('item6')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Dumbo</h3>
+          <div class="card-price">$750.00</div>
+          <button class="card-add-btn" onclick="addToCart('item6')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product disney-product">
+      <div class="product-card">
         <img src="NatureIsAll-VJ25.png" alt="Bambi">
-        <h3>Bambi</h3>
-        <p>$350.00</p>
-        <button class="add-btn" onclick="addToCart('item7')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Bambi</h3>
+          <div class="card-price">$350.00</div>
+          <button class="card-add-btn" onclick="addToCart('item7')">Add to Cart</button>
+        </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Thomas Blackshear Section Banner -->
-  <div class="section-banner thomas">
-    <h2>✦ Thomas Blackshear Collection</h2>
-    <p>Expressive figurines with emotional depth and timeless artistry</p>
+  <!-- Thomas Blackshear Banner -->
+  <div class="collection-banner thomas">
+    <div class="banner-inner">
+      <div class="banner-text">
+        <h2>✦ Thomas Blackshear Collection</h2>
+        <p>Expressive figurines with emotional depth and timeless artistry</p>
+      </div>
+      <div class="banner-line"></div>
+    </div>
   </div>
 
   <!-- Thomas Blackshear Products -->
-  <div class="products-thomas">
+  <div class="products-section thomas-section">
     <div class="product-grid">
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Catching the Eye-vj127.png" alt="Catching The Eye">
-        <h3>Catching The Eye</h3>
-        <p>$340.00</p>
-        <button class="add-btn" onclick="addToCart('item9')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Catching The Eye</h3>
+          <div class="card-price">$340.00</div>
+          <button class="card-add-btn" onclick="addToCart('item9')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="ColorOfLove-VJ131.png" alt="The Color of Love">
-        <h3>The Color of Love</h3>
-        <p>$650.00</p>
-        <button class="add-btn" onclick="addToCart('item10')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Color of Love</h3>
+          <div class="card-price">$650.00</div>
+          <button class="card-add-btn" onclick="addToCart('item10')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="OhYesSheDid-VJ149.png" alt="Oh Yes She Did!">
-        <h3>Oh Yes She Did!</h3>
-        <p>$425.00</p>
-        <button class="add-btn" onclick="addToCart('item11')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Oh Yes She Did!</h3>
+          <div class="card-price">$425.00</div>
+          <button class="card-add-btn" onclick="addToCart('item11')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="RidingHigh-VJ145.png" alt="Riding High">
-        <h3>Riding High</h3>
-        <p>$185.00</p>
-        <button class="add-btn" onclick="addToCart('item12')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Riding High</h3>
+          <div class="card-price">$185.00</div>
+          <button class="card-add-btn" onclick="addToCart('item12')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Boss-VJ157.png" alt="The Boss">
-        <h3>The Boss</h3>
-        <p>$300.00</p>
-        <button class="add-btn" onclick="addToCart('item13')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Boss</h3>
+          <div class="card-price">$300.00</div>
+          <button class="card-add-btn" onclick="addToCart('item13')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="ProtectorsofFreedom-vj169.png" alt="Protectors of Freedom">
-        <h3>Protectors of Freedom</h3>
-        <p>$950.00</p>
-        <button class="add-btn" onclick="addToCart('item15')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Protectors of Freedom</h3>
+          <div class="card-price">$950.00</div>
+          <button class="card-add-btn" onclick="addToCart('item15')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="SistersForever-VJ177.png" alt="Sisters Forever">
-        <h3>Sisters Forever</h3>
-        <p>$225.00</p>
-        <button class="add-btn" onclick="addToCart('item16')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Sisters Forever</h3>
+          <div class="card-price">$225.00</div>
+          <button class="card-add-btn" onclick="addToCart('item16')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Praise-VJ185.jpeg" alt="Praise">
-        <h3>Praise</h3>
-        <p>$550.00</p>
-        <button class="add-btn" onclick="addToCart('item17')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Praise</h3>
+          <div class="card-price">$550.00</div>
+          <button class="card-add-btn" onclick="addToCart('item17')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="PeaceOnEarth-VJ189.jpeg" alt="Peace on Earth">
-        <h3>Peace on Earth</h3>
-        <p>$225.00</p>
-        <button class="add-btn" onclick="addToCart('item18')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Peace on Earth</h3>
+          <div class="card-price">$225.00</div>
+          <button class="card-add-btn" onclick="addToCart('item18')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
-        <img src="JoysofSpring-VJ195.png" alt="Joys of Spring">
-        <h3>The Joys of Spring</h3>
-        <p>$220.00</p>
-        <button class="add-btn" onclick="addToCart('item19')">Add to Cart</button>
+      <div class="product-card">
+        <img src="JoysofSpring-VJ195.png" alt="The Joys of Spring">
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Joys of Spring</h3>
+          <div class="card-price">$220.00</div>
+          <button class="card-add-btn" onclick="addToCart('item19')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Tootie-VJ201.png" alt="Tootie">
-        <h3>Tootie</h3>
-        <p>$220.00</p>
-        <button class="add-btn" onclick="addToCart('item20')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Tootie</h3>
+          <div class="card-price">$220.00</div>
+          <button class="card-add-btn" onclick="addToCart('item20')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Forever Friends-VJ308.png" alt="Forever Friends">
-        <h3>Forever Friends</h3>
-        <p>$190.00</p>
-        <button class="add-btn" onclick="addToCart('item21')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Forever Friends</h3>
+          <div class="card-price">$190.00</div>
+          <button class="card-add-btn" onclick="addToCart('item21')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Gypsy-VJ214.png" alt="Gypsy">
-        <h3>Gypsy</h3>
-        <p>$275.00</p>
-        <button class="add-btn" onclick="addToCart('item22')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Gypsy</h3>
+          <div class="card-price">$275.00</div>
+          <button class="card-add-btn" onclick="addToCart('item22')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Flower Girl-VJ224.png" alt="The Flower Girl">
-        <h3>The Flower Girl</h3>
-        <p>$95.00</p>
-        <button class="add-btn" onclick="addToCart('item23')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Flower Girl</h3>
+          <div class="card-price">$95.00</div>
+          <button class="card-add-btn" onclick="addToCart('item23')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Birdy-VJ232.png" alt="Birdy">
-        <h3>Birdy</h3>
-        <p>$120.00</p>
-        <button class="add-btn" onclick="addToCart('item24')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Birdy</h3>
+          <div class="card-price">$120.00</div>
+          <button class="card-add-btn" onclick="addToCart('item24')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Skeeter-VJ238.png" alt="Skeeter">
-        <h3>Skeeter</h3>
-        <p>$175.00</p>
-        <button class="add-btn" onclick="addToCart('item25')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Skeeter</h3>
+          <div class="card-price">$175.00</div>
+          <button class="card-add-btn" onclick="addToCart('item25')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Grandmama-VJ245.png" alt="Grandmama">
-        <h3>Grandmama</h3>
-        <p>$430.00</p>
-        <button class="add-btn" onclick="addToCart('item26')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Grandmama</h3>
+          <div class="card-price">$430.00</div>
+          <button class="card-add-btn" onclick="addToCart('item26')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="JJ CLUCK-VJ251.png" alt="Jay Jay & Cluck">
-        <h3>Jay Jay & Cluck</h3>
-        <p>$190.00</p>
-        <button class="add-btn" onclick="addToCart('item27')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Jay Jay & Cluck</h3>
+          <div class="card-price">$190.00</div>
+          <button class="card-add-btn" onclick="addToCart('item27')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Heir-VJ266.png" alt="The Heirs">
-        <h3>The Heirs</h3>
-        <p>$100.00</p>
-        <button class="add-btn" onclick="addToCart('item28')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Heirs</h3>
+          <div class="card-price">$100.00</div>
+          <button class="card-add-btn" onclick="addToCart('item28')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="vj300.jpeg" alt="The Little Shepherd">
-        <h3>The Little Shepherd</h3>
-        <p>$65.00</p>
-        <button class="add-btn" onclick="addToCart('item29')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Little Shepherd</h3>
+          <div class="card-price">$65.00</div>
+          <button class="card-add-btn" onclick="addToCart('item29')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Harmony-VJ291.png" alt="Harmony">
-        <h3>Harmony</h3>
-        <p>$50.00</p>
-        <button class="add-btn" onclick="addToCart('item31')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Harmony</h3>
+          <div class="card-price">$50.00</div>
+          <button class="card-add-btn" onclick="addToCart('item31')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Midnight-VJ316.png" alt="Midnight">
-        <h3>Midnight</h3>
-        <p>$750.00</p>
-        <button class="add-btn" onclick="addToCart('item33')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Midnight</h3>
+          <div class="card-price">$750.00</div>
+          <button class="card-add-btn" onclick="addToCart('item33')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="DoubleHug-VJ270.png" alt="Double Hug">
-        <h3>Double Hug</h3>
-        <p>$300.00</p>
-        <button class="add-btn" onclick="addToCart('item34')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Double Hug</h3>
+          <div class="card-price">$300.00</div>
+          <button class="card-add-btn" onclick="addToCart('item34')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="FruitsofFriendship-VJ279.png" alt="Fruits of Friendship">
-        <h3>Fruits of Friendship</h3>
-        <p>$240.00</p>
-        <button class="add-btn" onclick="addToCart('item35')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Fruits of Friendship</h3>
+          <div class="card-price">$240.00</div>
+          <button class="card-add-btn" onclick="addToCart('item35')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Leap-VJ330.png" alt="Leap of Faith">
-        <h3>Leap of Faith</h3>
-        <p>$600.00</p>
-        <button class="add-btn" onclick="addToCart('item36')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Leap of Faith</h3>
+          <div class="card-price">$600.00</div>
+          <button class="card-add-btn" onclick="addToCart('item36')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="BrightMorningStar-VJ285.png" alt="A Bright and Morning Star">
-        <h3>A Bright and Morning Star</h3>
-        <p>$100.00</p>
-        <button class="add-btn" onclick="addToCart('item37')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>A Bright and Morning Star</h3>
+          <div class="card-price">$100.00</div>
+          <button class="card-add-btn" onclick="addToCart('item37')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="K9Mnshine2.jpeg" alt="K9 and Moonshine">
-        <h3>K9 and Moonshine</h3>
-        <p>$225.00</p>
-        <button class="add-btn" onclick="addToCart('item38')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>K9 and Moonshine</h3>
+          <div class="card-price">$225.00</div>
+          <button class="card-add-btn" onclick="addToCart('item38')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="Family-VJ328.png" alt="The Family">
-        <h3>The Family</h3>
-        <p>$475.00</p>
-        <button class="add-btn" onclick="addToCart('item39')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>The Family</h3>
+          <div class="card-price">$475.00</div>
+          <button class="card-add-btn" onclick="addToCart('item39')">Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product thomas-product">
+      <div class="product-card">
         <img src="HeavenlyPeace1.jpeg" alt="Heavenly Peace">
-        <h3>Heavenly Peace</h3>
-        <p>$70.00</p>
-        <button class="add-btn" onclick="addToCart('item40')">Add to Cart</button>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Heavenly Peace</h3>
+          <div class="card-price">$70.00</div>
+          <button class="card-add-btn" onclick="addToCart('item40')">Add to Cart</button>
+        </div>
       </div>
 
     </div>
@@ -814,37 +1152,72 @@
 
   <!-- Cart & Payment -->
   <div class="cart-section">
-
-    <div class="cart">
-      <h2 class="cart-title">Your Gallery Cart</h2>
-      <div id="cart-items"><p class="empty-cart">Your cart is empty. Browse above and add some pieces!</p></div>
-      <div id="cart-total">Total: $0.00</div>
+    <div class="cart-wrapper">
+      <h2 class="cart-heading">Your Cart</h2>
+      <div class="cart-heading-line"><span>✦</span></div>
+      <div id="cart-items">
+        <p class="empty-cart">Your cart is empty — browse the collection above</p>
+      </div>
+      <div id="cart-total">Total: <span>$0.00</span></div>
     </div>
 
-    <div class="payment-section">
-      <h2 class="payment-title">Secure Payment</h2>
+    <div class="payment-wrapper">
+      <h2 class="payment-heading">Secure Checkout</h2>
       <div id="dropin-container"></div>
-      <div style="max-width: 900px; margin: 0 auto 16px; padding: 20px 30px; background: white; border-radius: 14px; border: 1px solid #e5d5c5; font-family: 'Cormorant Garamond', serif;">
-  <p style="font-size: 1.1rem; color: #2f241d; text-align: center; margin-bottom: 10px;">
-    By completing your purchase you agree to our
-    <a href="policies.html" target="_blank" style="color: #b88b4a; font-weight: bold; text-decoration: underline;">Shipping & Return Policy</a>
-    and
-    <a href="policies.html" target="_blank" style="color: #b88b4a; font-weight: bold; text-decoration: underline;">Privacy Policy</a>.
-  </p>
-  <p style="font-size: 1rem; color: #6d5b4f; text-align: center; font-style: italic;">
-    Returns are handled on a case-by-case basis. Please contact us before returning any item.
-    <a href="mailto:victor.dewberry@vjgallery.com" style="color: #b88b4a;">victor.dewberry@vjgallery.com</a>
-  </p>
-</div>
 
-<button id="submit-button">Complete Purchase</button>
+      <div class="policy-notice">
+        <p>*By completing your purchase you agree to our
+          <a href="policies.html" target="_blank">Shipping & Return Policy</a> and
+          <a href="policies.html" target="_blank">Privacy Policy</a>.
+        </p>
+        <p>Returns are handled case-by-case. Contact us first at
+          <a href="mailto:victor.dewberry@vjgallery.com">victor.dewberry@vjgallery.com</a>
+        </p>
+      </div>
+
+      <button id="submit-button">Complete Purchase</button>
     </div>
-
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="LOGO.png" alt="VJ Gallery">
+          <span class="brand-name">VJ Gallery</span>
+        </div>
+        <p>Collectible figurines and fine art from the world's most celebrated artists. Each piece is a story waiting to be told.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="store.html">Home</a>
+        <a href="Disney.html">Disney Artist Bio</a>
+        <a href="DisneyCollection.html">Disney Collection</a>
+        <a href="ThomasBlackshear.html">Thomas Blackshear Bio</a>
+        <a href="ThomasBlackshearCollection.html">Thomas Blackshear Collection</a>
+        <a href="RonLee.html">Ron Lee</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 victor.dewberry@vjgallery.com</p>
+        <p>📞 (405) 923-9565</p>
+        <p>📍 Oklahoma City, Oklahoma</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 VJ Gallery · All Rights Reserved</p>
+      <div>
+        <a href="policies.html">Shipping Policy</a>
+        <a href="policies.html">Returns</a>
+        <a href="policies.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     const products = [
-      { id: "item1",  name: "Disney Mickey Figurine",       price: 700.00 },
+      { id: "item1",  name: "Lonesome Ghost",               price: 700.00 },
       { id: "item2",  name: "Pinocchio",                    price: 490.00 },
       { id: "item3",  name: "Flight By Dusty Horner",       price: 1120.00 },
       { id: "item4",  name: "Disney Donald Duck",           price: 400.00 },
@@ -888,55 +1261,48 @@
 
     const cart = [];
 
-   function addToCart(productId) {
-  // ✅ Always sync with localStorage first
-  const saved = JSON.parse(localStorage.getItem('vjcart') || '[]');
-  saved.forEach(item => {
-    const existing = cart.find(c => c.id === item.id);
-    if (existing) {
-      existing.qty = item.qty;
-    } else {
-      cart.push(item);
+    function addToCart(productId) {
+      const saved = JSON.parse(localStorage.getItem('vjcart') || '[]');
+      saved.forEach(item => {
+        const existing = cart.find(c => c.id === item.id);
+        if (existing) { existing.qty = item.qty; } else { cart.push(item); }
+      });
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) { existingItem.qty += 1; } else { cart.push({ id: productId, qty: 1 }); }
+      localStorage.setItem('vjcart', JSON.stringify(cart));
+      renderCart();
+      // Flash feedback
+      const btn = event.target;
+      const original = btn.textContent;
+      btn.textContent = '✓ Added';
+      btn.style.background = 'var(--gold)';
+      btn.style.color = 'var(--black)';
+      btn.style.opacity = '1';
+      btn.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1200);
     }
-  });
 
-  const existingItem = cart.find(item => item.id === productId);
-  if (existingItem) {
-    existingItem.qty += 1;
-  } else {
-    cart.push({ id: productId, qty: 1 });
-  }
-  localStorage.setItem('vjcart', JSON.stringify(cart));
-  renderCart();
-}
     function increaseQty(productId) {
       const item = cart.find(item => item.id === productId);
-      if (item) {
-        item.qty += 1;
-        localStorage.setItem('vjcart', JSON.stringify(cart));
-        renderCart();
-      }
+      if (item) { item.qty += 1; localStorage.setItem('vjcart', JSON.stringify(cart)); renderCart(); }
     }
 
     function decreaseQty(productId) {
       const item = cart.find(item => item.id === productId);
       if (!item) return;
       item.qty -= 1;
-      if (item.qty <= 0) {
-        const index = cart.findIndex(cartItem => cartItem.id === productId);
-        cart.splice(index, 1);
-      }
+      if (item.qty <= 0) cart.splice(cart.findIndex(c => c.id === productId), 1);
       localStorage.setItem('vjcart', JSON.stringify(cart));
       renderCart();
     }
 
     function removeFromCart(productId) {
       const index = cart.findIndex(item => item.id === productId);
-      if (index !== -1) {
-        cart.splice(index, 1);
-        localStorage.setItem('vjcart', JSON.stringify(cart));
-        renderCart();
-      }
+      if (index !== -1) { cart.splice(index, 1); localStorage.setItem('vjcart', JSON.stringify(cart)); renderCart(); }
     }
 
     function renderCart() {
@@ -945,108 +1311,80 @@
       cartItemsDiv.innerHTML = "";
 
       if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty. Browse above and add some pieces!</p>';
-        cartTotalDiv.textContent = "Total: $0.00";
+        cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty — browse the collection above</p>';
+        cartTotalDiv.innerHTML = 'Total: <span>$0.00</span>';
         return;
       }
 
       let total = 0;
-
       cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
         const name = product ? product.name : item.name;
         const price = product ? product.price : item.price;
         if (!name || price === undefined) return;
-
         const itemTotal = price * item.qty;
         total += itemTotal;
-
-        const cartItemDiv = document.createElement("div");
-        cartItemDiv.className = "cart-item";
-        cartItemDiv.innerHTML = `
-  <div class="cart-item-info">
-    <strong>${name}</strong>
-    <div class="item-price" style="font-family: Arial, sans-serif;">$${Number(price).toFixed(2)} each</div>
-  </div>
-  <div class="qty-controls">
-    <button onclick="decreaseQty('${item.id}')">−</button>
-    <div style="text-align: center;">
-      <div style="font-family: Arial, sans-serif; font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em;">Qty</div>
-      <div style="font-family: Arial, sans-serif; font-size: 1.6rem; font-weight: bold; color: #2f241d; min-width: 30px;">${item.qty}</div>
-    </div>
-    <button onclick="increaseQty('${item.id}')">+</button>
-    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-  </div>
-  <div class="item-total">$${itemTotal.toFixed(2)}</div>
-`;
-        cartItemsDiv.appendChild(cartItemDiv);
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div class="cart-item-info">
+            <strong>${name}</strong>
+            <div class="item-price">$${Number(price).toFixed(2)} each</div>
+          </div>
+          <div class="qty-controls">
+            <button onclick="decreaseQty('${item.id}')">−</button>
+            <div class="qty-display">
+              <span class="qty-label">Qty</span>
+              <span class="qty-number">${item.qty}</span>
+            </div>
+            <button onclick="increaseQty('${item.id}')">+</button>
+            <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+          </div>
+          <div class="item-total">$${itemTotal.toFixed(2)}</div>
+        `;
+        cartItemsDiv.appendChild(div);
       });
-
-      cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;
+      cartTotalDiv.innerHTML = `Total: <span>$${total.toFixed(2)}</span>`;
     }
 
     window.addEventListener("load", function () {
       const savedCart = JSON.parse(localStorage.getItem('vjcart') || '[]');
       savedCart.forEach(item => {
         const existing = cart.find(c => c.id === item.id);
-        if (existing) {
-          existing.qty = item.qty;
-        } else {
-          cart.push(item);
-        }
+        if (existing) { existing.qty = item.qty; } else { cart.push(item); }
       });
       renderCart();
 
       fetch("https://checkout-backend-c5gi.onrender.com/token")
-        .then(response => response.text())
+        .then(r => r.text())
         .then(token => {
-          token = token.trim();
-          braintree.dropin.create({
-            authorization: token,
-            container: "#dropin-container"
-          }, function (createErr, instance) {
-            if (createErr) {
-              console.error("DROP-IN ERROR:", createErr);
-              alert("Drop-in failed: " + JSON.stringify(createErr));
-              return;
-            }
-
-            document.getElementById("submit-button").addEventListener("click", function () {
-              if (cart.length === 0) {
-                alert("Your cart is empty.");
-                return;
-              }
-
-              instance.requestPaymentMethod(function (err, payload) {
-                if (err) {
-                  console.error("Payment method error:", err);
-                  return;
-                }
-
-                fetch("https://checkout-backend-c5gi.onrender.com/checkout", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ nonce: payload.nonce, cart: cart })
-                })
-                  .then(res => res.json())
+          braintree.dropin.create({ authorization: token.trim(), container: "#dropin-container" },
+            function (err, instance) {
+              if (err) { console.error(err); return; }
+              document.getElementById("submit-button").addEventListener("click", function () {
+                if (cart.length === 0) { alert("Your cart is empty."); return; }
+                instance.requestPaymentMethod(function (err, payload) {
+                  if (err) { console.error(err); return; }
+                  fetch("https://checkout-backend-c5gi.onrender.com/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nonce: payload.nonce, cart: cart })
+                  })
+                  .then(r => r.json())
                   .then(data => {
                     if (data.success) {
                       localStorage.removeItem('vjcart');
                       alert("Thank you for your purchase! Your order has been placed.");
-                    } else {
-                      alert("Payment failed: " + data.error);
-                    }
+                    } else { alert("Payment failed: " + data.error); }
                   })
-                  .catch(err => console.error("Checkout error:", err));
+                  .catch(err => console.error(err));
+                });
               });
             });
-          });
         })
-        .catch(err => {
-          console.error("Token fetch error:", err);
-          alert("Token failed to load");
-        });
+        .catch(err => { console.error(err); alert("Token failed to load"); });
     });
   </script>
+
 </body>
 </html>

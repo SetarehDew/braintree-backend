@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas Blackshear | VJ Gallery</title>
   <style>
+    :root {
+      --gold:#b88b4a;
+      --cream: #2f241d;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -52,7 +56,7 @@
       margin-left: 20px;
       text-decoration: none;
       color: #2f241d;
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 500;
     }
 
@@ -293,6 +297,63 @@
 .back-btn:hover {
   background: #b88b4a;
 }
+
+/* ===== DROPDOWN ===== */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  color: var(--cream);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  font-family: 'Cinzel', serif;
+  cursor: pointer;
+  margin-left: 28px;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.dropdown-trigger:hover { color: var(--gold); }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: rgba(145, 140, 140, 0.97);
+  border: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(12px);
+  min-width: 220px;
+  z-index: 9999;
+  padding: 8px 0;
+}
+
+.dropdown-menu.open {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--cream);
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+  margin-left: 0;
+  border-left: 2px solid transparent;
+}
+
+.dropdown-menu a:hover {
+  color: var(--gold);
+  background: rgba(201,168,76,0.06);
+  border-left-color: var(--gold);
+}
   </style>
 </head>
 <body>
@@ -304,12 +365,24 @@
       <span>VJ Gallery</span>
     </div>
     <nav class="nav">
-      <a href="store.html">Home</a>
-      <a href="index.html">Shop</a>
-      <a href="store.html#artists">Artists</a>
+  <a href="store.html">Home</a>
+  <a href="index.html">Shop Full Collection</a>
     </nav>
+    </div>
+  <div class="dropdown">
+    <button class="dropdown-trigger">Artists ▾</button>
+    <div class="dropdown-menu">
+      <a href="Disney.html">Disney</a>
+      <a href="ThomasBlackshear.html">Thomas Blackshear</a>
+      <a href="RonLee.html">Ron Lee</a>
+      <a href="KarenGermany.html">Karen Germany</a>
+      <a href="SarahSchultz.html">Sarah Schultz</a>
+    </div>
   </div>
+
   <button class="back-btn" onclick="history.back()">← Back</button>
+</div>
+  
 
   <!-- Hero Banner -->
   <div class="artist-banner">
@@ -376,6 +449,20 @@
     <a href="policies.html" style="color: #b88b4a; text-decoration: none;">Privacy Policy</a>
   </p>
 </footer>
+<script>
+  const trigger = document.querySelector('.dropdown-trigger');
+  const menu = document.querySelector('.dropdown-menu');
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+
+  // Close when clicking anywhere else on the page
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+  });
+</script>
 
 </body>
 </html>
