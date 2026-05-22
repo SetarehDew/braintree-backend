@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karen Germany | VJ Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brown-dark:   #5C3317;
+      --brown-mid:    #8B4513;
+      --brown-light:  #A0522D;
+      --sienna:       #CD853F;
+      --gold:         #C8900A;
+      --gold-light:   #E8C060;
+      --gold-pale:    #F5E0A0;
+      --terracotta:   #C0622A;
+      --cream:        #FFFAF2;
+      --cream-dark:   #F5ECD8;
+      --text:         #3a2010;
+      --text-mid:     #6a4020;
+      --text-light:   #9a7050;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background:
+        linear-gradient(rgba(255,250,242,0.88), rgba(255,250,242,0.88)),
+        url("dllthumg.png") center / cover no-repeat fixed;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== NAVIGATION ===== */
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 3px solid var(--sienna);
+      box-shadow: 0 2px 16px rgba(92,51,23,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--brown-mid);
+    }
+
+    .logo img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .nav a {
+      margin-left: 20px;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: var(--sienna); }
+
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      display: inline-block;
+      padding: 9px 20px;
+      background: transparent;
+      color: var(--sienna);
+      border: 1px solid var(--sienna);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 22px 0 0 40px;
+    }
+
+    .back-btn:hover {
+      background: var(--sienna);
+      color: white;
+    }
+
+    /* ===== PAGE TITLE ===== */
+    .page-title-area {
+      text-align: center;
+      padding: 50px 20px 40px;
+    }
+
+    .page-title-area .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--sienna);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .page-title-area .eyebrow::before,
+    .page-title-area .eyebrow::after {
+      content: "";
+      width: 50px;
+      height: 1px;
+      background: var(--sienna);
+      opacity: 0.5;
+    }
+
+    .page-title-area h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--brown-dark);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .page-title-area p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ===== SPLIT SCREEN CARD ===== */
+    .split-card {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 30px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(92,51,23,0.15);
+    }
+
+    /* ===== LEFT PANEL ===== */
+    .left-panel {
+      background: linear-gradient(160deg, var(--brown-mid) 0%, var(--brown-light) 45%, var(--sienna) 100%);
+      padding: 50px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative circles */
+    .left-panel::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,220,150,0.12);
+    }
+
+    .left-panel::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,220,150,0.08);
+    }
+
+    .left-top { position: relative; z-index: 1; }
+
+    .artist-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,220,150,0.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      margin: 0 auto 24px;
+      display: block;
+    }
+
+    .artist-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold-pale);
+      text-align: center;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .artist-title {
+      font-size: 1rem;
+      color: rgba(245,224,160,0.7);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .left-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,220,150,0.3), transparent);
+      margin-bottom: 28px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .info-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,220,150,0.1);
+      border: 1px solid rgba(255,220,150,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .info-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,220,150,0.55);
+      margin-bottom: 2px;
+    }
+
+    .info-text p {
+      font-size: 0.95rem;
+      color: rgba(245,224,160,0.85);
+      line-height: 1.4;
+    }
+
+    .left-bottom {
+      position: relative;
+      z-index: 1;
+      margin-top: 30px;
+    }
+
+    .coming-soon-pill {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,220,150,0.08);
+      border: 1px solid rgba(255,220,150,0.3);
+      border-radius: 999px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: rgba(245,224,160,0.8);
+      font-style: italic;
+      letter-spacing: 0.04em;
+      cursor: default;
+    }
+
+    .coming-soon-pill::before { content: "✦ "; color: var(--gold-light); }
+    .coming-soon-pill::after  { content: " ✦"; color: var(--gold-light); }
+
+    /* ===== RIGHT PANEL ===== */
+    .right-panel {
+      background: var(--cream);
+      padding: 50px 50px;
+    }
+
+    .right-panel h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--brown-dark);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--gold-light);
+      display: inline-block;
+    }
+
+    .right-panel p {
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 18px;
+      line-height: 1.95;
+    }
+
+    .right-panel p strong { color: var(--sienna); }
+
+    /* ===== MINI HIGHLIGHT CARDS ===== */
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .mini-card {
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+      background: white;
+      box-shadow: 0 4px 14px rgba(92,51,23,0.07);
+    }
+
+    .mini-card.c1 { border-top: 4px solid var(--sienna); }
+    .mini-card.c2 { border-top: 4px solid var(--gold); }
+    .mini-card.c3 { border-top: 4px solid var(--terracotta); }
+
+    .mini-card .micon { font-size: 1.8rem; margin-bottom: 8px; }
+
+    .mini-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-card.c1 h4 { color: var(--sienna); }
+    .mini-card.c2 h4 { color: var(--gold); }
+    .mini-card.c3 h4 { color: var(--terracotta); }
+
+    .mini-card p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ===== QUOTE STRIP ===== */
+    .quote-strip {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 30px;
+    }
+
+    .quote-inner {
+      background: linear-gradient(135deg, var(--brown-mid) 0%, var(--sienna) 60%, var(--gold) 100%);
+      border-radius: 16px;
+      padding: 40px 50px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 12px 40px rgba(92,51,23,0.2);
+    }
+
+    .quote-inner p {
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .quote-inner cite {
+      font-size: 0.9rem;
+      color: rgba(255,220,150,0.7);
+      letter-spacing: 0.1em;
+    }
+
+    .quote-inner::before {
+      content: "✦";
+      color: var(--gold-light);
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #2f241d;
+      color: #c9b8a8;
+      text-align: center;
+      padding: 30px 20px;
+      font-style: italic;
+      font-size: 1rem;
+      border-top: 4px solid var(--sienna);
+    }
+
+    footer a {
+      color: var(--sienna);
+      text-decoration: none;
+      margin: 0 8px;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover { color: var(--gold-light); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 800px) {
+      .split-card { grid-template-columns: 1fr; padding: 0 16px; }
+      .left-panel { padding: 36px 24px; }
+      .right-panel { padding: 36px 24px; }
+      .mini-cards { grid-template-columns: 1fr; }
+      .main-header { flex-direction: column; gap: 12px; padding: 16px 20px; }
+      .back-btn { margin: 16px 0 0 16px; }
+      .quote-inner { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="main-header">
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Gallery Logo">
+      <span>VJ Gallery</span>
+    </div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="store.html#artists">Artists</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <!-- Page Title -->
+  <div class="page-title-area">
+    <div class="eyebrow">Featured Artist</div>
+    <h1>Karen Germany</h1>
+    <p>Master Sculptor · Daddy Long Legs Collection</p>
+  </div>
+
+  <!-- Split Screen Card -->
+  <div class="split-card">
+
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <div class="left-top">
+        <img class="artist-photo" src="dllthumg.png" alt="Karen Germany">
+        <div class="artist-name">Karen Germany</div>
+        <div class="artist-title">Sculptor & Fine Artist</div>
+
+        <div class="left-divider"></div>
+
+        <div class="info-row">
+          <div class="info-icon">🎨</div>
+          <div class="info-text">
+            <h4>Specialty</h4>
+            <p>Fine Art Sculpture</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">✦</div>
+          <div class="info-text">
+            <h4>Collection</h4>
+            <p>Daddy Long Legs</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">🌟</div>
+          <div class="info-text">
+            <h4>Known For</h4>
+            <p>Whimsical collectible figurines cherished by collectors worldwide</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="left-bottom">
+        <span class="coming-soon-pill">Karen Germany (Daddy Long Legs) Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <h2>About the Artist</h2>
+
+      <p>
+        <strong>Karen Germany</strong> is a gifted sculptor whose work captures the beauty, grace, and emotion of the human form. With a masterful eye for detail and an extraordinary sense of movement, her pieces bring stories to life in three dimensions — each sculpture a testament to her deep passion for the craft.
+      </p>
+      <p>
+        Her beloved <strong>Daddy Long Legs</strong> collection has captured the hearts of collectors worldwide. These charming, whimsical figurines carry an unmistakable style — blending warmth, humor, and artistry into every hand-crafted piece in a way that is instantly recognizable and deeply cherished.
+      </p>
+      <p>
+        Karen's sculptures are celebrated for their <strong>expressive depth</strong> and meticulous craftsmanship. Every piece she creates carries a unique narrative — inviting the viewer to pause, reflect, and connect with the subject on a deeply personal level.
+      </p>
+      <p>
+        Karen Germany's figurines are more than collectibles — they are <strong>works of art</strong> that carry meaning, memory, and beauty into every home they enter. VJ Gallery is proud to feature her extraordinary talent.
+      </p>
+
+      <!-- Mini Highlight Cards -->
+      <div class="mini-cards">
+        <div class="mini-card c1">
+          <div class="micon">🎨</div>
+          <h4>Master Sculptor</h4>
+          <p>Each piece handcrafted with extraordinary attention to detail.</p>
+        </div>
+        <div class="mini-card c2">
+          <div class="micon">✨</div>
+          <h4>Iconic Style</h4>
+          <p>The beloved Daddy Long Legs aesthetic recognized worldwide.</p>
+        </div>
+        <div class="mini-card c3">
+          <div class="micon">💛</div>
+          <h4>Heartfelt Stories</h4>
+          <p>Every sculpture tells a story of beauty and humanity.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quote Strip -->
+  <div class="quote-strip">
+    <div class="quote-inner">
+      <p>"Art is not what you see, but what you make others see."</p>
+      <cite>— Edgar Degas</cite>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+    <p style="margin-top: 10px;">
+      <a href="policies.html">Shipping & Return Policy</a>
+      &nbsp;·&nbsp;
+      <a href="policies.html">Privacy Policy</a>
+      &nbsp;·&nbsp;
+      <a href="contact.html">Contact Us</a>
+    </p>
+  </footer>
+
+</body>
+</html>
