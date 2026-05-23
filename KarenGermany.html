@@ -67,7 +67,7 @@
 
     .nav a {
       margin-left: 20px;
-      font-size: 0.95rem;
+      font-size: 1.5rem;
       color: var(--text-mid);
       font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
@@ -82,10 +82,10 @@
       display: inline-block;
       padding: 9px 20px;
       background: transparent;
-      color: var(--sienna);
-      border: 1px solid var(--sienna);
+      color: black;
+      border: 2px solid black;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 1.25rem;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: 'Cormorant Garamond', serif;
@@ -105,7 +105,7 @@
 
     .page-title-area .eyebrow {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       letter-spacing: 0.4em;
       color: black;
       text-transform: uppercase;
@@ -114,6 +114,7 @@
       justify-content: center;
       gap: 14px;
       margin-bottom: 14px;
+      font-weight: 600;
     }
 
     .page-title-area .eyebrow::before,
@@ -134,9 +135,10 @@
     }
 
     .page-title-area p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       color: var(--text-light);
       font-style: italic;
+      font-weight: 600;
     }
 
     /* ===== SPLIT SCREEN CARD ===== */
@@ -188,8 +190,8 @@
     .left-top { position: relative; z-index: 1; }
 
     .artist-photo {
-      width: 160px;
-      height: 160px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid rgba(255,220,150,0.5);
@@ -209,7 +211,7 @@
     }
 
     .artist-title {
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: rgba(245,224,160,0.7);
       text-align: center;
       font-style: italic;
@@ -238,13 +240,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 1.25rem;
       flex-shrink: 0;
     }
 
     .info-text h4 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.65rem;
+      font-size: 1.25rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(255,220,150,0.55);
@@ -252,7 +254,7 @@
     }
 
     .info-text p {
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       color: rgba(245,224,160,0.85);
       line-height: 1.4;
     }
@@ -272,11 +274,12 @@
       border-radius: 999px;
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem;
-      color: rgba(245,224,160,0.8);
-      font-style: italic;
+      font-size: 1.25rem;
+      color: black;
+      font-style: normal;
       letter-spacing: 0.04em;
       cursor: default;
+      font-weight: bold;
     }
 
     .coming-soon-pill::before { content: "✦ "; color: var(--gold-light); }
@@ -299,10 +302,11 @@
     }
 
     .right-panel p {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       color: var(--text);
       margin-bottom: 18px;
       line-height: 1.95;
+      font-weight: 500;
     }
 
     .right-panel p strong { color: var(--sienna); }
@@ -340,7 +344,7 @@
     .mini-card.c3 h4 { color: var(--terracotta); }
 
     .mini-card p {
-      font-size: 0.9rem;
+      font-size: 1.25rem;
       color: var(--text-mid);
       line-height: 1.6;
       margin: 0;
@@ -413,6 +417,62 @@
       .back-btn { margin: 16px 0 0 16px; }
       .quote-inner { padding: 30px 24px; }
     }
+    /* ===== DROPDOWN ===== */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  color: var(--text-mid) !important;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  font-family: 'Cinzel', serif;
+  cursor: pointer;
+  margin-left: 28px;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.dropdown-trigger:hover { color: var(--gold); }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: rgba(145, 140, 140, 0.97);
+  border: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(12px);
+  min-width: 220px;
+  z-index: 9999;
+  padding: 8px 0;
+}
+
+.dropdown-menu.open {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--cream);
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+  margin-left: 0;
+  border-left: 2px solid transparent;
+}
+
+.dropdown-menu a:hover {
+  color: var(--gold);
+  background: rgba(201,168,76,0.06);
+  border-left-color: var(--gold);
+}
   </style>
 </head>
 <body>
@@ -426,9 +486,18 @@
     <nav class="nav">
       <a href="store.html">Home</a>
       <a href="index.html">Shop</a>
-      <a href="store.html#artists">Artists</a>
       <a href="contact.html">Contact</a>
-    </nav>
+      </div>
+      </nav>
+    <div class="dropdown">
+        <button class="dropdown-trigger">Artists ▾</button>
+        <div class="dropdown-menu">
+          <a href="Disney.html">Disney</a>
+          <a href="ThomasBlackshear.html">Thomas Blackshear</a>
+          <a href="RonLee.html">Ron Lee</a>
+          <a href="KarenGermany.html">Karen Germany</a>
+          <a href="SarahSchultz.html">Sarah Schultz</a>
+        </div>
   </div>
 
   <button class="back-btn" onclick="history.back()">← Back</button>
@@ -446,8 +515,9 @@
     <!-- Left Panel -->
     <div class="left-panel">
       <div class="left-top">
-        <img class="artist-photo" src="dllthumg.png" alt="Karen Germany">
+        <img class="artist-photo" src="karenGermany.jpg" alt="Karen Germany">
         <div class="artist-name">Karen Germany</div>
+        <img src="dllthumb.png" alt="Daddy Long Legs Logo" style="width: 120px; height: 120px; object-fit: contain; margin: 0 auto 16px; display: block;">
         <div class="artist-title">Sculptor & Fine Artist</div>
 
         <div class="left-divider"></div>
@@ -472,7 +542,7 @@
           <div class="info-icon">🌟</div>
           <div class="info-text">
             <h4>Known For</h4>
-            <p>Whimsical collectible figurines cherished by collectors worldwide</p>
+            <p>Creator of Daddy Long Legs</p>
           </div>
         </div>
       </div>
@@ -485,11 +555,11 @@
     <!-- Right Panel -->
     <div class="right-panel">
       <h2>About the Artist</h2>
-      <p>Karen Germany, the creator of Daddy’s Long Legs Dolls and Figurines, was born in 1949 in Dallas, Texas. Karen would grow up in a family of six in Austin, Texas. She would marry Brent Germany in 1975 and the couple would have two sons. Karen had dreamed of following her artistic interests and in 1985 she and her husband started a business which offered collectibles by Texas artist. 
-In 1987 Karen decided to try her hand at sculpting with super sculpy. Her first attempts were animals but in 1989 she began creating Black dolls that would resemble real African-American people. She would create resin molds for each of her designs so she would be able to make several dolls at a time. 
-Her business would grow into a cottage industry consisting of her husband, who handled sales and manufacturing , two master dress makers, 95 seamstresses, and Karen, who was in charge of designs. 
-Her dolls were enjoyed world wide by many collectors and several celebrity collectors, like Whoopi Goldberg and Gladys Knight.
-After 9/11 Karen made the decision to retire and shut down the business. Sadly in 2003 Daddy’s Long Legs came to an end. </p>
+      <p>Karen Germany, the creator of Daddy’s Long Legs Dolls and Figurines, was born in 1949 in Dallas, Texas. Karen would grow up in a family of six in Austin, Texas. She would marry Brent Germany in 1975 and the couple would have two sons. Karen had dreamed of following her artistic interests and in 1985 she and her husband started a business which offered collectibles by Texas artist.</p>
+      <p>In 1987 Karen decided to try her hand at sculpting with super sculpy. Her first attempts were animals but in 1989 she began creating Black dolls that would resemble real African-American people. She would create resin molds for each of her designs so she would be able to make several dolls at a time.</p>
+<p>Her business would grow into a cottage industry consisting of her husband, who handled sales and manufacturing , two master dress makers, 95 seamstresses, and Karen, who was in charge of designs.</p>
+<p>Her dolls were enjoyed world wide by many collectors and several celebrity collectors, like Whoopi Goldberg and Gladys Knight.</p>
+<p>After 9/11 Karen made the decision to retire and shut down the business. Sadly in 2003 Daddy’s Long Legs came to an end. </p>
       <!-- Mini Highlight Cards -->
       <div class="mini-cards">
         <div class="mini-card c1">
@@ -531,6 +601,19 @@ After 9/11 Karen made the decision to retire and shut down the business. Sadly i
       <a href="contact.html">Contact Us</a>
     </p>
   </footer>
+  <script>
+  const trigger = document.querySelector('.dropdown-trigger');
+  const menu = document.querySelector('.dropdown-menu');
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+  });
+</script>
 
 </body>
 </html>
