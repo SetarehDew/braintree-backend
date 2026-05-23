@@ -272,7 +272,7 @@
 /* ===== FLOATING CART BUTTON ===== */
 .floating-cart {
   position: fixed;
-  top: 20px;
+  top: 45vh;
   right: 20px;
   z-index: 9999;
   cursor: grab;
@@ -334,6 +334,58 @@
 </head>
 
 <body>
+  <!-- Cart Info Banner -->
+<div id="cart-notice" style="
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+  background: rgba(47,36,29,0.96);
+  border: 1px solid rgba(184,139,74,0.5);
+  border-radius: 12px;
+  padding: 16px 28px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  animation: fadeNotice 0.5s ease;
+">
+  <p style="
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    color: #f0e8d8;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  ">
+    <span style="color: #b88b4a; font-weight: bold; letter-spacing: 0.05em;">Your Shopping Cart</span><br>
+    The VJ Gallery emblem on your screen serves as your personal shopping cart. 
+    Simply drag it anywhere on the page for your convenience. 
+    Items added to your cart will be reflected in the number displayed on the emblem.
+    Click it at any time to proceed to checkout.
+  </p>
+  <button onclick="document.getElementById('cart-notice').style.display='none'; localStorage.setItem('cartNoticeSeen','true');" style="
+    background: #b88b4a;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 24px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s ease;
+  " onmouseover="this.style.background='#9d7338'" onmouseout="this.style.background='#b88b4a'">
+    Continue Browsing
+  </button>
+</div>
+
+<style>
+@keyframes fadeNotice {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+</style>
   
   <a class="floating-cart" href="index.html">
   <img src="LOGO.png" alt="Cart">
@@ -1080,5 +1132,11 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
     &nbsp;·&nbsp;
     <a href="policies.html" style="color: #b88b4a; text-decoration: none;">Privacy Policy</a>
   </p>
+  <script>
+  // Only show notice if they haven't seen it before
+  if (localStorage.getItem('cartNoticeSeen')) {
+    document.getElementById('cart-notice').style.display = 'none';
+  }
+</script>
 </footer>
 </html>
