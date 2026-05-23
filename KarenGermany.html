@@ -473,6 +473,16 @@
   background: rgba(201,168,76,0.06);
   border-left-color: var(--gold);
 }
+.coming-soon-pill {
+  transition: all 0.3s ease;
+}
+
+.coming-soon-pill:hover {
+  background: rgba(255,220,150,0.2);
+  border-color: rgba(255,220,150,0.6);
+  color: var(--gold-pale);
+  transform: scale(1.02);
+}
   </style>
 </head>
 <body>
@@ -554,12 +564,22 @@
 
     <!-- Right Panel -->
     <div class="right-panel">
+
+      <!-- Photo Strip -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 30px;">
+        <img src="ddl3.jpg" alt="Karen Germany" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid var(--gold-light);">
+        <img src="ddl1.jpg" alt="Karen Germany" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid var(--gold-light);">
+        <img src="ddl2.jpg" alt="Karen Germany" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid var(--gold-light);">
+        <img src="ddl4.jpg" alt="Karen Germany" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid var(--gold-light);">
+      </div>
+
       <h2>About the Artist</h2>
-      <p>Karen Germany, the creator of Daddy’s Long Legs Dolls and Figurines, was born in 1949 in Dallas, Texas. Karen would grow up in a family of six in Austin, Texas. She would marry Brent Germany in 1975 and the couple would have two sons. Karen had dreamed of following her artistic interests and in 1985 she and her husband started a business which offered collectibles by Texas artist.</p>
+      <p>Karen Germany, the creator of Daddy's Long Legs Dolls and Figurines, was born in 1949 in Dallas, Texas. Karen would grow up in a family of six in Austin, Texas. She would marry Brent Germany in 1975 and the couple would have two sons. Karen had dreamed of following her artistic interests and in 1985 she and her husband started a business which offered collectibles by Texas artist.</p>
       <p>In 1987 Karen decided to try her hand at sculpting with super sculpy. Her first attempts were animals but in 1989 she began creating Black dolls that would resemble real African-American people. She would create resin molds for each of her designs so she would be able to make several dolls at a time.</p>
-<p>Her business would grow into a cottage industry consisting of her husband, who handled sales and manufacturing , two master dress makers, 95 seamstresses, and Karen, who was in charge of designs.</p>
-<p>Her dolls were enjoyed world wide by many collectors and several celebrity collectors, like Whoopi Goldberg and Gladys Knight.</p>
-<p>After 9/11 Karen made the decision to retire and shut down the business. Sadly in 2003 Daddy’s Long Legs came to an end. </p>
+      <p>Her business would grow into a cottage industry consisting of her husband, who handled sales and manufacturing, two master dress makers, 95 seamstresses, and Karen, who was in charge of designs.</p>
+      <p>Her dolls were enjoyed world wide by many collectors and several celebrity collectors, like Whoopi Goldberg and Gladys Knight.</p>
+      <p>After 9/11 Karen made the decision to retire and shut down the business. Sadly in 2003 Daddy's Long Legs came to an end.</p>
+
       <!-- Mini Highlight Cards -->
       <div class="mini-cards">
         <div class="mini-card c1">
@@ -578,19 +598,11 @@
           <p>Every sculpture tells a story of beauty and humanity.</p>
         </div>
       </div>
+
     </div>
 
   </div>
 
-  <!-- Quote Strip -->
-  <div class="quote-strip">
-    <div class="quote-inner">
-      <p>"Art is not what you see, but what you make others see."</p>
-      <cite>— Edgar Degas</cite>
-    </div>
-  </div>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
     <p style="margin-top: 10px;">

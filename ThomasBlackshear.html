@@ -283,19 +283,21 @@
 
 .back-btn {
   display: inline-block;
-  padding: 10px 20px;
-  background: #2f241d;
-  color: white;
-  border: none;
+  padding: 8px 20px;
+  background: rgba(255,255,255,0.15);
+  color: var(--text);
+  border: 2px solid black;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  margin: 10px 20px;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: 'Cormorant Garamond', serif;
+  margin-left: 16px;
 }
 
 .back-btn:hover {
-  background: #b88b4a;
+  background: var(--yellow);
+  color: var(--dark);
 }
 
 /* ===== DROPDOWN ===== */
@@ -365,23 +367,21 @@
       <span>VJ Gallery</span>
     </div>
     <nav class="nav">
-  <a href="store.html">Home</a>
-  <a href="index.html">Shop Full Collection</a>
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <div class="dropdown">
+        <button class="dropdown-trigger">Artists ▾</button>
+        <div class="dropdown-menu">
+          <a href="Disney.html">Disney</a>
+          <a href="RonLee.html">Ron Lee</a>
+          <a href="KarenGermany.html">Karen Germany</a>
+          <a href="SarahSchultz.html">Sarah Schultz</a>
+        </div>
+      </div>
+      <button class="back-btn" onclick="history.back()">← Back</button>
     </nav>
-    </div>
-  <div class="dropdown">
-    <button class="dropdown-trigger">Artists ▾</button>
-    <div class="dropdown-menu">
-      <a href="Disney.html">Disney</a>
-      <a href="ThomasBlackshear.html">Thomas Blackshear</a>
-      <a href="RonLee.html">Ron Lee</a>
-      <a href="KarenGermany.html">Karen Germany</a>
-      <a href="SarahSchultz.html">Sarah Schultz</a>
-    </div>
   </div>
-
-  <button class="back-btn" onclick="history.back()">← Back</button>
-</div>
   
 
   <!-- Hero Banner -->
