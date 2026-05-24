@@ -21,12 +21,11 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      background: #3a3530;
+      background: var(--black);
       color: var(--white);
       line-height: 1.7;
       overflow-x: hidden;
@@ -34,11 +33,6 @@
 
     /* ===== NAVIGATION ===== */
     .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -64,11 +58,16 @@
       object-fit: contain;
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
     .nav-links a {
       margin-left: 28px;
       text-decoration: none;
       color: var(--cream);
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       letter-spacing: 0.08em;
       font-family: 'Cinzel', serif;
       transition: color 0.2s ease;
@@ -94,6 +93,64 @@
       color: var(--black);
     }
 
+    /* ===== DROPDOWN ===== */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-trigger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: 'Cinzel', serif;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      margin-left: 28px;
+      transition: color 0.2s ease;
+      padding: 0;
+    }
+
+    .dropdown-trigger:hover { color: var(--gold); }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      background: rgba(8,8,8,0.97);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-top: 2px solid var(--gold);
+      backdrop-filter: blur(12px);
+      min-width: 230px;
+      z-index: 9999;
+      padding: 8px 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .dropdown-menu.open { display: block; }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 22px;
+      text-decoration: none;
+      color: var(--cream);
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      transition: all 0.2s ease;
+      margin-left: 0;
+      border-left: 2px solid transparent;
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      border-left-color: var(--gold);
+      padding-left: 28px;
+    }
+
     /* ===== HERO SECTION ===== */
     .hero {
       min-height: 80vh;
@@ -104,37 +161,33 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      padding: 120px 20px 80px;
+      padding: 80px 20px 80px;
     }
 
     .hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(8,8,8,0.35), rgba(8,8,8,0.50)),
-    url("homebackground.png") center / cover no-repeat fixed;
-  z-index: 0;
-}
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(8,8,8,0.35), rgba(8,8,8,0.50)),
+        url("homebackground.png") center / cover no-repeat fixed;
+      z-index: 0;
     }
 
+    .hero-content { position: relative; z-index: 1; }
+
     .hero-eyebrow {
-  font-family: 'Cinzel', serif;
-  font-size: 2rem;
-  letter-spacing: 1em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-weight: bold;
-  text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
-}
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
+    }
 
     .hero-eyebrow::before,
     .hero-eyebrow::after {
@@ -153,23 +206,23 @@
     }
 
     .hero h1 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: 0.12em;
-  line-height: 1.1;
-  margin-bottom: 16px;
-  text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.8);
-}
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.12em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.8);
+    }
 
     .hero h1 span {
-  color: var(--gold);
-  text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
-}
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
+    }
 
     .hero-subtitle {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: rgba(245,240,232,0.7);
       font-style: italic;
       letter-spacing: 0.05em;
@@ -192,14 +245,8 @@
       background: linear-gradient(to right, transparent, var(--gold));
     }
 
-    .hero-divider::after {
-      background: linear-gradient(to left, transparent, var(--gold));
-    }
-
-    .hero-divider span {
-      color: var(--gold);
-      font-size: 1.2rem;
-    }
+    .hero-divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
+    .hero-divider span { color: var(--gold); font-size: 1.2rem; }
 
     /* ===== COLLECTION BANNERS ===== */
     .collection-banner {
@@ -209,13 +256,13 @@
     }
 
     .collection-banner.disney {
-      background: rgb(68, 61, 39);
+      background: linear-gradient(135deg, #1a0505 0%, #0f0a0a 100%);
       border-top: 1px solid rgba(139,26,26,0.5);
       border-bottom: 1px solid rgba(139,26,26,0.3);
     }
 
     .collection-banner.thomas {
-      background: rgb(68, 61, 39);
+      background: linear-gradient(135deg, #051a05 0%, #0a0f0a 100%);
       border-top: 1px solid rgba(26,58,26,0.5);
       border-bottom: 1px solid rgba(26,58,26,0.3);
     }
@@ -232,45 +279,27 @@
     .banner-text h2 {
       font-family: 'Cinzel', serif;
       font-size: clamp(1.8rem, 3vw, 2.8rem);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       margin-bottom: 8px;
     }
 
-    .collection-banner.disney .banner-text h2 { color: red; }
+    .collection-banner.disney .banner-text h2 { color: var(--gold); }
     .collection-banner.thomas .banner-text h2 { color: #a8d4a8; }
 
     .banner-text p {
       font-style: italic;
       color: rgba(245,240,232,0.5);
-      font-size: 2rem;
+      font-size: 1.1rem;
     }
 
-    .banner-line {
-      flex: 1;
-      height: 1px;
-      max-width: 300px;
-    }
-
-    .collection-banner.disney .banner-line {
-      background: linear-gradient(to right, rgba(139,26,26,0.6), transparent);
-    }
-
-    .collection-banner.thomas .banner-line {
-      background: linear-gradient(to right, rgba(26,58,26,0.6), transparent);
-    }
+    .banner-line { flex: 1; height: 1px; max-width: 300px; }
+    .collection-banner.disney .banner-line { background: linear-gradient(to right, rgba(139,26,26,0.6), transparent); }
+    .collection-banner.thomas .banner-line { background: linear-gradient(to right, rgba(26,58,26,0.6), transparent); }
 
     /* ===== PRODUCT GRIDS ===== */
-    .products-section {
-      padding: 40px 40px 70px;
-    }
-
-    .products-section.disney-section {
-      background: #665d54;
-    }
-
-    .products-section.thomas-section {
-      background: #665d54;
-    }
+    .products-section { padding: 40px 40px 70px; }
+    .products-section.disney-section { background: linear-gradient(180deg, #0f0505 0%, #080303 100%); }
+    .products-section.thomas-section { background: linear-gradient(180deg, #050f05 0%, #030803 100%); }
 
     .product-grid {
       display: grid;
@@ -280,7 +309,6 @@
       margin: 0 auto;
     }
 
-    /* NEW CARD STYLE — Borderless with reveal effect */
     .product-card {
       position: relative;
       overflow: hidden;
@@ -297,9 +325,7 @@
       display: block;
     }
 
-    .product-card:hover img {
-      transform: scale(1.08);
-    }
+    .product-card:hover img { transform: scale(1.08); }
 
     .card-overlay {
       position: absolute;
@@ -318,13 +344,11 @@
       left: 0;
       right: 0;
       padding: 24px 20px;
-      transform: translateY(0);
-      transition: transform 0.4s ease;
     }
 
     .card-info h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
+      font-size: 1rem;
       letter-spacing: 0.06em;
       color: var(--white);
       margin-bottom: 4px;
@@ -332,7 +356,7 @@
     }
 
     .card-price {
-      font-size: 2rem;
+      font-size: 1rem;
       color: var(--gold);
       font-weight: 300;
       letter-spacing: 0.05em;
@@ -351,21 +375,13 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.2s ease;
       opacity: 0;
       transform: translateY(10px);
       transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
     }
 
-    .product-card:hover .card-add-btn {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card-add-btn:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
+    .product-card:hover .card-add-btn { opacity: 1; transform: translateY(0); }
+    .card-add-btn:hover { background: var(--gold); color: var(--black); }
 
     /* ===== CART SECTION ===== */
     .cart-section {
@@ -374,14 +390,11 @@
       border-top: 1px solid rgba(201,168,76,0.15);
     }
 
-    .cart-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .cart-wrapper { max-width: 900px; margin: 0 auto; }
 
     .cart-heading {
       font-family: 'Cinzel', serif;
-      font-size: 4rem;
+      font-size: 2rem;
       color: var(--gold);
       letter-spacing: 0.12em;
       text-align: center;
@@ -404,14 +417,8 @@
       background: linear-gradient(to right, transparent, var(--gold));
     }
 
-    .cart-heading-line::after {
-      background: linear-gradient(to left, transparent, var(--gold));
-    }
-
-    .cart-heading-line span {
-      color: var(--gold);
-      font-size: 0.9rem;
-    }
+    .cart-heading-line::after { background: linear-gradient(to left, transparent, var(--gold)); }
+    .cart-heading-line span { color: var(--gold); font-size: 0.9rem; }
 
     .cart-item {
       display: flex;
@@ -430,7 +437,7 @@
 
     .cart-item-info strong {
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       color: var(--white);
       letter-spacing: 0.05em;
       display: block;
@@ -438,16 +445,12 @@
     }
 
     .cart-item-info .item-price {
-      font-size: 1.25rem;
+      font-size: 0.9rem;
       color: rgba(245,240,232,0.5);
       font-family: Arial, sans-serif;
     }
 
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .qty-controls { display: flex; align-items: center; gap: 12px; }
 
     .qty-controls button {
       width: 28px;
@@ -456,7 +459,7 @@
       border: 1px solid rgba(201,168,76,0.4);
       background: transparent;
       color: var(--gold);
-      font-size: 2rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
@@ -464,17 +467,11 @@
       justify-content: center;
     }
 
-    .qty-controls button:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
-
-    .qty-display {
-      text-align: center;
-    }
+    .qty-controls button:hover { background: var(--gold); color: var(--black); }
+    .qty-display { text-align: center; }
 
     .qty-label {
-      font-size: 1.25rem;
+      font-size: 0.6rem;
       color: rgba(245,240,232,0.4);
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -483,7 +480,7 @@
 
     .qty-number {
       font-family: Arial, sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: bold;
       color: var(--white);
       min-width: 28px;
@@ -510,7 +507,7 @@
 
     .item-total {
       font-family: Arial, sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: bold;
       color: var(--gold);
       min-width: 80px;
@@ -520,37 +517,140 @@
     #cart-total {
       text-align: right;
       font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--white);
       margin-top: 24px;
       padding-top: 20px;
       border-top: 1px solid rgba(201,168,76,0.2);
       letter-spacing: 0.05em;
-      font-weight: 600;
     }
 
-    #cart-total span {
-      color: var(--gold);
-    }
+    #cart-total span { color: var(--gold); }
 
     .empty-cart {
       text-align: center;
       padding: 60px 20px;
-      color: var(--white);
+      color: rgba(245,240,232,0.3);
       font-style: italic;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       letter-spacing: 0.05em;
     }
 
-    /* ===== PAYMENT SECTION ===== */
-    .payment-wrapper {
+    /* ===== CUSTOMER INFO FORM ===== */
+    .customer-form-wrapper {
       max-width: 900px;
       margin: 60px auto 0;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      overflow: hidden;
     }
+
+    .customer-form-header {
+      background: rgba(201,168,76,0.08);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .customer-form-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .customer-form-header p {
+      font-size: 1.25rem;
+      color: rgba(245,240,232,0.4);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .customer-form-body { padding: 30px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.2em;
+      color: rgba(201,168,76,0.7);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      padding: 12px 14px;
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(245,240,232,0.2);
+      font-style: italic;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.04);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.06);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-color: rgba(255,255,255,0.04);
+      padding-right: 36px;
+    }
+
+    .form-group select option { background: #1a1a1a; color: var(--white); }
+
+    .required-note {
+      font-size: 1.25rem;
+      color: rgba(245,240,232,0.3);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    /* ===== PAYMENT SECTION ===== */
+    .payment-wrapper { max-width: 900px; margin: 30px auto 0; }
 
     .payment-heading {
       font-family: 'Cinzel', serif;
-      font-size: 2.5rem;
+      font-size: 1.6rem;
       color: var(--gold);
       letter-spacing: 0.12em;
       text-align: center;
@@ -565,7 +665,6 @@
       margin-bottom: 20px;
     }
 
-    /* Policy notice */
     .policy-notice {
       max-width: 900px;
       margin: 0 auto 20px;
@@ -577,7 +676,7 @@
     }
 
     .policy-notice p {
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       color: rgba(245,240,232,0.6);
       margin-bottom: 6px;
     }
@@ -639,11 +738,7 @@
       margin-bottom: 16px;
     }
 
-    .footer-brand img {
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-    }
+    .footer-brand img { width: 44px; height: 44px; object-fit: contain; }
 
     .footer-brand .brand-name {
       font-family: 'Cinzel', serif;
@@ -661,7 +756,7 @@
 
     .footer-col h4 {
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 0.8rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
@@ -674,7 +769,7 @@
       display: block;
       text-decoration: none;
       color: rgba(245,240,232,0.5);
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       margin-bottom: 10px;
       transition: color 0.2s ease;
     }
@@ -683,7 +778,7 @@
 
     .footer-col p {
       color: rgba(245,240,232,0.5);
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       line-height: 1.8;
     }
 
@@ -701,14 +796,14 @@
 
     .footer-bottom p {
       color: rgba(245,240,232,0.3);
-      font-size: 1.25rem;
+      font-size: 0.85rem;
       letter-spacing: 0.05em;
     }
 
     .footer-bottom a {
       color: rgba(201,168,76,0.5);
       text-decoration: none;
-      font-size: 1.25rem;
+      font-size: 0.85rem;
       margin-left: 20px;
       transition: color 0.2s ease;
     }
@@ -722,64 +817,10 @@
       .footer-inner { grid-template-columns: 1fr; gap: 30px; }
       .products-section { padding: 20px 10px 50px; }
       .collection-banner { padding: 40px 20px 30px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-row-3 { grid-template-columns: 1fr; }
+      .customer-form-body { padding: 20px; }
     }
-    /* ===== DROPDOWN ===== */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-trigger {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  font-family: 'Cinzel', serif;
-  color: var(--cream);
-  letter-spacing: 0.08em;
-  margin-left: 28px;
-  transition: color 0.2s ease;
-  padding: 0;
-}
-
-.dropdown-trigger:hover { color: var(--gold); }
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  background: rgba(8,8,8,0.97);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-top: 2px solid var(--gold);
-  backdrop-filter: blur(12px);
-  min-width: 230px;
-  z-index: 9999;
-  padding: 8px 0;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-}
-
-.dropdown-menu.open { display: block; }
-
-.dropdown-menu a {
-  display: block;
-  padding: 12px 22px;
-  text-decoration: none;
-  color: var(--cream);
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  transition: all 0.2s ease;
-  margin-left: 0;
-  border-left: 2px solid transparent;
-}
-
-.dropdown-menu a:hover {
-  color: var(--gold);
-  background: rgba(201,168,76,0.08);
-  border-left-color: var(--gold);
-  padding-left: 28px;
-}
   </style>
 </head>
 <body>
@@ -833,7 +874,6 @@
   <!-- Disney Products -->
   <div class="products-section disney-section">
     <div class="product-grid">
-
       <div class="product-card">
         <img src="mickey.jpg" alt="Lonesome Ghost">
         <div class="card-overlay"></div>
@@ -843,7 +883,6 @@
           <button class="card-add-btn" onclick="addToCart('item1')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="vj12.png" alt="Pinocchio">
         <div class="card-overlay"></div>
@@ -853,7 +892,6 @@
           <button class="card-add-btn" onclick="addToCart('item2')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="FlightbyDustyHorner-VJ27.jpg" alt="Flight By Dusty Horner">
         <div class="card-overlay"></div>
@@ -863,7 +901,6 @@
           <button class="card-add-btn" onclick="addToCart('item3')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="DonaldDuck-VJ11.png" alt="Donald Duck">
         <div class="card-overlay"></div>
@@ -873,7 +910,6 @@
           <button class="card-add-btn" onclick="addToCart('item4')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="RememberWho-VJ20.png" alt="Lion King">
         <div class="card-overlay"></div>
@@ -883,7 +919,6 @@
           <button class="card-add-btn" onclick="addToCart('item5')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="dumbo.jpg" alt="Dumbo">
         <div class="card-overlay"></div>
@@ -893,7 +928,6 @@
           <button class="card-add-btn" onclick="addToCart('item6')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="NatureIsAll-VJ25.png" alt="Bambi">
         <div class="card-overlay"></div>
@@ -903,7 +937,6 @@
           <button class="card-add-btn" onclick="addToCart('item7')">Add to Cart</button>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -921,7 +954,6 @@
   <!-- Thomas Blackshear Products -->
   <div class="products-section thomas-section">
     <div class="product-grid">
-
       <div class="product-card">
         <img src="Catching the Eye-vj127.png" alt="Catching The Eye">
         <div class="card-overlay"></div>
@@ -931,7 +963,6 @@
           <button class="card-add-btn" onclick="addToCart('item9')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="ColorOfLove-VJ131.png" alt="The Color of Love">
         <div class="card-overlay"></div>
@@ -941,7 +972,6 @@
           <button class="card-add-btn" onclick="addToCart('item10')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="OhYesSheDid-VJ149.png" alt="Oh Yes She Did!">
         <div class="card-overlay"></div>
@@ -951,7 +981,6 @@
           <button class="card-add-btn" onclick="addToCart('item11')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="RidingHigh-VJ145.png" alt="Riding High">
         <div class="card-overlay"></div>
@@ -961,7 +990,6 @@
           <button class="card-add-btn" onclick="addToCart('item12')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Boss-VJ157.png" alt="The Boss">
         <div class="card-overlay"></div>
@@ -971,7 +999,6 @@
           <button class="card-add-btn" onclick="addToCart('item13')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="ProtectorsofFreedom-vj169.png" alt="Protectors of Freedom">
         <div class="card-overlay"></div>
@@ -981,7 +1008,6 @@
           <button class="card-add-btn" onclick="addToCart('item15')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="SistersForever-VJ177.png" alt="Sisters Forever">
         <div class="card-overlay"></div>
@@ -991,7 +1017,6 @@
           <button class="card-add-btn" onclick="addToCart('item16')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Praise-VJ185.jpeg" alt="Praise">
         <div class="card-overlay"></div>
@@ -1001,7 +1026,6 @@
           <button class="card-add-btn" onclick="addToCart('item17')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="PeaceOnEarth-VJ189.jpeg" alt="Peace on Earth">
         <div class="card-overlay"></div>
@@ -1011,7 +1035,6 @@
           <button class="card-add-btn" onclick="addToCart('item18')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="JoysofSpring-VJ195.png" alt="The Joys of Spring">
         <div class="card-overlay"></div>
@@ -1021,7 +1044,6 @@
           <button class="card-add-btn" onclick="addToCart('item19')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Tootie-VJ201.png" alt="Tootie">
         <div class="card-overlay"></div>
@@ -1031,7 +1053,6 @@
           <button class="card-add-btn" onclick="addToCart('item20')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Forever Friends-VJ308.png" alt="Forever Friends">
         <div class="card-overlay"></div>
@@ -1041,7 +1062,6 @@
           <button class="card-add-btn" onclick="addToCart('item21')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Gypsy-VJ214.png" alt="Gypsy">
         <div class="card-overlay"></div>
@@ -1051,7 +1071,6 @@
           <button class="card-add-btn" onclick="addToCart('item22')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Flower Girl-VJ224.png" alt="The Flower Girl">
         <div class="card-overlay"></div>
@@ -1061,7 +1080,6 @@
           <button class="card-add-btn" onclick="addToCart('item23')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Birdy-VJ232.png" alt="Birdy">
         <div class="card-overlay"></div>
@@ -1071,7 +1089,6 @@
           <button class="card-add-btn" onclick="addToCart('item24')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Skeeter-VJ238.png" alt="Skeeter">
         <div class="card-overlay"></div>
@@ -1081,7 +1098,6 @@
           <button class="card-add-btn" onclick="addToCart('item25')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Grandmama-VJ245.png" alt="Grandmama">
         <div class="card-overlay"></div>
@@ -1091,7 +1107,6 @@
           <button class="card-add-btn" onclick="addToCart('item26')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="JJ CLUCK-VJ251.png" alt="Jay Jay & Cluck">
         <div class="card-overlay"></div>
@@ -1101,7 +1116,6 @@
           <button class="card-add-btn" onclick="addToCart('item27')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Heir-VJ266.png" alt="The Heirs">
         <div class="card-overlay"></div>
@@ -1111,7 +1125,6 @@
           <button class="card-add-btn" onclick="addToCart('item28')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="vj300.jpeg" alt="The Little Shepherd">
         <div class="card-overlay"></div>
@@ -1121,7 +1134,6 @@
           <button class="card-add-btn" onclick="addToCart('item29')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Harmony-VJ291.png" alt="Harmony">
         <div class="card-overlay"></div>
@@ -1131,7 +1143,6 @@
           <button class="card-add-btn" onclick="addToCart('item31')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Midnight-VJ316.png" alt="Midnight">
         <div class="card-overlay"></div>
@@ -1141,7 +1152,6 @@
           <button class="card-add-btn" onclick="addToCart('item33')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="DoubleHug-VJ270.png" alt="Double Hug">
         <div class="card-overlay"></div>
@@ -1151,7 +1161,6 @@
           <button class="card-add-btn" onclick="addToCart('item34')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="FruitsofFriendship-VJ279.png" alt="Fruits of Friendship">
         <div class="card-overlay"></div>
@@ -1161,7 +1170,6 @@
           <button class="card-add-btn" onclick="addToCart('item35')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Leap-VJ330.png" alt="Leap of Faith">
         <div class="card-overlay"></div>
@@ -1171,7 +1179,6 @@
           <button class="card-add-btn" onclick="addToCart('item36')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="BrightMorningStar-VJ285.png" alt="A Bright and Morning Star">
         <div class="card-overlay"></div>
@@ -1181,7 +1188,6 @@
           <button class="card-add-btn" onclick="addToCart('item37')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="K9Mnshine2.jpeg" alt="K9 and Moonshine">
         <div class="card-overlay"></div>
@@ -1191,7 +1197,6 @@
           <button class="card-add-btn" onclick="addToCart('item38')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="Family-VJ328.png" alt="The Family">
         <div class="card-overlay"></div>
@@ -1201,7 +1206,6 @@
           <button class="card-add-btn" onclick="addToCart('item39')">Add to Cart</button>
         </div>
       </div>
-
       <div class="product-card">
         <img src="HeavenlyPeace1.jpeg" alt="Heavenly Peace">
         <div class="card-overlay"></div>
@@ -1211,7 +1215,6 @@
           <button class="card-add-btn" onclick="addToCart('item40')">Add to Cart</button>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -1226,12 +1229,94 @@
       <div id="cart-total">Total: <span>$0.00</span></div>
     </div>
 
+    <!-- Customer Information Form -->
+    <div class="customer-form-wrapper">
+      <div class="customer-form-header">
+        <div>
+          <h3>✦ Shipping & Contact Information</h3>
+          <p>Please complete all fields before proceeding to payment</p>
+        </div>
+      </div>
+      <div class="customer-form-body">
+        <p class="required-note">* All fields are required unless marked optional</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name">First Name *</label>
+            <input type="text" id="first-name" name="first-name" placeholder="First name" required>
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name *</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Last name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="customer-email">Email Address *</label>
+            <input type="email" id="customer-email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="customer-phone">Phone Number *</label>
+            <input type="tel" id="customer-phone" name="phone" placeholder="(xxx) xxx-xxxx" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Street Address *</label>
+          <input type="text" id="address" name="address" placeholder="Street address" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address2">Apartment / Suite (Optional)</label>
+          <input type="text" id="address2" name="address2" placeholder="Apt, suite, unit, building, floor, etc.">
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input type="text" id="city" name="city" placeholder="City" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State *</label>
+            <select id="state" name="state" required>
+              <option value="" disabled selected>State</option>
+              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+              <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+              <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+              <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+              <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+              <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+              <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+              <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+              <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+              <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+              <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+              <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+              <option>WI</option><option>WY</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="zip">ZIP Code *</label>
+            <input type="text" id="zip" name="zip" placeholder="ZIP" required maxlength="10">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="order-notes">Order Notes (Optional)</label>
+          <input type="text" id="order-notes" name="notes" placeholder="Special instructions, gift messages, etc.">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Payment -->
     <div class="payment-wrapper">
-      <h2 class="payment-heading">Secure Checkout</h2>
+      <h2 class="payment-heading">Secure Payment</h2>
       <div id="dropin-container"></div>
 
       <div class="policy-notice">
-        <p>*By completing your purchase you agree to our
+        <p>By completing your purchase you agree to our
           <a href="policies.html" target="_blank">Shipping & Return Policy</a> and
           <a href="policies.html" target="_blank">Privacy Policy</a>.
         </p>
@@ -1240,7 +1325,7 @@
         </p>
       </div>
 
-      <button id="submit-button">Complete Purchase</button>
+      <button id="submit-button">✦ Complete Purchase</button>
     </div>
   </div>
 
@@ -1262,6 +1347,7 @@
         <a href="ThomasBlackshear.html">Thomas Blackshear Bio</a>
         <a href="ThomasBlackshearCollection.html">Thomas Blackshear Collection</a>
         <a href="RonLee.html">Ron Lee</a>
+        <a href="KarenGermany.html">Karen Germany</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
@@ -1336,7 +1422,6 @@
       if (existingItem) { existingItem.qty += 1; } else { cart.push({ id: productId, qty: 1 }); }
       localStorage.setItem('vjcart', JSON.stringify(cart));
       renderCart();
-      // Flash feedback
       const btn = event.target;
       const original = btn.textContent;
       btn.textContent = '✓ Added';
@@ -1374,13 +1459,11 @@
       const cartItemsDiv = document.getElementById("cart-items");
       const cartTotalDiv = document.getElementById("cart-total");
       cartItemsDiv.innerHTML = "";
-
       if (cart.length === 0) {
         cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty — browse the collection above</p>';
         cartTotalDiv.innerHTML = 'Total: <span>$0.00</span>';
         return;
       }
-
       let total = 0;
       cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
@@ -1412,6 +1495,41 @@
       cartTotalDiv.innerHTML = `Total: <span>$${total.toFixed(2)}</span>`;
     }
 
+    function getCustomerInfo() {
+      return {
+        firstName:  document.getElementById('first-name').value.trim(),
+        lastName:   document.getElementById('last-name').value.trim(),
+        email:      document.getElementById('customer-email').value.trim(),
+        phone:      document.getElementById('customer-phone').value.trim(),
+        address:    document.getElementById('address').value.trim(),
+        address2:   document.getElementById('address2').value.trim(),
+        city:       document.getElementById('city').value.trim(),
+        state:      document.getElementById('state').value,
+        zip:        document.getElementById('zip').value.trim(),
+        notes:      document.getElementById('order-notes').value.trim()
+      };
+    }
+
+    function validateCustomerInfo(info) {
+      if (!info.firstName)  { alert('Please enter your first name.');     return false; }
+      if (!info.lastName)   { alert('Please enter your last name.');      return false; }
+      if (!info.email)      { alert('Please enter your email address.');  return false; }
+      if (!info.phone)      { alert('Please enter your phone number.');   return false; }
+      if (!info.address)    { alert('Please enter your street address.'); return false; }
+      if (!info.city)       { alert('Please enter your city.');           return false; }
+      if (!info.state)      { alert('Please select your state.');         return false; }
+      if (!info.zip)        { alert('Please enter your ZIP code.');       return false; }
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(info.email)) { alert('Please enter a valid email address.'); return false; }
+      return true;
+    }
+
+    /* ===== DROPDOWN ===== */
+    const trigger = document.querySelector('.dropdown-trigger');
+    const menu = document.querySelector('.dropdown-menu');
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('open'); });
+    document.addEventListener('click', () => { menu.classList.remove('open'); });
+
     window.addEventListener("load", function () {
       const savedCart = JSON.parse(localStorage.getItem('vjcart') || '[]');
       savedCart.forEach(item => {
@@ -1423,23 +1541,39 @@
       fetch("https://checkout-backend-c5gi.onrender.com/token")
         .then(r => r.text())
         .then(token => {
-          braintree.dropin.create({ authorization: token.trim(), container: "#dropin-container" },
+          braintree.dropin.create({
+            authorization: token.trim(),
+            container: "#dropin-container",
+            card: {
+              cardholderName: {
+                required: true
+           }
+         }
+       },
             function (err, instance) {
               if (err) { console.error(err); return; }
               document.getElementById("submit-button").addEventListener("click", function () {
                 if (cart.length === 0) { alert("Your cart is empty."); return; }
+
+                const customer = getCustomerInfo();
+                if (!validateCustomerInfo(customer)) return;
+
                 instance.requestPaymentMethod(function (err, payload) {
                   if (err) { console.error(err); return; }
                   fetch("https://checkout-backend-c5gi.onrender.com/checkout", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nonce: payload.nonce, cart: cart })
+                    body: JSON.stringify({
+                      nonce: payload.nonce,
+                      cart: cart,
+                      customer: customer
+                    })
                   })
                   .then(r => r.json())
                   .then(data => {
                     if (data.success) {
                       localStorage.removeItem('vjcart');
-                      alert("Thank you for your purchase! Your order has been placed.");
+                      alert("Thank you for your purchase, " + customer.firstName + "! Your order has been placed and a confirmation will be sent to " + customer.email + ".");
                     } else { alert("Payment failed: " + data.error); }
                   })
                   .catch(err => console.error(err));
@@ -1450,19 +1584,6 @@
         .catch(err => { console.error(err); alert("Token failed to load"); });
     });
   </script>
-  <script>
-  const trigger = document.querySelector('.dropdown-trigger');
-  const menu = document.querySelector('.dropdown-menu');
-
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.classList.toggle('open');
-  });
-
-  document.addEventListener('click', () => {
-    menu.classList.remove('open');
-  });
-</script>
 
 </body>
 </html>
