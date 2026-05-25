@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah Schultz | VJ Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --terracotta:   #C4622A;
+      --terra-light:  #E08050;
+      --terra-pale:   #F0C4A8;
+      --sage:         #7A9170;
+      --sage-light:   #A8BEA0;
+      --sage-pale:    #D8E8D0;
+      --sand:         #E8D8B8;
+      --sand-dark:    #C8B890;
+      --gold:         #C8900A;
+      --gold-light:   #E8B830;
+      --cream:        #FAF5EC;
+      --cream-dark:   #F0E8D8;
+      --text:         #2A1E12;
+      --text-mid:     #5A4030;
+      --text-light:   #9A7860;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== NAVIGATION ===== */
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(250,245,236,0.97);
+      border-bottom: 3px solid var(--terracotta);
+      box-shadow: 0 2px 16px rgba(196,98,42,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--terracotta);
+    }
+
+    .logo img { width: 38px; height: 38px; object-fit: contain; }
+
+    .nav a {
+      margin-left: 20px;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: var(--terracotta); }
+
+    /* ===== DROPDOWN ===== */
+    .dropdown { position: relative; display: inline-block; }
+
+    .dropdown-trigger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text-mid);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-left: 20px;
+      transition: color 0.2s ease;
+      padding: 0;
+    }
+
+    .dropdown-trigger:hover { color: var(--terracotta); }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      background: rgba(42,30,18,0.97);
+      border: 1px solid rgba(196,98,42,0.3);
+      border-top: 3px solid var(--terracotta);
+      min-width: 230px;
+      z-index: 9999;
+      padding: 8px 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-menu.open { display: block; }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 22px;
+      color: var(--sand);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--gold-light);
+      background: rgba(196,98,42,0.1);
+      border-left-color: var(--terracotta);
+      padding-left: 28px;
+    }
+
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      display: inline-block;
+      padding: 9px 20px;
+      background: transparent;
+      color: var(--terracotta);
+      border: 1px solid var(--terracotta);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 22px 0 0 40px;
+    }
+
+    .back-btn:hover { background: var(--terracotta); color: white; }
+
+    /* ===== FULL BLEED HERO ===== */
+    .hero-fullbleed {
+      position: relative;
+      height: 60vh;
+      min-height: 400px;
+      overflow: hidden;
+    }
+
+    .hero-fullbleed img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-fullbleed::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(42,30,18,0.1) 0%,
+        rgba(42,30,18,0.3) 50%,
+        rgba(42,30,18,0.75) 100%
+      );
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 40px 60px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--terra-pale);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      width: 40px;
+      height: 1px;
+      background: var(--terra-pale);
+      opacity: 0.6;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      color: white;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      margin-bottom: 8px;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--terra-pale);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== MAIN CONTENT — MAGAZINE LAYOUT ===== */
+    .magazine-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+
+    /* ===== PULL QUOTE ===== */
+    .pull-quote {
+      border-left: 5px solid var(--terracotta);
+      padding: 20px 30px;
+      margin: 0 0 50px;
+      background: var(--cream-dark);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--terracotta);
+      line-height: 1.6;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 10px;
+      letter-spacing: 0.1em;
+      font-style: normal;
+    }
+
+    /* ===== TWO COLUMN BIO ===== */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      align-items: start;
+    }
+
+    .bio-photo-col { position: relative; }
+
+    .bio-photo-frame {
+      position: relative;
+    }
+
+    .bio-photo-frame::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: -16px;
+      bottom: -16px;
+      border: 2px solid var(--sand-dark);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .bio-photo-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 12px 40px rgba(42,30,18,0.15);
+    }
+
+    .bio-text-col h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--terracotta);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--sand);
+      display: inline-block;
+    }
+
+    .bio-text-col p {
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 18px;
+      line-height: 2;
+    }
+
+    .bio-text-col p strong { color: var(--terracotta); }
+
+    /* ===== STAT STRIP ===== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-bottom: 60px;
+      border: 1px solid var(--sand-dark);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stat-item {
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid var(--sand-dark);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-item:nth-child(1) { background: var(--terracotta); }
+    .stat-item:nth-child(2) { background: var(--sage); }
+    .stat-item:nth-child(3) { background: var(--gold); }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: white;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .stat-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    /* ===== FULL WIDTH FEATURE STRIP ===== */
+    .feature-strip {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #8B3010 50%, var(--gold) 100%);
+      border-radius: 16px;
+      padding: 50px 60px;
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .feature-strip-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .feature-strip-text p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .coming-soon-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 24px 32px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .coming-soon-badge .badge-icon { font-size: 2.5rem; }
+
+    .coming-soon-badge .badge-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: white;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .coming-soon-badge .badge-stars {
+      color: var(--gold-light);
+      font-size: 1rem;
+      letter-spacing: 4px;
+    }
+
+    /* ===== SPECIALTY TAGS ===== */
+    .tags-section {
+      margin-bottom: 60px;
+    }
+
+    .tags-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--sand);
+    }
+
+    .tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tag {
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    .tag.terra { background: rgba(196,98,42,0.12); border: 1px solid var(--terra-light); color: var(--terracotta); }
+    .tag.sage  { background: rgba(122,145,112,0.12); border: 1px solid var(--sage-light); color: var(--sage); }
+    .tag.gold  { background: rgba(200,144,10,0.1); border: 1px solid var(--gold); color: var(--gold); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #2a1e12;
+      color: #c9b8a8;
+      text-align: center;
+      padding: 30px 20px;
+      font-style: italic;
+      font-size: 1rem;
+      border-top: 4px solid var(--terracotta);
+    }
+
+    footer a {
+      color: var(--terra-light);
+      text-decoration: none;
+      margin: 0 8px;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover { color: var(--gold-light); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 800px) {
+      .bio-grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+      .feature-strip { grid-template-columns: 1fr; padding: 36px 24px; }
+      .main-header { flex-direction: column; gap: 12px; padding: 16px 20px; }
+      .magazine-wrapper { padding: 40px 20px 60px; }
+      .hero-text { padding: 30px 24px; }
+      .back-btn { margin: 16px 0 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="main-header">
+    <div class="logo">
+      <img src="LOGO.png" alt="VJ Gallery Logo">
+      <span>VJ Gallery</span>
+    </div>
+    <nav class="nav">
+      <a href="store.html">Home</a>
+      <a href="index.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <div class="dropdown">
+        <button class="dropdown-trigger">Artists ▾</button>
+        <div class="dropdown-menu">
+          <a href="Disney.html">Disney</a>
+          <a href="ThomasBlackshear.html">Thomas Blackshear</a>
+          <a href="RonLee.html">Ron Lee</a>
+          <a href="KarenGermany.html">Karen Germany</a>
+          <a href="SarahSchultz.html">Sarah Schultz</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <!-- Full Bleed Hero -->
+  <div class="hero-fullbleed">
+    <img src="sarahattic.jpeg" alt="Sarah Schultz studio">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Featured Artist</div>
+      <h1 class="hero-name">Sarah Schultz</h1>
+      <p class="hero-tagline">Sculptor & Painter · Fine Art Collectibles</p>
+    </div>
+  </div>
+
+  <!-- Magazine Content -->
+  <div class="magazine-wrapper">
+
+    <!-- Pull Quote -->
+    <div class="pull-quote">
+      <p>"Every sculpture begins as a feeling — the clay simply gives it a place to live."</p>
+      <cite>— Sarah Schultz</cite>
+    </div>
+
+    <!-- Two Column Bio -->
+    <div class="bio-grid">
+      <div class="bio-photo-col">
+        <div class="bio-photo-frame">
+          <img src="sarahsachultz.jpg" alt="Sarah Schultz">
+        </div>
+      </div>
+      <div class="bio-text-col">
+        <h2>About the Artist</h2>
+        <p>
+          <strong>Sarah Schultz</strong> is a gifted sculptor and painter whose work bridges two artistic disciplines with remarkable grace. Her pieces carry the warmth of handcrafted detail and the emotional resonance of fine painted artistry — making each one a truly one-of-a-kind collectible.
+        </p>
+        <p>
+          With a deep reverence for the <strong>human form and natural beauty</strong>, Sarah creates figurines and paintings that tell stories without words. Her work invites the viewer into quiet moments of reflection — a tender gesture, a thoughtful gaze, a scene frozen in time.
+        </p>
+        <p>
+          Sarah's dual mastery of <strong>sculpture and painting</strong> sets her apart in the world of fine art collectibles. Each three-dimensional piece she creates is finished with her signature painted detail — bringing texture, color, and life to every surface in a way few artists can achieve.
+        </p>
+        <p>
+          VJ Gallery is honored to feature Sarah Schultz's extraordinary work and looks forward to bringing her collection to collectors who appreciate artistry of the highest order.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stat Strip -->
+    <div class="stat-strip">
+      <div class="stat-item">
+        <div class="stat-icon">🎨</div>
+        <div class="stat-label">Dual Medium Artist</div>
+        <div class="stat-desc">Masterful in both sculpture and fine art painting</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">◆</div>
+        <div class="stat-label">Collectible Works</div>
+        <div class="stat-desc">Each piece handcrafted with extraordinary attention to detail</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">✦</div>
+        <div class="stat-label">Signature Style</div>
+        <div class="stat-desc">Warm storytelling through form, texture and color</div>
+      </div>
+    </div>
+
+    <!-- Specialty Tags -->
+    <div class="tags-section">
+      <h3>Areas of Specialty</h3>
+      <div class="tags-grid">
+        <span class="tag terra">Fine Art Sculpture</span>
+        <span class="tag sage">Acrylic & Oil Painting</span>
+        <span class="tag gold">Collectible Figurines</span>
+        <span class="tag terra">Hand-Painted Detail</span>
+        <span class="tag sage">Mixed Media</span>
+        <span class="tag gold">Gallery Exhibition</span>
+      </div>
+    </div>
+
+    <!-- Feature Strip with Coming Soon -->
+    <div class="feature-strip">
+      <div class="feature-strip-text">
+        <h3>The Sarah Schultz Collection</h3>
+        <p>
+          An extraordinary collection of sculptural and painted works is coming soon to VJ Gallery. Each piece in Sarah's collection reflects her unique ability to capture emotion, beauty, and humanity in tangible form. Stay tuned for the unveiling of a truly remarkable body of work.
+        </p>
+      </div>
+      <div class="coming-soon-badge">
+        <div class="badge-stars">✦ ✦ ✦</div>
+        <div class="badge-text">Sarah Schultz<br>Collection<br>Coming Soon</div>
+        <div class="badge-stars">✦ ✦ ✦</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
+    <p style="margin-top: 10px;">
+      <a href="policies.html">Shipping & Return Policy</a>
+      &nbsp;·&nbsp;
+      <a href="policies.html">Privacy Policy</a>
+      &nbsp;·&nbsp;
+      <a href="contact.html">Contact Us</a>
+    </p>
+  </footer>
+
+  <script>
+    const trigger = document.querySelector('.dropdown-trigger');
+    const menu = document.querySelector('.dropdown-menu');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', () => {
+      menu.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
