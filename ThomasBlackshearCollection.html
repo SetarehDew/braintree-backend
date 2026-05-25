@@ -315,20 +315,82 @@
 
 .back-btn {
   display: inline-block;
-  padding: 10px 20px;
-  background: #2f241d;
-  color: white;
-  border: none;
+  padding: 8px 20px;
+  background: transparent;
+  color: #2f241d;
+  border: 1px solid #b88b4a;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: background 0.2s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  margin: 10px 0 0 20px;
+  transition: all 0.2s ease;
+  margin-left: 16px;
+  font-family: Georgia, serif;
 }
 
 .back-btn:hover {
   background: #b88b4a;
+  color: white;
+}
+
+.back-btn:hover {
+  background: #b88b4a;
+}
+/* ===== DROPDOWN ===== */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-family: Georgia, serif;
+  color: #2f241d;
+  font-weight: 500;
+  margin-left: 20px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.dropdown-trigger:hover { color: #b88b4a; }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: rgba(47,36,29,0.97);
+  border: 1px solid rgba(184,139,74,0.3);
+  border-top: 3px solid #b88b4a;
+  backdrop-filter: blur(12px);
+  min-width: 230px;
+  z-index: 9999;
+  padding: 8px 0;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.dropdown-menu.open { display: block; }
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 22px;
+  text-decoration: none;
+  color: #f0e8d8;
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  transition: all 0.2s ease;
+  margin-left: 0;
+  border-left: 3px solid transparent;
+}
+
+.dropdown-menu a:hover {
+  color: #b88b4a;
+  background: rgba(184,139,74,0.08);
+  border-left-color: #b88b4a;
+  padding-left: 28px;
 }
   </style>
 </head>
@@ -369,9 +431,9 @@
     color: white;
     border: none;
     border-radius: 999px;
-    padding: 8px 24px;
+    padding: 14px 36px;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 0.95rem;
+    font-size: 1.3rem;
     cursor: pointer;
     letter-spacing: 0.05em;
     transition: background 0.2s ease;
@@ -392,19 +454,28 @@
   <span class="cart-badge" id="cart-count">0</span>
 </a>
   <div class="main-header">
-    <div class="logo">
-      <img src="LOGO.png" alt="VJ Logo">
-      <span>VJ Gallery</span>
-    </div>
-    <nav class="nav">
-      <a href="store.html">Home</a>
-      <a href="ThomasBlackshear.html">Artist Bio</a>
-      <a href="DisneyCollection.html">Disney Collection</a>
-      <a href="index.html">Full Shop</a>   
-      
-    </nav>
+  <div class="logo">
+    <img src="LOGO.png" alt="VJ Logo">
+    <span>VJ Gallery</span>
   </div>
-  <button class="back-btn" onclick="history.back()">← Back</button>
+  <nav class="nav">
+    <a href="store.html">Home</a>
+    <a href="index.html">Shop</a>
+    <a href="contact.html">Contact</a>
+    <div class="dropdown">
+      <button class="dropdown-trigger">Artists ▾</button>
+      <div class="dropdown-menu">
+        <a href="Disney.html">Disney</a>
+        <a href="ThomasBlackshear.html">Thomas Blackshear</a>
+        <a href="RonLee.html">Ron Lee</a>
+        <a href="KarenGermany.html">Karen Germany</a>
+        <a href="SarahSchultz.html">Sarah Schultz</a>
+      </div>
+    </div>
+    <button class="back-btn" onclick="history.back()">← Back</button>
+  </nav>
+</div>
+  
  
 
   <section class="page-title">
@@ -934,12 +1005,12 @@
     <div class="fade-carousel" data-index="0">
         <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
 
-        <img src="JJ CLUCK-VJ251.png" class="active" alt="Front view">
-        <img src="JJ CLUCK-VJ252.png" alt="Side view">
-        <img src="JJ CLUCK-VJ253.png" alt="back view">
-        <img src="JJ CLUCK-VJ254.png" alt="side view">
-        <img src="JJ CLUCK-VJ255.png" alt="Display view">
-        <img src="JJ CLUCK-VJ250.png" alt="full display with letter of authentication">   
+        <img src="JJ CLUCK-VJ251.png" class="active" alt="front view of Jay Jay and Cluck Cluck collectible figurines on a neutral display surface">
+        <img src="JJ CLUCK-VJ252.png" alt="side view of Jay Jay and Cluck Cluck figurines showing sculpted feathers and painted details">
+        <img src="JJ CLUCK-VJ253.png" alt="back view of Jay Jay and Cluck Cluck figurines highlighting wings and base on a display platform">
+        <img src="JJ CLUCK-VJ254.png" alt="alternate side view of Jay Jay and Cluck Cluck figurines with decorative details visible">
+        <img src="JJ CLUCK-VJ255.png" alt="display view of Jay Jay and Cluck Cluck figurines arranged with a simple background">
+        <img src="JJ CLUCK-VJ250.png" alt="full display of Jay Jay and Cluck Cluck figurines with letter of authentication visible">   
 
         <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
 
@@ -957,6 +1028,37 @@
       <span class="price">$190.00</span>
       <button class="btn" onclick="addToCart('item27', 'Jay Jay & Cluck Cluck', 190.00)">Add to Cart</button>
     </div>
+
+    <div class="product-card">
+    <div class="fade-carousel" data-index="0">
+        <button class="carousel-btn prev" onclick="changeSlide(this, -1)">‹</button>
+
+        <img src="Midnight-VJ316.png" class="active" alt="front view of Midnight collectible figurine standing on a display surface">
+        <img src="Midnight-VJ315.png" alt="side view of Midnight figurine showing flowing garment and sculpted profile">
+        <img src="Midnight-VJ320.png" alt="back view of Midnight figurine revealing draped cloak and base details">
+        <img src="Midnight-VJ319.png" alt="alternate side view of Midnight figurine with dramatic styling and calm tone">
+        <img src="Midnight-VJ318.png" alt="display view of Midnight figurine on a neutral background for presentation">
+        <img src="Midnight-VJ317.png" alt="alternate display angle of Midnight figurine on a simple platform">
+        <img src="Midnight-VJ321.png" alt="full display of Midnight figurine with letter of authentication visible">   
+
+        <button class="carousel-btn next" onclick="changeSlide(this, 1)">›</button>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(this, 0)"></span>
+          <span class="dot" onclick="goToSlide(this, 1)"></span>
+          <span class="dot" onclick="goToSlide(this, 2)"></span>
+          <span class="dot" onclick="goToSlide(this, 3)"></span>
+          <span class="dot" onclick="goToSlide(this, 4)"></span>
+          <span class="dot" onclick="goToSlide(this, 5)"></span>
+        </div>
+        </div>
+    
+      <h3>Midnight</h3>
+      <span class="price">$750.00</span>
+      <button class="btn" onclick="addToCart('item27', 'Jay Jay & Cluck Cluck', 190.00)">Add to Cart</button>
+    </div>
+
+    
 
 
 
@@ -1124,6 +1226,19 @@ document.querySelectorAll('.product-card').forEach(card => observer.observe(card
   }
 
   updateCartCount();
+</script>
+<script>
+  const trigger = document.querySelector('.dropdown-trigger');
+  const menu = document.querySelector('.dropdown-menu');
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+  });
 </script>
 </body>
 <footer style="background: #2f241d; color: #c9b8a8; text-align: center; padding: 30px 20px; font-style: italic; font-size: 1rem; border-top: 4px solid #b88b4a;">

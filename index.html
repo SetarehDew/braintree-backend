@@ -67,7 +67,7 @@
       margin-left: 28px;
       text-decoration: none;
       color: var(--cream);
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       letter-spacing: 0.08em;
       font-family: 'Cinzel', serif;
       transition: color 0.2s ease;
@@ -82,7 +82,7 @@
       padding: 8px 18px;
       border-radius: 999px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      font-size: 1.25rem;
       cursor: pointer;
       transition: all 0.2s ease;
       margin-left: 20px;
@@ -103,7 +103,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       font-family: 'Cinzel', serif;
       color: var(--cream);
       letter-spacing: 0.08em;
@@ -176,18 +176,19 @@
     .hero-content { position: relative; z-index: 1; }
 
     .hero-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.4em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      text-shadow: 0 0 20px rgba(201,168,76,0.8), 0 0 40px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.8);
-    }
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-weight: 600;
+  text-shadow: 0 0 15px rgba(201,168,76,1), 0 0 30px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.9);
+}
 
     .hero-eyebrow::before,
     .hero-eyebrow::after {
@@ -198,8 +199,8 @@
     }
 
     .hero-logo {
-      width: 110px;
-      height: 110px;
+      width: 200px;
+      height: 200px;
       object-fit: contain;
       margin: 0 auto 24px;
       filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
@@ -298,8 +299,8 @@
 
     /* ===== PRODUCT GRIDS ===== */
     .products-section { padding: 40px 40px 70px; }
-    .products-section.disney-section { background: linear-gradient(180deg, #0f0505 0%, #080303 100%); }
-    .products-section.thomas-section { background: linear-gradient(180deg, #050f05 0%, #030803 100%); }
+    .products-section.disney-section { background: rgb(122, 118, 118);} 
+    .products-section.thomas-section { background: rgb(122, 118, 118); }
 
     .product-grid {
       display: grid;
@@ -394,7 +395,7 @@
 
     .cart-heading {
       font-family: 'Cinzel', serif;
-      font-size: 2rem;
+      font-size: 4rem;
       color: var(--gold);
       letter-spacing: 0.12em;
       text-align: center;
@@ -418,7 +419,7 @@
     }
 
     .cart-heading-line::after { background: linear-gradient(to left, transparent, var(--gold)); }
-    .cart-heading-line span { color: var(--gold); font-size: 0.9rem; }
+    .cart-heading-line span { color: var(--white); font-size: 1.25rem; }
 
     .cart-item {
       display: flex;
@@ -437,7 +438,7 @@
 
     .cart-item-info strong {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       color: var(--white);
       letter-spacing: 0.05em;
       display: block;
@@ -445,8 +446,8 @@
     }
 
     .cart-item-info .item-price {
-      font-size: 0.9rem;
-      color: rgba(245,240,232,0.5);
+      font-size: 1.25rem;
+      color: var(--white);
       font-family: Arial, sans-serif;
     }
 
@@ -459,7 +460,7 @@
       border: 1px solid rgba(201,168,76,0.4);
       background: transparent;
       color: var(--gold);
-      font-size: 1rem;
+      font-size: 1.25rem;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
@@ -471,7 +472,7 @@
     .qty-display { text-align: center; }
 
     .qty-label {
-      font-size: 0.6rem;
+      font-size: 1.25rem;
       color: rgba(245,240,232,0.4);
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -507,7 +508,7 @@
 
     .item-total {
       font-family: Arial, sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-weight: bold;
       color: var(--gold);
       min-width: 80px;
@@ -532,8 +533,9 @@
       padding: 60px 20px;
       color: rgba(245,240,232,0.3);
       font-style: italic;
-      font-size: 1.2rem;
+      font-size: 2rem;
       letter-spacing: 0.05em;
+      font-weight: 600;
     }
 
     /* ===== CUSTOMER INFO FORM ===== */
@@ -564,7 +566,7 @@
 
     .customer-form-header p {
       font-size: 1.25rem;
-      color: rgba(245,240,232,0.4);
+      color: var(--white);
       font-style: italic;
       margin-top: 4px;
     }
@@ -615,7 +617,7 @@
     }
 
     .form-group input::placeholder {
-      color: rgba(245,240,232,0.2);
+      color: var(--white);
       font-style: italic;
     }
 
@@ -676,7 +678,7 @@
     }
 
     .policy-notice p {
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       color: rgba(245,240,232,0.6);
       margin-bottom: 6px;
     }
@@ -700,7 +702,7 @@
       border: none;
       border-radius: 2px;
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -748,7 +750,7 @@
     }
 
     .footer-brand p {
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       color: rgba(245,240,232,0.4);
       line-height: 1.8;
       font-style: italic;
@@ -756,7 +758,7 @@
 
     .footer-col h4 {
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
+      font-size: 1.15rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
@@ -769,7 +771,7 @@
       display: block;
       text-decoration: none;
       color: rgba(245,240,232,0.5);
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       margin-bottom: 10px;
       transition: color 0.2s ease;
     }
@@ -778,7 +780,7 @@
 
     .footer-col p {
       color: rgba(245,240,232,0.5);
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       line-height: 1.8;
     }
 
@@ -803,7 +805,7 @@
     .footer-bottom a {
       color: rgba(201,168,76,0.5);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 1.1rem;
       margin-left: 20px;
       transition: color 0.2s ease;
     }
@@ -855,7 +857,6 @@
       <div class="hero-eyebrow">The Full Collection</div>
       <img class="hero-logo" src="lg.png" alt="VJ Gallery Logo">
       <h1>VJ <span>Gallery</span></h1>
-      <p class="hero-subtitle">Collectible Figurines & Fine Art · Oklahoma City</p>
       <div class="hero-divider"><span>✦</span></div>
     </div>
   </section>
@@ -1206,7 +1207,7 @@
           <button class="card-add-btn" onclick="addToCart('item39')">Add to Cart</button>
         </div>
       </div>
-      <div class="product-card">
+     <div class="product-card">
         <img src="HeavenlyPeace1.jpeg" alt="Heavenly Peace">
         <div class="card-overlay"></div>
         <div class="card-info">
@@ -1215,8 +1216,18 @@
           <button class="card-add-btn" onclick="addToCart('item40')">Add to Cart</button>
         </div>
       </div>
+
+      <div class="product-card">
+        <img src="Evening Rose-VJ306.png" alt="Evening Rose">
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <h3>Evening Rose</h3>
+          <div class="card-price">$425.00</div>
+          <button class="card-add-btn" onclick="addToCart('item32')">Add to Cart</button>
+        </div>
+      </div>
     </div>
-  </div>
+  </div> 
 
   <!-- Cart & Payment -->
   <div class="cart-section">
@@ -1399,7 +1410,7 @@
       { id: "item29", name: "The Little Shepherd",          price: 65.00 },
       { id: "item30", name: "UNKNOWN",                      price: 0.00 },
       { id: "item31", name: "Harmony",                      price: 50.00 },
-      { id: "item32", name: "Evening Rose",                 price: 0.00 },
+      { id: "item32", name: "Evening Rose",                 price: 425.00 },
       { id: "item33", name: "Midnight",                     price: 750.00 },
       { id: "item34", name: "Double Hug",                   price: 300.00 },
       { id: "item35", name: "The Fruits of Friendship",     price: 240.00 },
