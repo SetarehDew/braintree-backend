@@ -33,7 +33,7 @@
   background: #2f241d;
   color: #f7f3ee;
   padding: 14px 0;
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   letter-spacing: 0.04em;
   overflow: hidden;
   white-space: nowrap;
@@ -67,7 +67,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-size: clamp(2.4rem, 5vw, 6rem);
       margin-bottom: 14px;
       letter-spacing: 0.03em;
       text-shadow: 2px 4px 12px rgba(0,0,0,0.06);
@@ -93,7 +93,7 @@
     .btn {
       padding: 14px 22px;
       border-radius: 999px;
-      font-size: 1rem;
+      font-size: 1.5rem;
       border: 2px solid transparent;
       transition: 0.25s ease;
       display: inline-block;
@@ -192,6 +192,18 @@
       margin-top: 100px;
     }
 
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: #2f241d;
+      margin-bottom: 10px;
+   }
+
+    .feature-card p {
+     font-size: 1.2rem;
+     color: #6d5b4f;
+     line-height: 1.8;
+  }
+
     .collection-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -225,7 +237,7 @@
 
     .product-info h3 {
       margin-bottom: 8px;
-      font-size: 1.2rem;
+      font-size: 2rem;
     }
 
     .product-info p {
@@ -239,7 +251,7 @@
       font-weight: bold;
       margin-bottom: 14px;
       color: #2f241d;
-      font-size: 1.1rem;
+      font-size: 2rem;
     }
 
     .banner {
@@ -344,22 +356,28 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 40px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  border-bottom: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
 
 .logo {
   font-family: "Playfair Display", serif;
-  font-size: 2.3rem;
-  color: #2f241d;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 4px 12px rgba(0,0,0,0.06);
 }
 
 .nav a {
   margin-left: 25px;
-  font-size: 1rem;
-  color: #2f241d;
+  font-size: 2.5rem;
+  color: white;
   font-weight: 500;
+  text-shadow: 1px 2px 8px rgba(0,0,0,0.5);
 }
 
 .nav a:hover {
@@ -433,20 +451,21 @@
   background: #2f241d;
   color: #f0c080;
   text-align: center;
-  padding: 60px 40px;
-  font-size: 2rem;
+  padding: 140px 40px;
+  font-size: 3.5rem;
   font-style: italic;
   letter-spacing: 0.03em;
   line-height: 1.8;
   position: relative;
-  margin-bottom: 120px;
+  margin-top: 80px;
+  margin-bottom: 200px;
 }
 
 .quote-banner::before,
 .quote-banner::after {
   content: "✦";
   color: #b88b4a;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   display: block;
   margin-bottom: 16px;
 }
@@ -560,6 +579,94 @@ footer {
   font-size: 0.85rem;
 }
 
+.gold-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gold-dust .dust {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: dustfall linear infinite;
+}
+
+.quote-banner p {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes dustfall {
+  0%   { opacity: 0; transform: translateY(-10px) translateX(0); }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(300px) translateX(15px); }
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  25%  { opacity: 1; transform: scale(1.2) rotate(90deg); }
+  50%  { opacity: 0.6; transform: scale(0.8) rotate(180deg); }
+  75%  { opacity: 1; transform: scale(1.1) rotate(270deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(360deg); }
+}
+
+.coming-soon-card {
+  background: linear-gradient(rgba(47,36,29,0.55), rgba(47,36,29,0.55)), url("comingsoon-bg.svg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #b88b4a;
+  min-height: 360px;
+}
+
+.coming-soon-card:hover {
+  transform: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.coming-soon-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.coming-soon-stars {
+  color: #b88b4a;
+  font-size: 1.2rem;
+  letter-spacing: 0.4em;
+  margin: 10px 0;
+}
+
+.coming-soon-title {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #f0c080;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.coming-soon-sub {
+  display: block;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #c9a84c;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
   </style>
 </head>
 <body>
@@ -621,12 +728,13 @@ Every piece we offer carries that spirit forward. And every time someone finds s
   </section>
 
   <div class="quote-banner fade-in">
+  <div class="gold-dust" id="goldDust"></div>
   <p>"Art is not what you see, but what you make others see."</p>
 </div>
 
  <div id="artists" class="fade-in" style="overflow:hidden">
-    <img src="ourartist.png" alt="Our Artists" style="width: 100%; max-width: 800px; display: block; margin: 0 auto 40px;">
-    <h2 class="section-title" style="font-size: 2rem;">Explore the artists from the collection and learn more about their stories, styles and creative legacy</h2>
+    <img src="ourartist.png" alt="Our Artists" style="width: 100%; max-width: 1000px; display: block; margin: 0 auto 40px;">
+    <h2 class="section-title" style="font-size: 2.3rem;">Explore the artists from the collection and learn more about their stories, styles and creative legacy</h2>
  </div>
 
 <section class="section artists">
@@ -656,10 +764,14 @@ Every piece we offer carries that spirit forward. And every time someone finds s
     <span>Disney</span>
   </a>
 
-  <a class="artist-card" href="artist6.html">
-    <img src="artist6-logo.png" alt="Artist 6 Logo">
-    <span>More Artists To Come</span>
-  </a>
+  <div class="artist-card coming-soon-card">
+  <div class="coming-soon-inner">
+    <div class="coming-soon-stars">✦ ✦ ✦</div>
+    <span class="coming-soon-title">More Artists</span>
+    <span class="coming-soon-sub">Coming Soon</span>
+    <div class="coming-soon-stars">✦ ✦ ✦</div>
+  </div>
+</div>
 </div>
   </section>
 
@@ -780,6 +892,25 @@ Every piece we offer carries that spirit forward. And every time someone finds s
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+<script>
+  const dustContainer = document.getElementById('goldDust');
+  const dustColors = ['#f0c080', '#ffd700', '#e8c96a', '#c9a84c', '#fff8dc'];
+  const dustCount = 35;
+
+  for (let i = 0; i < dustCount; i++) {
+    const speck = document.createElement('div');
+    speck.classList.add('dust');
+    const size = Math.random() * 4 + 2;
+    speck.style.width = size + 'px';
+    speck.style.height = size + 'px';
+    speck.style.left = Math.random() * 100 + '%';
+    speck.style.background = dustColors[Math.floor(Math.random() * dustColors.length)];
+    speck.style.animationDuration = (Math.random() * 5 + 3) + 's';
+    speck.style.animationDelay = (Math.random() * 6) + 's';
+    dustContainer.appendChild(speck);
+  }
 </script>
 <footer style="background: #2f241d; color: #c9b8a8; text-align: center; padding: 30px 20px; font-style: italic; font-size: 1rem; border-top: 4px solid #b88b4a;">
   <p>© 2025 VJ Gallery · Collectible Figurines & Fine Art · Oklahoma City, OK</p>
