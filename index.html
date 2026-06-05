@@ -33,14 +33,18 @@
 
     /* ===== NAVIGATION ===== */
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 50px;
-      background: rgba(8,8,8,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 50px;
+  background: transparent;
+  border-bottom: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
 
     .nav-brand {
       display: flex;
@@ -119,7 +123,7 @@
       position: absolute;
       top: calc(100% + 12px);
       left: 0;
-      background: rgba(8,8,8,0.97);
+      background: rgba(8,8,8,0.92);
       border: 1px solid rgba(201,168,76,0.2);
       border-top: 2px solid var(--gold);
       backdrop-filter: blur(12px);
@@ -295,7 +299,6 @@
     .banner-line { flex: 1; height: 1px; max-width: 300px; }
     .collection-banner.disney .banner-line { background: linear-gradient(to right, rgba(139,26,26,0.6), transparent); }
     .collection-banner.thomas .banner-line { background: linear-gradient(to right, rgba(26,58,26,0.6), transparent); }
-
     /* ===== PRODUCT GRIDS ===== */
     .products-section.disney-section {
   background:
@@ -850,7 +853,7 @@
       <div class="dropdown">
         <button class="dropdown-trigger">Artists ▾</button>
         <div class="dropdown-menu">
-          <a href="Disney.html">Disney</a>
+          <a href="disney.html">Disney</a>
           <a href="ThomasBlackshear.html">Thomas Blackshear</a>
           <a href="RonLee.html">Ron Lee</a>
           <a href="KarenGermany.html">Karen Germany</a>
