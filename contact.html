@@ -66,11 +66,11 @@
     }
 
     @keyframes particleFloat {
-      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-      10%  { opacity: 0.5; }
-      90%  { opacity: 0.2; }
-      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-    }
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+}
 
     /* Geometric SVG lines */
     .geo-lines {
@@ -98,7 +98,7 @@
       align-items: center;
       gap: 12px;
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       color: var(--gold);
       letter-spacing: 0.1em;
       text-decoration: none;
@@ -118,6 +118,7 @@
       font-size: 1.25rem;
       letter-spacing: 0.1em;
       transition: color 0.2s ease;
+      font-weight: bold;
     }
 
     .nav-links a:hover { color: var(--gold); }
@@ -130,7 +131,7 @@
       padding: 7px 18px;
       border-radius: 999px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -563,7 +564,7 @@
 
     footer p {
       color: var(--text-light);
-      font-size: 0.85rem;
+      font-size: 1.2rem;
       letter-spacing: 0.04em;
     }
 
@@ -729,8 +730,8 @@
   <script>
     // Generate silver and gold floating particles
     const container = document.getElementById('particles');
-    const colors = ['#b8912a', '#c8cdd4', '#d4ab4a', '#e0e4e8', '#c9a84c'];
-    for (let i = 0; i < 35; i++) {
+    const colors = ['#8a6d1f', '#9aa0a8', '#a8842a', '#7a8088', '#9d7d22'];
+    for (let i = 0; i < 70; i++) {
       const p = document.createElement('div');
       p.classList.add('particle');
       const size = Math.random() * 4 + 1;
@@ -738,7 +739,7 @@
       p.style.height = size + 'px';
       p.style.left = Math.random() * 100 + 'vw';
       p.style.background = colors[Math.floor(Math.random() * colors.length)];
-      p.style.animationDuration = (Math.random() * 14 + 8) + 's';
+      p.style.animationDuration = (Math.random() * 7 + 4) + 's';
       p.style.animationDelay = (Math.random() * 10) + 's';
       container.appendChild(p);
     }
