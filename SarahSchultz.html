@@ -62,7 +62,7 @@
 
     .nav a {
       margin-left: 20px;
-      font-size: 1.5rem;
+      font-size: 2rem;
       color: var(--text-mid);
       font-weight: 500;
       transition: color 0.2s ease;
@@ -77,7 +77,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-family: 'Cormorant Garamond', serif;
       color: var(--text-mid);
       font-weight: 500;
@@ -108,7 +108,7 @@
       display: block;
       padding: 12px 22px;
       color: var(--sand);
-      font-size: 1.25rem;
+      font-size: 2rem;
       transition: all 0.2s ease;
       border-left: 3px solid transparent;
     }
@@ -125,7 +125,7 @@
       display: inline-block;
       padding: 10px 22px;
       background: transparent;
-      color: white;
+      color: black;
       border: 2px solid var(--gold-light);
       border-radius: 999px;
       font-size: 1.25rem;
@@ -133,6 +133,7 @@
       transition: all 0.2s ease;
       font-family: 'Cormorant Garamond', serif;
       margin: 24px 0 0 40px;
+      font-weight: bolder;
     }
 
     .back-btn:hover { background: var(--gold-light); color: var(--text); }
@@ -145,7 +146,7 @@
 
     .artist-banner h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-size: clamp(4rem, 6vw, 9rem);
       color: black;
       text-shadow: 2px 4px 16px rgba(0,0,0,0.6);
       margin-bottom: 10px;
@@ -203,7 +204,7 @@
     .bio-left { text-align: center; }
 
     .bio-left img.headshot {
-      width: 100%;
+      width: 300%;
       border-radius: 16px;
       border: 4px solid var(--gold);
       box-shadow: 0 8px 24px rgba(200,144,10,0.25);
@@ -211,7 +212,7 @@
     }
 
     .bio-left img.figurine-preview {
-      width: 100%;
+      width: 200%;
       height: 200px;
       object-fit: cover;
       border-radius: 12px;
@@ -222,14 +223,14 @@
 
     .bio-left .name-tag {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+      font-size: 3rem;
       color: var(--terracotta);
       font-weight: bold;
       margin-bottom: 4px;
     }
 
     .bio-left .medium-tag {
-      font-size: 1.25rem;
+      font-size: 2rem;
       color: var(--sage);
       font-style: italic;
       margin-bottom: 10px;
@@ -241,14 +242,14 @@
       background: rgba(196,98,42,0.08);
       border: 2px solid var(--terra-light);
       border-radius: 999px;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       color: var(--terracotta);
       font-style: italic;
       margin-bottom: 6px;
     }
 
     .preview-label {
-      font-size: 1.25rem;
+      font-size: 2rem;
       color: var(--text-light);
       margin-top: 8px;
       font-style: italic;
@@ -257,7 +258,7 @@
     /* ===== BIO RIGHT ===== */
     .bio-right h2 {
       font-family: 'New Times Roman', serif;
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: var(--terracotta);
       margin-bottom: 20px;
       padding-bottom: 14px;
@@ -295,8 +296,8 @@
     }
 
     .diamond-shape {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       border-radius: 12px;
       transform: rotate(45deg);
       display: flex;
@@ -324,8 +325,8 @@
     .diamond-inner .icon { font-size: 2rem; display: block; margin-bottom: 6px; }
 
     .diamond-inner span {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
+      font-family: 'Times New Roman', serif;
+      font-size: 2rem;
       color: white;
       font-weight: bold;
       letter-spacing: 0.05em;
@@ -334,11 +335,11 @@
     }
 
     .diamond-desc {
-      font-size: 1.25rem;
-      color: white;
-      text-shadow: 1px 2px 8px rgba(0,0,0,0.5);
+      font-size: 2rem;
+      color: whitesmoke;
+      text-shadow: 1px 2px 8px rgba(0,0,0,0.9);
       line-height: 1.6;
-      font-style: italic;
+      font-weight: bold;
     }
 
     /* ===== COMING SOON BUTTON ===== */
@@ -354,7 +355,7 @@
       color: #5a5040;
       border-radius: 999px;
       font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
+      font-size: 2rem;
       font-weight: bold;
       letter-spacing: 0.06em;
       font-style: italic;
@@ -380,7 +381,7 @@
       text-align: center;
       padding: 30px 20px;
       font-style: italic;
-      font-size: 1rem;
+      font-size: 2rem;
       border-top: 4px solid var(--terracotta);
     }
 
@@ -422,18 +423,17 @@
           <a href="ThomasBlackshear.html">Thomas Blackshear</a>
           <a href="RonLee.html">Ron Lee</a>
           <a href="KarenGermany.html">Karen Germany</a>
-          <a href="SarahSchultz.html">Sarah Schultz</a>
         </div>
       </div>
-    </nav>
+      <button class="back-btn" onclick="history.back()">← Back</button>
+      </nav>
   </div>
 
-  <button class="back-btn" onclick="history.back()">← Back</button>
+  
 
   <!-- Hero Banner -->
   <div class="artist-banner">
     <h1>Sarah Schultz</h1>
-    <p>Sculptor & Painter · Fine Art Collectibles</p>
     <div class="banner-divider"><span>✦</span></div>
   </div>
 
