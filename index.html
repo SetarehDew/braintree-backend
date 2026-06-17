@@ -261,34 +261,63 @@
     }
 
     .collection-banner.disney {
-  background: linear-gradient(135deg, #f0e8d8 0%, #e8dcc4 100%);
-  border-top: 1px solid rgba(201,168,76,0.4);
-  border-bottom: 1px solid rgba(201,168,76,0.3);
+  background: linear-gradient(135deg, #fffdf8 0%, #faf4e4 100%);
+  border-top: 4px solid #c8102e;
+  border-bottom: 2px solid #d4af37;
 }
 
 .collection-banner.thomas {
-  background: linear-gradient(135deg, #ece4f0 0%, #e0d4e0 100%);
-  border-top: 1px solid rgba(201,168,76,0.4);
-  border-bottom: 1px solid rgba(201,168,76,0.3);
+  background: linear-gradient(135deg, #f4f8f0 0%, #e2ecd8 100%);
+  border-top: 4px solid #1a5632;
+  border-bottom: 2px solid #d4af37;
 }
-    .banner-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-    }
 
-    .banner-text h2 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
+.banner-logo-wrap {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #fff;
+}
 
-    .collection-banner.disney .banner-text h2 { color: #8b1a1a; }
-    .collection-banner.thomas .banner-text h2 { color: #4a3a6a; }
+.banner-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.banner-logo-wrap.disney-logo {
+  border: 3px solid #c8102e;
+  box-shadow: 0 4px 14px rgba(200,16,46,0.3);
+}
+
+.banner-logo-wrap.thomas-logo {
+  border: 3px solid #1a5632;
+  box-shadow: 0 4px 14px rgba(26,86,50,0.3);
+}
+
+.banner-stars {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: #d4af37;
+  letter-spacing: 0.3em;
+}
+
+.collection-banner.disney .banner-text h2 { color: #c8102e; }
+.collection-banner.thomas .banner-text h2 { color: #1a5632; }
+
+.banner-text p {
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.collection-banner.disney .banner-text p { color: #9a7a30; }
+.collection-banner.thomas .banner-text p { color: #5a7a4a; }
 
     .banner-text p {
       font-style: italic;
@@ -300,23 +329,19 @@
     .collection-banner.disney .banner-line { background: linear-gradient(to right, rgba(139,26,26,0.6), transparent); }
     .collection-banner.thomas .banner-line { background: linear-gradient(to right, rgba(26,58,26,0.6), transparent); }
     /* ===== PRODUCT GRIDS ===== */
+    .products-section { padding: 40px 40px 70px; }
+
     .products-section.disney-section {
-  background:
-    linear-gradient(rgba(245,240,230,0.92), rgba(238,230,215,0.92)),
-    url("disneythumb.png") center / 400px no-repeat;
-  background-attachment: scroll, fixed;
-}
-.products-section.thomas-section {
-  background:
-    linear-gradient(rgba(245,240,230,0.92), rgba(238,230,215,0.92)),
-    url("tbs.webp") center / 500px no-repeat;
-  background-attachment: scroll, fixed;
-}
+      background: radial-gradient(circle at 50% 30%, #fffef9 0%, #f7efdc 100%);
+    }
+    .products-section.thomas-section {
+      background: radial-gradient(circle at 50% 30%, #f6faf2 0%, #e6efdd 100%);
+    }
 
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 2px;
+      gap: 24px;
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -325,79 +350,78 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      background: var(--gray);
-      aspect-ratio: 3/4;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .disney-section .product-card { border: 1px solid rgba(212,175,55,0.35); }
+    .thomas-section .product-card { border: 1px solid rgba(26,86,50,0.25); }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.2);
     }
 
     .product-card img {
       width: 100%;
-      height: 100%;
+      height: 280px;
       object-fit: cover;
-      transition: transform 0.6s ease;
       display: block;
     }
 
-    .product-card:hover img { transform: scale(1.08); }
-
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
-      transition: all 0.4s ease;
-    }
-
-    .product-card:hover .card-overlay {
-      background: linear-gradient(to top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1) 100%);
-    }
+    .card-overlay { display: none; }
 
     .card-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 24px 20px;
+      padding: 20px 18px 22px;
+      text-align: center;
     }
 
     .card-info h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      margin-bottom: 4px;
-      line-height: 1.3;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      line-height: 1.25;
     }
 
     .card-price {
-      font-size: 1.5rem;
-      color: black;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
-      font-weight: bold;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+      font-family: Georgia, serif;
     }
+
+    .disney-section .card-price { color: #c8102e; }
+    .thomas-section .card-price { color: #1a5632; }
 
     .card-add-btn {
       display: block;
       width: 100%;
-      padding: 10px;
-      border: 1px solid var(--gold);
+      padding: 13px;
+      border: 2px solid #d4af37;
       background: transparent;
-      color: var(--gold);
+      color: #9a7a30;
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
 
-    .product-card:hover .card-add-btn { opacity: 1; transform: translateY(0); }
-    .card-add-btn:hover { background: var(--gold); color: var(--black); }
+    .card-add-btn:hover { background: #d4af37; color: #fff; }
 
     /* ===== CART SECTION ===== */
-    .cart-section {
+   .cart-section {
   background:
     linear-gradient(rgba(245,240,230,0.95), rgba(238,230,215,0.95)),
     url("LOGO.png") center 80px / 300px no-repeat;
@@ -405,17 +429,38 @@
   border-top: 1px solid rgba(201,168,76,0.3);
 }
 
+.cart-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding: 4px;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #d4af37, #f5e0a0, #c8102e, #d4af37, #1a5632, #d4af37);
+  background-size: 300% 300%;
+  animation: borderFlow 6s linear infinite;
+}
+
+.cart-wrapper-inner {
+  background: linear-gradient(135deg, #fffdf8 0%, #f5efe2 100%);
+  border-radius: 14px;
+  padding: 40px 36px;
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
     .cart-wrapper { max-width: 900px; margin: 0 auto; }
 
-    .cart-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 4rem;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
+.cart-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  color: #1a1a1a;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
     .cart-heading-line {
       display: flex;
       align-items: center;
@@ -878,11 +923,14 @@
   <!-- Disney Collection Banner -->
   <div class="collection-banner disney">
     <div class="banner-inner">
+      <div class="banner-logo-wrap disney-logo">
+        <img src="disneythumb.png" alt="Disney">
+      </div>
       <div class="banner-text">
-        <h2>✦ Disney Collection</h2>
+        <h2>Disney Collection</h2>
         <p>Magical figurines inspired by timeless Disney stories</p>
       </div>
-      <div class="banner-line"></div>
+      <div class="banner-stars">✦ ✦ ✦</div>
     </div>
   </div>
 
@@ -958,11 +1006,14 @@
   <!-- Thomas Blackshear Banner -->
   <div class="collection-banner thomas">
     <div class="banner-inner">
+      <div class="banner-logo-wrap thomas-logo">
+        <img src="tbs.webp" alt="Thomas Blackshear">
+      </div>
       <div class="banner-text">
-        <h2>✦ Thomas Blackshear Collection</h2>
+        <h2>Thomas Blackshear Collection</h2>
         <p>Expressive figurines with emotional depth and timeless artistry</p>
       </div>
-      <div class="banner-line"></div>
+      <div class="banner-stars">✦ ✦ ✦</div>
     </div>
   </div>
 
@@ -1246,12 +1297,14 @@
   <!-- Cart & Payment -->
   <div class="cart-section">
     <div class="cart-wrapper">
-      <h2 class="cart-heading">Your Cart</h2>
-      <div class="cart-heading-line"><span>✦</span></div>
-      <div id="cart-items">
-        <p class="empty-cart">Your cart is empty — browse the collection above</p>
+      <div class="cart-wrapper-inner">
+        <h2 class="cart-heading">Your Cart</h2>
+        <div class="cart-heading-line"><span>✦</span></div>
+        <div id="cart-items">
+          <p class="empty-cart">Your cart is empty — browse the collection above</p>
+        </div>
+        <div id="cart-total">Total: <span>$0.00</span></div>
       </div>
-      <div id="cart-total">Total: <span>$0.00</span></div>
     </div>
 
     <!-- Customer Information Form -->
