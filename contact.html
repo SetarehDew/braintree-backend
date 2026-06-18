@@ -26,7 +26,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: 'Times New Roman', serif;
       background: var(--off-white);
       color: var(--text-dark);
       min-height: 100vh;
@@ -102,11 +102,12 @@
       color: var(--gold);
       letter-spacing: 0.1em;
       text-decoration: none;
+      font-weight: bold;
     }
 
     .nav-brand img {
-      width: 36px;
-      height: 36px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
     }
 
@@ -115,7 +116,7 @@
       text-decoration: none;
       color: var(--text-mid);
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 2rem;
       letter-spacing: 0.1em;
       transition: color 0.2s ease;
       font-weight: bold;
@@ -131,7 +132,7 @@
       padding: 7px 18px;
       border-radius: 999px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
+      font-size: 2rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -150,12 +151,13 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px 80px;
+      padding: 100px 20px 80px;
     }
 
     /* ===== HEADER ===== */
     .page-header {
       text-align: center;
+      margin-top: 100px;
       margin-bottom: 50px;
       animation: fadeUp 0.7s ease both;
     }
@@ -166,8 +168,8 @@
     }
 
     .logo-circle {
-      width: 100px;
-      height: 100px;
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       border: 1px solid rgba(184,145,42,0.3);
       background: linear-gradient(135deg, rgba(184,145,42,0.08), rgba(200,205,212,0.15));
@@ -196,14 +198,14 @@
     }
 
     .logo-circle img {
-      width: 180px;
-      height: 180px;
+      width: 500px;
+      height: 500px;
       object-fit: contain;
     }
 
     .eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-family: 'Times New Roman', serif;
+      font-size: 2rem;
       letter-spacing: 0.4em;
       color: var(--gold);
       text-transform: uppercase;
@@ -212,6 +214,7 @@
       align-items: center;
       justify-content: center;
       gap: 14px;
+      margin-top: 80px;
     }
 
     .eyebrow::before,
@@ -228,10 +231,10 @@
     }
 
     .page-title {
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 700;
-      color: var(--text-dark);
+      color: black;
       letter-spacing: 0.08em;
       margin-bottom: 10px;
     }
@@ -240,8 +243,7 @@
 
     .page-subtitle {
       font-size: 2rem;
-      color: black;
-      font-style: italic;
+      color: rgb(69, 69, 70);
       letter-spacing: 0.04em;
     }
 
@@ -297,9 +299,9 @@
     .info-panel-top { position: relative; z-index: 1; }
 
     .info-panel h2 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       font-size: 1.25rem;
-      color: var(--gold-pale);
+      color: black;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 32px;
@@ -322,28 +324,28 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 1.25rem;
       flex-shrink: 0;
       background: rgba(184,145,42,0.08);
     }
 
     .contact-detail h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.5rem;
       letter-spacing: 0.2em;
-      color: var(--gold);
+      color: black;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
 
     .contact-detail p {
       font-size: 1.5rem;
-      color: rgba(84, 67, 14, 0.85);
+      color: black;
       line-height: 1.5;
     }
 
     .contact-detail a {
-      color: rgba(240,224,176,0.85);
+      color: black;
       text-decoration: none;
       transition: color 0.2s ease;
     }
@@ -357,10 +359,10 @@
     }
 
     .hours-title {
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       font-size: 1.25rem;
       letter-spacing: 0.2em;
-      color: var(--gold);
+      color: black;
       text-transform: uppercase;
       margin-bottom: 14px;
     }
@@ -368,14 +370,13 @@
     .hours-row {
       display: flex;
       justify-content: space-between;
-      font-size: 1.25rem;
-      color: rgba(200,205,212,0.6);
+      font-size: 1.5rem;
+      color: black;
       margin-bottom: 8px;
     }
 
     .hours-row span:last-child {
-      color: var(--gold-pale);
-      font-style: italic;
+      color: black;
     }
 
     .social-row {
@@ -392,9 +393,9 @@
       border: 1px solid rgba(184,145,42,0.3);
       border-radius: 999px;
       text-decoration: none;
-      color: rgba(240,224,176,0.7);
+      color: rgba(240,224,176,1);
       font-size: 1.25rem;
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       letter-spacing: 0.06em;
       transition: all 0.2s ease;
     }
@@ -412,9 +413,9 @@
     }
 
     .form-panel h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
-      color: var(--gold);
+      font-family: 'Times New Roman', serif;
+      font-size: 2rem;
+      color: black;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 30px;
@@ -435,12 +436,13 @@
     }
 
     .form-group label {
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       font-size: 1.25rem;
       letter-spacing: 0.2em;
-      color: var(--silver-dark);
+      color: black;
       text-transform: uppercase;
       margin-bottom: 7px;
+      font-weight: 500;
     }
 
     .form-group input,
@@ -450,9 +452,9 @@
       border: 1px solid var(--mid-gray);
       border-radius: 2px;
       padding: 12px 14px;
-      color: var(--text-dark);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.25rem;
+      color: black;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.5rem;
       transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
       outline: none;
       width: 100%;
@@ -460,14 +462,14 @@
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: var(--silver-dark);
-      font-style: italic;
+      color: black;
+      font-weight: 500;
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--gold);
+      border-color: black;
       background: white;
       box-shadow: 0 0 0 3px rgba(184,145,42,0.08);
     }
@@ -484,7 +486,7 @@
 
     .form-group select option {
       background: white;
-      color: var(--text-dark);
+      color: black;
     }
 
     .form-group textarea {
@@ -501,8 +503,8 @@
       color: white;
       border: none;
       border-radius: 2px;
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -535,16 +537,15 @@
     }
 
     .success-message h3 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Times New Roman', serif;
       font-size: 1.25rem;
-      color: var(--text-dark);
+      color: black;
       margin-bottom: 10px;
       letter-spacing: 0.08em;
     }
 
     .success-message p {
-      color: var(--text-light);
-      font-style: italic;
+      color: black;
     }
 
     /* ===== FOOTER ===== */
@@ -564,16 +565,17 @@
 
     footer p {
       color: var(--text-light);
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       letter-spacing: 0.04em;
     }
 
     footer a {
       color: var(--gold);
       text-decoration: none;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       margin-left: 18px;
       transition: color 0.2s ease;
+      font-weight: 500;
     }
 
     footer a:hover { color: var(--gold-light); }
@@ -648,15 +650,15 @@
   <div class="info-divider"></div>
 
   <div style="padding: 24px; background: rgba(184,145,42,0.08); border: 1px solid rgba(184,145,42,0.2); border-radius: 8px; margin-bottom: 24px;">
-    <p style="font-family: 'Cinzel', serif; font-size: 1.25rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px;">A Note From VJ Gallery</p>
-    <p style="font-size: 1.25rem; color: black; line-height: 1.9; font-style: italic;">
+    <p style="font-family: 'Cinzel', serif; font-size: 2rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; font-weight: bold;">A Note From VJ Gallery</p>
+    <p style="font-size: 1.5rem; color: black; line-height: 1.9; font-weight: 500;">
       "Every inquiry we receive is treated with the utmost care and attention. Your satisfaction is not simply a priority — it is the foundation upon which VJ Gallery was built. We will respond to your message promptly and with the personal attention your inquiry deserves."
     </p>
-    <p style="margin-top: 16px; font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 0.15em; color: rgba(184,145,42,0.7); font-weight: bold;">— The VJ Gallery Team</p>
+    <p style="margin-top: 16px; font-family: 'Times New Roman', serif; font-size: 2rem; letter-spacing: 0.15em; color: rgba(61, 47, 9, 0.7); font-weight: bold;">— The VJ Gallery Team</p>
   </div>
 
-  <div style="padding: 16px 20px; border-left: 2px solid rgba(184,145,42,0.4);">
-    <p style="font-size: 1.25rem; color: black; line-height: 1.8;">
+  <div style="padding: 16px 20px; border-left: 2px solid rgba(88, 69, 17, 0.4);">
+    <p style="font-size: 1.5rem; color: rgb(20, 16, 16); line-height: 1.8;">
       We look forward to assisting you in finding the perfect piece for your collection. No request is too large or too small — we are here to serve you.
     </p>
   </div>
