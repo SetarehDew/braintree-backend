@@ -52,11 +52,12 @@
       gap: 12px;
       font-family: 'Cinzel', serif;
       font-size: 2rem;
-      color: black;
+      color: white;
       letter-spacing: 0.1em;
       font-weight: 600;
+      text-shadow: 1px 2px 8px rgba(0,0,0,0.8);
+      text-decoration: none;
     }
-
     .nav-brand img {
       width: 80px;
       height: 80px;
@@ -72,13 +73,16 @@
       margin-left: 28px;
       text-decoration: none;
       color: var(--cream);
+      font-weight: 700;
       font-size: 2rem;
       letter-spacing: 0.08em;
       font-family: 'Cinzel', serif;
       transition: color 0.2s ease;
+      text-shadow: 1px 2px 8px rgba(0,0,0,0.4);
+
     }
 
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: black; }
 
     .back-btn {
       background: transparent;
@@ -88,6 +92,7 @@
       border-radius: 999px;
       font-family: 'Cormorant Garamond', serif;
       font-size: 2rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
       margin-left: 20px;
@@ -109,6 +114,7 @@
       border: none;
       cursor: pointer;
       font-size: 2rem;
+      font-weight: 700;
       font-family: 'Cinzel', serif;
       color: var(--cream);
       letter-spacing: 0.08em;
@@ -117,7 +123,7 @@
       padding: 0;
     }
 
-    .dropdown-trigger:hover { color: var(--gold); }
+    .dropdown-trigger:hover { color: black; }
 
     .dropdown-menu {
       display: none;
@@ -187,6 +193,7 @@
   color: var(--gold);
   text-transform: uppercase;
   margin-bottom: 20px;
+  margin-top: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,6 +260,55 @@
 
     .hero-divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
     .hero-divider span { color: var(--gold); font-size: 1.2rem; }
+
+.cart-notice {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2520 100%);
+  border-top: 2px solid #d4af37;
+  border-bottom: 2px solid #d4af37;
+  padding: 30px 30px;
+  text-align: center;
+}
+
+.cart-notice-stars {
+  font-size: 3rem;
+  letter-spacing: 0.3em;
+  color: #d4af37;
+  margin-bottom: 12px;
+}
+
+.cart-notice-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #836915;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.cart-notice-text {
+  font-size: 2.5rem;
+  color: #e8ecf0;
+  line-height: 1.7;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.cart-notice-arrow {
+  margin-top: 14px;
+  font-size: 5rem;
+  color: #d4af37;
+  animation: cartBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes cartBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes cartBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
 
     /* ===== COLLECTION BANNERS ===== */
     .collection-banner {
@@ -923,10 +979,11 @@
 
   <!-- Navigation -->
   <nav class="nav">
-    <div class="nav-brand">
+    <a href="store.html" class="nav-brand">
       <img src="LOGO.png" alt="VJ Gallery">
       VJ Gallery
-    </div>
+    </a>
+
     <div class="nav-links">
       <a href="store.html">Home</a>
       <a href="contact.html">Contact</a>
@@ -954,6 +1011,14 @@
       <div class="hero-divider"><span>✦</span></div>
     </div>
   </section>
+
+   <!-- Cart Notice -->
+  <div class="cart-notice">
+    <div class="cart-notice-stars">✦ ✦ ✦</div>
+    <div class="cart-notice-heading">How to Shop</div>
+    <div class="cart-notice-text">Explore each artist's collection below and add the pieces you love. When you're ready, your cart and secure checkout are waiting at the bottom — adjust quantities or remove items any time before you complete your order.</div>
+    <div class="cart-notice-arrow">↓</div>
+  </div>
 
   <!-- Disney Collection Banner -->
   <div class="collection-banner disney">
