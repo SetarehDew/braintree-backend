@@ -964,15 +964,90 @@
     .footer-bottom a:hover { color: var(--gold); }
 
     /* ===== RESPONSIVE ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .nav { padding: 14px 20px; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav-links a,
+      .dropdown-trigger {
+        margin-left: 0;
+        font-size: 1.1rem;
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        background: #1a1a1a;
+        padding: 16px 20px;
+      }
+      .back-btn {
+        margin-left: 0;
+        font-size: 1.1rem;
+      }
       .footer-inner { grid-template-columns: 1fr; gap: 30px; }
       .products-section { padding: 20px 10px 50px; }
       .collection-banner { padding: 40px 20px 30px; }
       .form-row { grid-template-columns: 1fr; }
       .form-row-3 { grid-template-columns: 1fr; }
       .customer-form-body { padding: 20px; }
+
+      /* Hero */
+      .hero-eyebrow { margin-top: 20px; }
+      .hero-logo { width: 180px; height: 180px; }
+
+      /* Cart notice */
+      .cart-notice-stars { font-size: 1.6rem; }
+      .cart-notice-heading { font-size: 2rem; }
+      .cart-notice-text { font-size: 1.2rem; }
+      .cart-notice-arrow { font-size: 2.6rem; }
+
+      /* Collection banners */
+      .banner-logo-wrap { width: 180px; height: 180px; }
+      .banner-stars { font-size: 2rem; }
+      .banner-text h2 { font-size: 2.4rem; }
+      .banner-text p { font-size: 1.4rem; }
+
+      /* Product cards */
+      .product-grid { grid-template-columns: 1fr; gap: 18px; }
+      .product-card img { height: 320px; }
+      .card-info h3 { font-size: 1.4rem; }
+      .card-price { font-size: 1.8rem; }
+
+      /* Cart section — kill the giant margins */
+      .cart-heading { font-size: 2.6rem; margin-top: 40px; }
+      .cart-heading-line span { font-size: 1.4rem; }
+      .cart-heading-line::before,
+      .cart-heading-line::after { width: 60px; }
+      .cart-item-info strong { font-size: 1.3rem; }
+      .cart-item-info .item-price { font-size: 1.2rem; }
+      .item-total { font-size: 1.5rem; }
+      #cart-total { font-size: 1.6rem; }
+      .empty-cart { font-size: 1.4rem; }
+
+      /* Customer form — kill the 300px margin */
+      .customer-form-wrapper { margin: 50px auto 0; }
+      .customer-form-header h3 { font-size: 1.5rem; }
+      .customer-form-header p { font-size: 1.3rem; }
+      .form-group label { font-size: 1.1rem; }
+      .form-group input,
+      .form-group select { font-size: 1.2rem; }
+      .required-note { font-size: 1.3rem; }
+
+      /* Payment — kill the 300px margin and shrink */
+      .payment-heading { font-size: 2.4rem; margin-top: 50px; }
+      .policy-notice p { font-size: 1.2rem; }
+      #submit-button { font-size: 1.2rem; }
+
+      /* Cart wrapper padding */
+      .cart-wrapper-inner { padding: 20px 16px; }
+      .cart-section { padding: 50px 16px; }
     }
   </style>
 </head>
